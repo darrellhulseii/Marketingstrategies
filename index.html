@@ -511,6 +511,14 @@ textarea{resize:vertical}
   </div>
   <div id="attDeckWrap"></div>
 </div>
+
+<div class="page" id="page-mkacademy">
+  <div class="sec-head">
+    <h2>🎓 MARKETING ACADEMY</h2>
+    <p>Ryan Magin · School of Hard Knocks · Top Agency Playbooks — battle-tested strategies applied to your territory</p>
+  </div>
+  <div id="mkAcademyWrap"></div>
+</div>
 ```
 
   </div><!-- /main -->
@@ -632,7 +640,8 @@ const NAV_ITEMS = [
   {id:'newmover',  icon:'⌂', label:'New Mover'},
   {id:'intel',     icon:'◉', label:'Market Intel'},
   {id:'pricing',   icon:'$', label:'Pricing Vault'},
-  {id:'attdeck',   icon:'📊', label:'AT&T Pitch Deck'}
+  {id:'attdeck',   icon:'📊', label:'AT&T Pitch Deck'},
+  {id:'mkacademy', icon:'🎓', label:'Marketing Academy'}
 ];
 
 // ════════════════════════════════════════════════════════════
@@ -685,6 +694,7 @@ function goTo(id){
   if(id==='log') renderLeadLog();
   if(id==='pricing') renderPricing();
   if(id==='attdeck') renderATTDeck();
+  if(id==='mkacademy') renderMKAcademy();
 }
 function updateNewBadge(){
   const n = leads.filter(l=>l.status==='New').length;
@@ -1668,6 +1678,380 @@ if (next >= 0 && next < ATT_SLIDES.length) showAttSlide(next);
 }
 
 // ════════════════════════════════════════════════════════════
+// MARKETING ACADEMY — Ryan Magin · School of Hard Knocks · Top Agencies
+// ════════════════════════════════════════════════════════════
+const MK_DATA = {
+ryan: {
+label: ‘Ryan Magin’,
+color: ‘#A78BFA’,
+icon: ‘🎯’,
+subtitle: ‘Short-Form Content & Personal Brand Dominance’,
+bio: ‘Ryan Magin built one of the most followed B2B content brands in the country by mastering short-form video, LinkedIn organic reach, and turning content into closed deals. Every framework below is documented from his public teaching and replicated by hundreds of service businesses.’,
+sections: [
+{
+title: ‘The Infinite Content System’,
+icon: ‘♾’,
+color: ‘#A78BFA’,
+cards: [
+{
+headline: ‘Record One Long-Form Piece, Get 30 Shorts’,
+body: ‘Film one 20-minute walk-through, Q&A, or process video per week. That single recording becomes: 8–12 short clips (15–60s), 3–5 LinkedIn posts, 2 email nurtures, 1 carousel, 1 Reel cover story. The system multiplies your effort without multiplying your time.’,
+tag: ‘CONTENT SYSTEM’,
+apply: ‘Record one video weekly: “Why families in [City] are switching to ADT” or “AT&T Fiber vs. Comcast in Gilroy — the truth.” Cut into 10 clips for Facebook, TikTok, Instagram.’
+},
+{
+headline: ‘Hook in the First 1.5 Seconds or You're Dead’,
+body: ‘Ryan's top hooks follow a formula: CONTRAST (“Everyone thinks X but actually Y”), PATTERN INTERRUPT (“Stop scrolling — this is about your neighborhood”), or DIRECT CALL-OUT (“Gilroy homeowner? Watch this”). The opening sentence must create a micro-tension that can only be resolved by watching.’,
+tag: ‘VIDEO HOOKS’,
+apply: ‘“Gilroy homeowners — your neighbor just got burglarized. Here's the $28/mo thing that would have stopped it.” → Run as 7-second Facebook video ad. Test 5 openers simultaneously.’
+},
+{
+headline: ‘The Authority Flywheel — Document Don't Create’,
+body: ‘Don't create content from scratch. Document real moments: customer installs, territory rides, objection handling calls, before/after shots. Authentic documentation outperforms polished production 4:1 in click-through on organic posts for service businesses.’,
+tag: ‘AUTHORITY’,
+apply: ‘Film every ADT install. 15-second “install day” content with homeowner permission. “We just protected another Salinas family — install #47 this month.” Posts like this get 3x organic reach of ads.’
+},
+{
+headline: ‘The 3-Tier Content Pyramid’,
+body: ‘Top tier (20% of content): authority pieces — case studies, results, proof. Mid tier (50%): education + value — tips, how-tos, comparisons. Bottom tier (30%): engagement bait — polls, questions, controversial takes. Most businesses only post bottom tier and wonder why they don't convert.’,
+tag: ‘CONTENT MIX’,
+apply: ‘Top: “We installed 200 ADT systems in Monterey County this year — here's what we learned.” Mid: “The #1 thing burglars check before breaking into a home.” Bottom: “Is home security worth it in Gilroy right now? Comment YES or NO.”’
+}
+]
+},
+{
+title: ‘LinkedIn & Organic Lead Machine’,
+icon: ‘💼’,
+color: ‘#0EA5E9’,
+cards: [
+{
+headline: ‘The 1-3-1 LinkedIn Post Formula’,
+body: ‘Line 1: A single punchy hook that stops the scroll. Lines 2–3: the bridge — setup or context. Line 1 (final): A counterintuitive conclusion or CTA. Avoid walls of text. Use single-line stanzas. White space is engagement. Ryan consistently gets 50K+ impressions per post using this structure.’,
+tag: ‘LINKEDIN FORMAT’,
+apply: ‘“We knocked 400 doors in Gilroy last month.\n\nMost agents quit after 50 rejections.\n\nBut door #388 turned into a $1,400 ADT install.\n\nHere's the script we used →” (pin comment with script)’
+},
+{
+headline: ‘Post Daily for 90 Days — The Compounding Effect’,
+body: ‘LinkedIn and Facebook organic reach compounds. Accounts that post every day for 90 days see 300–500% more impressions on day 90 vs. day 1 — even with identical content quality. The algorithm rewards consistency more than quality. Start, ship, iterate.’,
+tag: ‘CONSISTENCY’,
+apply: ‘Commit to one Facebook/LinkedIn post per day for 90 days. Use the Infinite Content System. Rotate: Testimonial Mon, Tip Tue, Local Wed, Product Thu, Story Fri, Poll Sat, Behind-scenes Sun.’
+},
+{
+headline: ‘The DM Funnel — Turn Comments into Clients’,
+body: ‘Post content that ends with “Comment X and I'll send you [thing].” When they comment, DM them: “Hey [name], dropping the [thing] here — before I do, quick question: are you currently looking at home security for your [city] home?” This is Ryan's highest-converting organic flow.’,
+tag: ‘DM FUNNEL’,
+apply: ‘“Comment PROTECT and I'll send you our 2025 Home Security Checklist for Gilroy homeowners.” Collect leads. DM: “Sending it now — are you renting or own your home?” Qualify on the spot.’
+}
+]
+},
+{
+title: ‘Short-Form Video Domination’,
+icon: ‘📱’,
+color: ‘#22C55E’,
+cards: [
+{
+headline: ‘The PAS Video Framework (Problem-Agitate-Solve)’,
+body: ‘Second 1–3: State the problem viscerally. Second 4–8: Agitate the pain — make it feel real and urgent. Second 9–15: Introduce the solution with specificity. End with a CTA that matches the platform (swipe up, comment, call now). This framework drives the lowest CPL of any ad structure in home security.’,
+tag: ‘VIDEO STRUCTURE’,
+apply: ‘P: “A Salinas family got robbed last week while the parents were at work.” A: “The thieves were in and out in 4 minutes. Kids came home to a ransacked house.” S: “ADT's 24/7 monitoring calls police the moment a sensor trips. Installation is free this month.”’
+},
+{
+headline: ‘Vertical Video Everywhere — 9:16 is the Standard’,
+body: ‘Horizontal video gets 50% less reach on every major platform. Film everything vertical on your phone. Add captions (85% of video is watched muted). Keep motion in the first frame. Use text overlays that reinforce the hook — not just decorative. Do not pay for a videographer. Your iPhone is better.’,
+tag: ‘PRODUCTION’,
+apply: ‘Film all video vertical. Use CapCut for captions. Post Reels to Instagram, Shorts to YouTube, TikToks natively. Repurpose 1 video across 4 platforms — same content, 4x reach.’
+},
+{
+headline: ‘The Testimonial Clip Formula’,
+body: ‘Film customers immediately after install. Ask 3 questions: “What made you decide to go with ADT today?” (the journey), “What's one thing you'd tell a neighbor who's on the fence?” (the objection kill), “How do you feel now that it's installed?” (the emotional payoff). Clip each answer as a standalone 15-second video.’,
+tag: ‘SOCIAL PROOF’,
+apply: ‘After every Gilroy/Salinas/Monterey install, film a 2-min testimonial. Cut into 3 clips. Run the “objection kill” clip as a paid video ad targeted at homeowners in the same ZIP code as the customer.’
+}
+]
+}
+]
+},
+hardknocks: {
+label: ‘School of Hard Knocks’,
+color: ‘#FF9500’,
+icon: ‘🥊’,
+subtitle: ‘Street-Level Tactics from the Trenches — What Actually Works’,
+bio: ‘The School of Hard Knocks is the unwritten curriculum of every top sales agent and local business owner who figured out what works by failing fast and iterating relentlessly. These are the tactics that never make it into marketing textbooks — because they're too real, too specific, and too close to the metal.’,
+sections: [
+{
+title: ‘Door-to-Door Mastery’,
+icon: ‘🚪’,
+color: ‘#FF9500’,
+cards: [
+{
+headline: ‘The 5-Second Trust Window’,
+body: ‘You have exactly 5 seconds at the door before a prospect has decided whether you're a threat or an opportunity. The formula: warm smile, non-threatening body language (stand back 2 feet from the door), open hands visible, and an immediate local anchor. “Hi, I'm with Complete Home Today — we just finished an install for your neighbor on [Street].” Local reference = instant legitimacy.’,
+tag: ‘FIRST IMPRESSION’,
+apply: ‘Always reference a real nearby install. Build a real-time install map by ZIP. When you finish a job, knock every home within a 3-block radius within 24 hours while the install is fresh and visible.’
+},
+{
+headline: ‘The Leave-Behind Loop — Return Rate 40%’,
+body: ‘Most door agents leave flyers. High performers leave a personalized door hanger with a handwritten note: “Hi [Name if known] — I was in your neighborhood today installing ADT for your neighbor at [street]. Saved them 12% on their homeowners insurance too. Worth a 5-min conversation? Text me: [number].” Handwriting = 4x higher response vs. printed flyer.’,
+tag: ‘LEAVE-BEHIND’,
+apply: ‘Print 200 door hangers per territory per week. Write 3–5 personal words on each in pen. Track which ZIPs generate callbacks. Double down on ZIPs with >8% response rate. This is your lowest-CPL channel.’
+},
+{
+headline: ‘Map Your Rejections — They Are Your Assets’,
+body: ‘Every no is data. Top agents track: time of knock, day of week, type of response (not home, hard no, soft no, interest but not now). The data reveals patterns: Tuesday 11am–1pm outperforms all other windows in suburban markets. Soft no's revisited after 3 weeks convert at 22%. Homes with visible ring cameras = already security-aware = strong ADT prospects.’,
+tag: ‘DATA DISCIPLINE’,
+apply: ‘Use Google Maps + a notes doc to track every door knocked in Gilroy, Morgan Hill, Salinas. Note date, time, response. After 60 days, you'll have a precision strike map of your best doors by hour and day.’
+},
+{
+headline: ‘The Partner Knock — With a Real Estate Agent’,
+body: ‘Partner with 2–3 local Realtors in each territory. Offer to provide a “Home Security Welcome Package” to every buyer they close. Knock with the Realtor's referral: “Hi, I'm with Complete Home Today — your Realtor [Name] asked me to reach out because you just moved in. She set up a complimentary home security consultation for you.” Referral close rate is 3x cold knock.’,
+tag: ‘PARTNERSHIP’,
+apply: ‘Identify top 5 Realtors in Gilroy MLS and Morgan Hill MLS. Offer a co-branded welcome kit and $50 referral fee per install. This produces warm door-knocks that convert at ADT's highest rate.’
+}
+]
+},
+{
+title: ‘Psychological Selling — What the Training Manual Won't Tell You’,
+icon: ‘🧠’,
+color: ‘#EF4444’,
+cards: [
+{
+headline: ‘The Assumed Close — Use It Early’,
+body: ‘Don't ask “Would you like to get started?” Ask “Which day works better for your install — Thursday afternoon or Friday morning?” Assumptive language bypasses the conscious resistance to a sales decision. The prospect now has to consciously opt out rather than opt in. Works on 60%+ of qualified leads who have engaged with your pitch.’,
+tag: ‘CLOSING TECHNIQUE’,
+apply: ‘After presenting ADT package: “We have Thursday afternoon or Friday morning for install in Gilroy — which works with your schedule?” Do not pause. Let silence work. The first person to speak after an assumptive close usually says yes or reveals their real objection.’
+},
+{
+headline: ‘Loss Aversion Always Beats Feature Lists’,
+body: ‘Humans are 2x more motivated to avoid losing something than to gain something of equal value. Stop leading with “You'll get 24/7 monitoring.” Start leading with “Without monitoring, you have no one calling police when a sensor trips — and that's assuming you even hear the alarm.” Reframe every feature as a loss prevention.’,
+tag: ‘PSYCHOLOGY’,
+apply: ‘Audit your pitch deck and every ad. For every feature (“24/7 monitoring”), write the loss-frame (“Without 24/7 monitoring, there's no one calling police on your behalf when it matters most.”) Run loss-frame and feature-frame ads in A/B split. Loss-frame will win by 20–40% CVR.’
+},
+{
+headline: ‘The 3 F's Objection Method — Feel, Felt, Found’,
+body: ‘“I understand how you feel. Many of our customers in [City] felt the same way before they installed ADT. What they found was [outcome].” This mirrors the prospect's emotion, creates social proof, and pivots to a resolution — all without being defensive or dismissive. Works on price objections, timing objections, and “I need to think about it.”’,
+tag: ‘OBJECTIONS’,
+apply: ‘Price objection: “I totally understand how you feel — $28/mo feels like another bill. Our Salinas customers felt the same. What they found was their homeowners insurance dropped $40/mo, so they actually saved money.” Practice this until it's automatic.’
+},
+{
+headline: ‘Urgency Without Lying — The Real Scarcity Stack’,
+body: ‘Fake urgency destroys trust. Real urgency closes deals. Real urgencies for ADT: actual install slot availability (“We have 2 slots left in Gilroy this week”), actual promotional windows from ADT, actual stat-based urgency (“Burglaries in ZIP 95020 are up 18% this year according to Gilroy PD crime stats”). Specific, verifiable urgency = trust + close.’,
+tag: ‘URGENCY’,
+apply: ‘Check Gilroy, Salinas, Monterey PD public crime stats monthly. Cite actual numbers. “Gilroy reported 43 residential burglaries in Q3 — up 12% from Q2. We installed 18 ADT systems in that same ZIP during that period.” Real data is your best closer.’
+}
+]
+},
+{
+title: ‘Local Market Domination Tactics’,
+icon: ‘📍’,
+color: ‘#22C55E’,
+cards: [
+{
+headline: ‘Own One ZIP Code Before Expanding’,
+body: ‘The biggest mistake new agents make is spreading too thin. Pick ONE ZIP code (95020 Gilroy or 93901 Salinas). Saturate it: door-to-door, Facebook geo-targeted to that ZIP, Nextdoor ads, referral partnerships with every local business inside it. Become the name people in that ZIP associate with home security. Then expand once you're known.’,
+tag: ‘TERRITORY STRATEGY’,
+apply: ‘Choose ZIP 95020 (Gilroy) as your pilot. Run every channel — Facebook, door-to-door, Nextdoor, direct mail — targeting ONLY that ZIP for 60 days. When you're averaging 30+ leads/month from one ZIP, clone the playbook to 95037 Morgan Hill.’
+},
+{
+headline: ‘The Hyper-Local Review Strategy’,
+body: ‘Google reviews that mention specific neighborhoods and streets rank higher in local search and convert 70% better than generic reviews. After every install, text the customer: “Hey [name] — could you do us a huge favor and leave us a Google review? If you mention your neighborhood, it helps other [City] families find us. Here's the link: [link]” Reviews with city + neighborhood names = local SEO gold.’,
+tag: ‘LOCAL SEO’,
+apply: ‘Build a post-install review text sequence into your CRM. Target: 100 Gilroy/Morgan Hill/Salinas reviews mentioning neighborhood names within 6 months. This alone will put Complete Home Today on the first page of “ADT Gilroy” searches.’
+},
+{
+headline: ‘The Community Event Play — Show Up Where Competitors Don't’,
+body: ‘Sponsor or table at: HOA annual meetings, Gilroy Garlic Festival, Salinas farmers markets, Morgan Hill community events, school fundraisers, neighborhood watch meetings. Cost: $50–200 per event. Return: direct conversations with 50–200 homeowners. Bring a tablet for quote requests. This is the oldest B2C channel and still converts in the top 3 for local service businesses.’,
+tag: ‘COMMUNITY MARKETING’,
+apply: ‘Identify 12 community events per year across your 4 territories. Budget $150/event = $1,800/year. Track leads generated per event. Most valuable: HOA meetings (captive homeowner audience), neighborhood watch (crime-aware = security-ready), new homeowner orientation events.’
+}
+]
+}
+]
+},
+agency: {
+label: ‘Top Agency Playbooks’,
+color: ‘#0EA5E9’,
+icon: ‘🏆’,
+subtitle: ‘Proven Frameworks from the World's Most Successful Marketing Organizations’,
+bio: ‘These are the distilled principles from Ogilvy & Mather, VaynerMedia, DDB, Neil Patel Digital, and BBDO — agencies with billions in managed ad spend and decades of proven results. Every principle is adapted for local authorized dealer marketing.’,
+sections: [
+{
+title: ‘Ogilvy Principles — The Father of Advertising’,
+icon: ‘👔’,
+color: ‘#0EA5E9’,
+cards: [
+{
+headline: ‘Research Is the Foundation — Know More Than Your Competitor’,
+body: ‘David Ogilvy spent more money on research than any agency of his era. His rule: before writing a single word of copy, know your customer's fears, dreams, language, and daily reality better than they know themselves. He read crime reports, insurance actuarial data, and consumer surveys obsessively. “You can't bore people into buying your product. You can only interest them in buying it.”’,
+tag: ‘OGILVY · RESEARCH’,
+apply: ‘Read the Gilroy PD, Salinas PD, and Monterey County Sheriff crime reports every quarter. Know the exact break-in statistics by ZIP. This knowledge makes every conversation and every ad more specific, more credible, and more converting than any competitor who's just guessing.’
+},
+{
+headline: ‘The Big Idea — One Concept, Not Ten’,
+body: ‘Ogilvy's most famous principle: every campaign needs ONE big idea that a consumer can grasp instantly and will remember for years. The Marlboro Man. “At 60 miles an hour the loudest noise in this new Rolls-Royce comes from the electric clock.” One idea, expressed perfectly, crushes ten mediocre ideas. For ADT: the big idea is peace of mind. For AT&T: the big idea is connection without limits.’,
+tag: ‘OGILVY · BIG IDEA’,
+apply: ‘For ADT: Your one idea = “We answer when something trips — so you don't have to wonder.” For AT&T: “Fast enough for everyone you love, priced for real life.” Build every ad from that single nucleus. Kill any creative that drifts from the big idea.’
+},
+{
+headline: ‘Direct Response Over Brand Awareness — Always Measure’,
+body: ‘Ogilvy was one of the first agency founders to champion direct response advertising in the TV era. His rule: if you can't measure the return, kill the spend. Every campaign should have a trackable response mechanism — a phone number, a URL, a coupon code. “In the modern world of business, it is useless to be a creative, original thinker unless you can also sell what you create.”’,
+tag: ‘OGILVY · DIRECT RESPONSE’,
+apply: ‘Every ad, every channel must have a unique tracking phone number (CallRail), a unique landing page URL, or a unique promo code. Kill any campaign that can't show you cost-per-lead after 30 days. Ogilvy's rule is still the best budget discipline tool in existence.’
+},
+{
+headline: ‘Long Copy Outperforms Short Copy — For Considered Purchases’,
+body: ‘Contrary to modern attention-span mythology, Ogilvy's research showed long-copy ads consistently outperformed short ones for products that require a decision (insurance, security, home services). The rule: people who are interested will read every word. People who aren't won't read any. Write for the interested person. Go deep. Provide reasons. Overcome objections within the copy.’,
+tag: ‘OGILVY · COPY’,
+apply: ‘For Facebook/Google landing pages: write 600–1000 word landing pages for ADT leads. Include: the problem, the risk of inaction, the solution, social proof, price anchor, guarantee, and strong CTA. Test against a short 150-word version. In home security, long copy typically wins by 30–50% conversion lift.’
+}
+]
+},
+{
+title: ‘VaynerMedia — The Digital-First Playbook’,
+icon: ‘📲’,
+color: ‘#A78BFA’,
+cards: [
+{
+headline: ‘Meet People Where They Are — Platform-Native Content’,
+body: ‘Gary Vaynerchuk's foundational insight: every platform has a native language. A Facebook ad that looks like an Instagram Story feels wrong. A LinkedIn post written like a tweet falls flat. Create content that feels native to each platform. For local service businesses: Facebook = family safety storytelling, Instagram = visual transformations, TikTok = personality + humor + education, Nextdoor = hyper-local authority.’,
+tag: ‘VAYNER · PLATFORM’,
+apply: ‘Map your content to platform: Facebook = “Your [City] neighbor's story” emotional narrative. Instagram = Before/after install Reels. TikTok = “Things your home security company won't tell you.” Nextdoor = Direct helpful responses to crime concerns. Never copy-paste across platforms.’
+},
+{
+headline: ‘Jab, Jab, Jab, Right Hook — Give Before You Ask’,
+body: ‘VaynerMedia's most replicated framework: give massive value (jabs) before making any ask (right hook). For every 3–4 educational/entertaining pieces of content, you earn the right to one promotional piece. Most local businesses do it backwards — 80% promo, 20% value. Flip it. The brands that give the most get the most back.’,
+tag: ‘VAYNER · CONTENT RATIO’,
+apply: ‘For every ADT promo post, publish 3 value posts: “Top 5 signs your home is a target for burglars in [City],” “How to tell if your neighbor's Ring camera actually deters crime (the data),” “What burglars look for before choosing a house — a retired detective explains.” Then: “Get ADT installed free this month.”’
+},
+{
+headline: ‘Micro-Content Clouds — The 2025 Amplification Stack’,
+body: ‘VaynerMedia coined the term “micro-content” — small pieces of content that support a larger campaign. The stack: 1 long-form piece (blog, video) → 10 micro-social pieces → 3 email touchpoints → 1 paid retargeting ad → 1 direct CTA offer. Each layer re-engages the audience at a different stage of awareness. This system runs campaigns that cost 70% less than standard ad-only campaigns.’,
+tag: ‘VAYNER · AMPLIFICATION’,
+apply: ‘Shoot a 10-min video: “Everything you need to know about ADT in Monterey County in 2025.” Cut into: 8 Facebook clips, 3 Instagram Reels, 1 YouTube video, 2 email newsletters, 1 Nextdoor post. Run the 2 best clips as paid ads to a retargeting audience. One day of filming = 30 days of content.’
+}
+]
+},
+{
+title: ‘Neil Patel — Conversion & SEO Engine’,
+icon: ‘🔍’,
+color: ‘#22C55E’,
+cards: [
+{
+headline: ‘Content Beats Paid — Build Your Moat’,
+body: ‘Neil Patel's agencies have driven billions of organic visitors without a dollar of SEO spend — through hyper-targeted, question-answering content. The rule: find every question your customer types into Google before they buy, and answer it better than anyone else. For local service businesses, this means owning local search terms with blog posts, FAQs, and location pages.’,
+tag: ‘NEIL PATEL · SEO’,
+apply: ‘Build a blog or FAQ page targeting: “ADT vs. Ring Gilroy,” “Best home security Salinas,” “AT&T Fiber available Morgan Hill,” “Home security monitoring cost Monterey.” Each page = a 24/7 sales rep that finds you leads for free, forever. One good page can generate 5–20 leads/month at $0 CPL.’
+},
+{
+headline: ‘The Landing Page Conversion Framework — 7 Essential Elements’,
+body: ‘Neil Patel's documented framework for landing pages that convert above 15%: (1) Benefit-focused headline, (2) Sub-headline that addresses the objection, (3) Hero image showing the outcome, (4) 3 bullet proof points, (5) Social proof above the fold, (6) CTA button with micro-copy (“Get My Free Quote — Takes 60 Seconds”), (7) Trust signals (BBB, ADT Authorized Dealer badge). All 7 must be above the fold.’,
+tag: ‘NEIL PATEL · CRO’,
+apply: ‘Audit your current landing pages against these 7 elements. Most dealer landing pages fail on #2 (no objection address), #6 (weak CTA copy), and #7 (no trust signals). Adding trust signals alone typically lifts conversion 15–25%. Adding ADT Authorized Dealer + “6-Month Money Back Guarantee” badge above fold is a quick win.’
+},
+{
+headline: ‘Email is Still the #1 ROI Channel — Build Your List’,
+body: ‘Despite every “email is dead” headline, Neil Patel's own data shows email consistently delivers $36–44 return per $1 spent — higher than any other digital channel. The key is segmentation: different messages for new leads vs. 30-day cold vs. existing customers. The sequence matters as much as the message.’,
+tag: ‘NEIL PATEL · EMAIL’,
+apply: ‘Capture email on every lead form. Build 3 sequences in your CRM: (1) New lead — 5-email ADT nurture over 7 days, (2) 30-day cold — reactivation offer, (3) Installed customers — upsell + referral. Even if you only convert 2% more leads through email, at 50 leads/month that's 1 extra install.’
+}
+]
+},
+{
+title: ‘DDB & BBDO — Emotional Creative That Moves People’,
+icon: ‘🎨’,
+color: ‘#EF4444’,
+cards: [
+{
+headline: ‘Emotion Opens the Wallet — Logic Justifies It’,
+body: ‘Bill Bernbach of DDB proved in the 1960s what neuroscience confirmed in 2020: purchase decisions are made emotionally and rationalized logically. The job of your ad is to make someone FEEL the right thing first — safe, proud, smart, protected. The features and price then provide the rational justification for a decision they've already made emotionally.’,
+tag: ‘DDB · EMOTION’,
+apply: ‘ADT ad frame: Show a mother watching her kids play from her phone camera while at work. Caption: “She's 40 miles away. Her family is home. She's completely at peace.” NO features listed. Emotional scene only. CTA: “Get the same peace of mind — free install this week.” Emotion first, price/features in the follow-up.’
+},
+{
+headline: ‘The Unexpected Angle — Zag When Everyone Else Zigs’,
+body: ‘BBDO's core creative principle: when every competitor is advertising the same way (fear of crime, feature lists, discount pricing), the brand that does the opposite gets remembered. Volkswagen's “Think Small” in an era of chrome-and-fins ads. Find the angle your competitors would never use, and own it. In home security: warmth, humor, pride of ownership, neighborly community — all underutilized angles.’,
+tag: ‘BBDO · DIFFERENTIATION’,
+apply: ‘While every ADT ad in your territory is running crime-fear ads, try: “We installed ADT for 47 [City] families this month. Not because they were scared. Because they wanted to stop worrying and start living.” Counter-positioning against the industry norm gets you remembered and shared.’
+},
+{
+headline: ‘The Power of Simple — Say One Thing, Say It Memorably’,
+body: ‘BBDO's longest-standing principle: great advertising communicates ONE idea in the most memorable possible way. Campaigns that try to communicate 3 things communicate zero things. Pick the one most compelling truth about your offer and find the most arresting possible expression of it. Then repeat it across every touchpoint for at least 12 months.’,
+tag: ‘BBDO · SIMPLICITY’,
+apply: ‘Choose one line for Complete Home Today and use it everywhere for 12 months: “We protect what matters most — and we'll never stop.” Or: “Your home. Protected. Period.” One message, consistently delivered across Facebook, door hangers, SMS, vehicle wraps, t-shirts, creates brand recognition in 90 days.’
+}
+]
+}
+]
+}
+};
+
+let mkActiveSource = ‘ryan’;
+let mkExpanded = {};
+
+function renderMKAcademy() {
+const wrap = el(‘mkAcademyWrap’);
+if (!wrap) return;
+
+const src = MK_DATA[mkActiveSource];
+
+wrap.innerHTML = ` <style> .mk-source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; } .mk-source-tab { padding:10px 20px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px; border:1.5px solid var(--bdr); background:var(--card); color:var(--muted); font-family:var(--font-body); } .mk-source-tab:hover { border-color:var(--amber); color:var(--white); } .mk-source-tab.active { color:#000; } .mk-bio { padding:14px 18px; border-radius:8px; border:1px solid var(--bdr); background:var(--card2); font-size:13px; color:var(--white); line-height:1.7; margin-bottom:18px; border-left:4px solid var(--amber); } .mk-section { margin-bottom:20px; } .mk-section-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; cursor:pointer; user-select:none; } .mk-section-title { font-family:var(--font-display); font-size:18px; font-weight:800; } .mk-section-toggle { font-size:16px; color:var(--muted); margin-left:auto; transition:transform .2s; } .mk-section-toggle.open { transform:rotate(180deg); } .mk-cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .mk-card { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; } .mk-card:hover { border-color:var(--amber); } .mk-card-head { padding:12px 16px 0 16px; } .mk-card-tag { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:inline-block; padding:2px 8px; border-radius:3px; } .mk-card-headline { font-size:14px; font-weight:700; color:var(--white); line-height:1.4; margin-bottom:8px; } .mk-card-body { font-size:12px; color:var(--muted); line-height:1.7; padding:0 16px 10px; } .mk-apply-toggle { padding:8px 16px; border-top:1px solid var(--bdr); cursor:pointer; font-size:11px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:6px; background:transparent; border-left:none; border-right:none; border-bottom:none; width:100%; text-align:left; font-family:var(--font-body); transition:background .15s; } .mk-apply-toggle:hover { background:var(--blueG); } .mk-apply-box { background:var(--blueG); border-top:1px solid rgba(14,165,233,.2); padding:10px 16px; font-size:11px; color:var(--white); line-height:1.7; display:none; } .mk-apply-box.open { display:block; } .mk-apply-label { font-family:var(--font-mono); font-size:9px; color:var(--blue); font-weight:700; letter-spacing:1px; margin-bottom:5px; } .mk-search-row { display:flex; gap:10px; margin-bottom:16px; align-items:center; } .mk-search { background:var(--card); border:1px solid var(--bdr); border-radius:6px; padding:9px 14px; color:var(--white); font-size:13px; outline:none; width:300px; font-family:var(--font-body); transition:border-color .2s; } .mk-search:focus { border-color:var(--amber); } .mk-count-badge { font-family:var(--font-mono); font-size:11px; color:var(--muted); padding:4px 12px; border-radius:20px; border:1px solid var(--bdr); } </style> <div class="mk-source-tabs"> ${Object.entries(MK_DATA).map(([k,v])=>`
+<button class="mk-source-tab${k===mkActiveSource?' active':''}" onclick="mkSetSource('${k}')"
+style="${k===mkActiveSource?`background:${v.color};border-color:${v.color};`:`border-color:var(--bdr);`}">
+<span>${v.icon}</span><span>${v.label}</span>
+</button>
+`).join('')} </div> <div class="mk-search-row"> <input class="mk-search" id="mkSearch" placeholder="🔍  Search strategies..." oninput="mkFilterCards()" /> <span class="mk-count-badge" id="mkCount">${src.sections.reduce((a,s)=>a+s.cards.length,0)} strategies</span> </div> <div class="mk-bio">${src.bio}</div> <div id="mkSections">${buildMKSections(src)}</div> `;
+}
+
+function buildMKSections(src, filter=’’) {
+return src.sections.map((sec, si) => {
+const filteredCards = filter
+? sec.cards.filter(c => (c.headline+c.body+c.tag+c.apply).toLowerCase().includes(filter.toLowerCase()))
+: sec.cards;
+if (filteredCards.length === 0) return ‘’;
+const skey = mkActiveSource+’*’+si;
+const isOpen = mkExpanded[skey] !== false; // default open
+return `<div class="mk-section"> <div class="mk-section-head" onclick="mkToggleSection('${skey}')"> <span style="font-size:20px;">${sec.icon}</span> <span class="mk-section-title" style="color:${sec.color};">${sec.title}</span> <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);padding:2px 8px;border-radius:10px;border:1px solid var(--bdr);">${filteredCards.length}</span> <span class="mk-section-toggle${isOpen?' open':''}">▼</span> </div> ${isOpen ?`<div class="mk-cards-grid">${filteredCards.map((c,ci)=>{
+const applyKey = mkActiveSource+’*’+si+’*’+ci;
+const isApplyOpen = mkExpanded[’apply*’+applyKey];
+const tagColor = sec.color;
+return `<div class="mk-card"> <div class="mk-card-head"> <div class="mk-card-tag" style="background:${tagColor}22;color:${tagColor};">${escHtml(c.tag)}</div> <div class="mk-card-headline">${escHtml(c.headline)}</div> </div> <div class="mk-card-body">${escHtml(c.body)}</div> <button class="mk-apply-toggle" onclick="mkToggleApply('${applyKey}')"> <span>⚡</span> Apply to Your Territory ${isApplyOpen?'▲':'▼'} </button> <div class="mk-apply-box${isApplyOpen?' open':''}"> <div class="mk-apply-label">HOW TO IMPLEMENT FOR COMPLETE HOME TODAY LLC</div> ${escHtml(c.apply)} </div> </div>`;
+}).join(’’)}</div>`: ''} </div>`;
+}).join(’’);
+}
+
+function mkSetSource(key) {
+mkActiveSource = key;
+mkExpanded = {};
+renderMKAcademy();
+}
+
+function mkToggleSection(skey) {
+mkExpanded[skey] = mkExpanded[skey] === false ? true : false;
+const src = MK_DATA[mkActiveSource];
+const filter = (el(‘mkSearch’)||{}).value || ‘’;
+const sec = el(‘mkSections’);
+if (sec) sec.innerHTML = buildMKSections(src, filter);
+}
+
+function mkToggleApply(applyKey) {
+const key = ‘apply_’+applyKey;
+mkExpanded[key] = !mkExpanded[key];
+const src = MK_DATA[mkActiveSource];
+const filter = (el(‘mkSearch’)||{}).value || ‘’;
+const sec = el(‘mkSections’);
+if (sec) sec.innerHTML = buildMKSections(src, filter);
+}
+
+function mkFilterCards() {
+const filter = (el(‘mkSearch’)||{}).value || ‘’;
+const src = MK_DATA[mkActiveSource];
+const sec = el(‘mkSections’);
+if (sec) sec.innerHTML = buildMKSections(src, filter);
+const totalFiltered = src.sections.reduce((a,s)=>a+s.cards.filter(c=>(c.headline+c.body+c.tag+c.apply).toLowerCase().includes(filter.toLowerCase())).length,0);
+const badge = el(‘mkCount’);
+if (badge) badge.textContent = totalFiltered + ’ strategies’ + (filter ? ’ found’ : ‘’);
+}
+
+// ════════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════════
 function init(){
@@ -1687,6 +2071,7 @@ renderDashboard();
 renderPricing();
 updateNewBadge();
 renderATTDeck();
+renderMKAcademy();
 }
 
 document.addEventListener(‘DOMContentLoaded’, init);

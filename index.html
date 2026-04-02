@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Home Today LLC — Ultimate Lead Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<style>
+:root {
+  --bg: #080C10;
+  --card: #0D1520;
+  --card2: #111827;
+  --bdr: #1E2D3D;
+  --amber: #FF9500;
+  --amberG: rgba(255,149,0,.12);
+  --blue: #0EA5E9;
+  --blueG: rgba(14,165,233,.12);
+  --green: #22C55E;
+  --red: #EF4444;
+  --muted: #6B7C8D;
+  --dim: #3D4F60;
+  --white: #E8EDF2;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--font-body);background:var(--bg);color:var(--white);display:flex;flex-direction:column}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--amber);border-radius:2px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::selection{background:rgba(255,149,0,.3)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes glow{0%,100%{text-shadow:0 0 8px var(–amber)}50%{text-shadow:0 0 24px var(–amber),0 0 48px rgba(255,149,0,.35)}}
+@keyframes slideIn{from{transform:translateX(-16px);opacity:0}to{transform:translateX(0);opacity:1}}
+.fade-up{animation:fadeUp .38s cubic-bezier(.22,.68,0,1.2) both}
+.pulse{animation:pulse 1.6s ease infinite}
+
+/* LAYOUT */
+#app{display:flex;flex:1;overflow:hidden}
+#sidebar{width:224px;min-height:100%;background:#060A0F;border-right:1px solid var(–bdr);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+#content-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+#ticker-bar{height:28px;background:#060A0F;border-bottom:1px solid var(–bdr);display:flex;align-items:center;flex-shrink:0;overflow:hidden}
+#main{flex:1;overflow-y:auto;padding:28px 32px}
+.page{display:none;animation:fadeUp .38s ease both}
+.page.active{display:block}
+
+/* TICKER */
+.ticker-label{background:var(–amber);color:#000;font-family:var(–font-display);font-weight:700;font-size:11px;padding:0 13px;height:100%;display:flex;align-items:center;letter-spacing:1px;flex-shrink:0}
+.ticker-track{overflow:hidden;flex:1;height:100%}
+.ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:ticker 45s linear infinite;height:100%;align-items:center}
+.ticker-inner span{font-family:var(–font-mono);font-size:9px;color:var(–muted);flex-shrink:0}
+
+/* SIDEBAR */
+.sidebar-logo{padding:18px 16px 12px;border-bottom:1px solid var(–bdr)}
+.sidebar-logo .co-name{font-family:var(–font-display);font-size:18px;font-weight:800;color:var(–amber);letter-spacing:1px;line-height:1.1}
+.sidebar-logo .co-sub{font-family:var(–font-display);font-size:18px;font-weight:800;color:var(–white);letter-spacing:1px;line-height:1.1}
+.sidebar-logo .co-tag{font-family:var(–font-mono);font-size:9px;color:var(–dim);margin-top:5px;letter-spacing:1.5px}
+.sidebar-live{padding:8px 16px;border-bottom:1px solid var(–bdr);display:flex;align-items:center;gap:8px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(–green);box-shadow:0 0 8px var(–green);flex-shrink:0}
+.live-text{font-family:var(–font-mono);font-size:9px;color:var(–green)}
+nav{flex:1;padding:6px 0}
+.nav-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 16px;background:transparent;border:none;border-left:2.5px solid transparent;color:var(–muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-align:left;font-family:var(–font-body)}
+.nav-btn:hover{background:var(–amberG);color:var(–white)}
+.nav-btn.active{background:var(–amberG);border-left-color:var(–amber);color:var(–amber);font-weight:700}
+.nav-icon{font-family:var(–font-mono);font-size:14px;width:18px;flex-shrink:0}
+.nav-badge{background:var(–amber);color:#000;border-radius:10px;padding:0 6px;font-size:10px;font-weight:800;margin-left:auto}
+.sidebar-footer{padding:12px 16px;border-top:1px solid var(–bdr);font-family:var(–font-mono);font-size:9px;color:var(–dim);line-height:1.7}
+
+/* CARDS */
+.card{background:var(–card);border:1px solid var(–bdr);border-radius:10px;padding:18px}
+.card.glow{border-color:var(–amber);box-shadow:0 0 20px rgba(255,149,0,.1),inset 0 0 30px rgba(255,149,0,.03)}
+.card.gold{border-color:rgba(245,158,11,.5);box-shadow:0 0 16px rgba(245,158,11,.1)}
+
+/* SECTION HEADER */
+.sec-head{margin-bottom:22px}
+.sec-head h2{font-family:var(–font-display);font-size:26px;font-weight:800;letter-spacing:.5px;color:var(–white)}
+.sec-head p{font-size:13px;color:var(–muted);margin-top:3px}
+
+/* GRID HELPERS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+.grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+
+/* FORM ELEMENTS */
+label.field-label{font-size:11px;font-weight:700;color:var(–muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px}
+input,select,textarea{background:#0D1520;border:1px solid var(–bdr);color:var(–white);border-radius:6px;padding:9px 12px;font-family:var(–font-body);font-size:13px;outline:none;transition:border-color .2s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(–amber)}
+select{cursor:pointer}
+textarea{resize:vertical}
+.field-group{margin-bottom:12px}
+.checkbox-row{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(–white)}
+.checkbox-row input[type=checkbox]{width:15px;height:15px;accent-color:var(–amber);flex-shrink:0}
+
+/* BUTTONS */
+.btn{cursor:pointer;font-family:var(–font-body);border:none;border-radius:7px;font-weight:700;display:inline-flex;align-items:center;gap:7px;transition:opacity .15s}
+.btn-primary{background:var(–amber);color:#000;padding:10px 22px;font-size:13px;box-shadow:0 4px 20px rgba(255,149,0,.35)}
+.btn-primary:hover{opacity:.9}
+.btn-secondary{background:var(–card2);color:var(–white);padding:10px 22px;font-size:13px}
+.btn-ghost{background:transparent;color:var(–muted);border:1px solid var(–bdr);padding:6px 14px;font-size:12px}
+.btn-ghost:hover{border-color:var(–amber);color:var(–amber)}
+.btn-block{width:100%;justify-content:center}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-sm{padding:6px 14px;font-size:12px}
+
+/* PILLS */
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+
+/* KPI CARD */
+.kpi-card{background:var(–card);border:1px solid var(–bdr);border-radius:10px;padding:14px 16px}
+.kpi-num{font-family:var(–font-display);font-size:34px;font-weight:800;line-height:1}
+.kpi-label{font-size:12px;font-weight:700;margin-top:4px}
+.kpi-sub{font-size:10px;color:var(–muted);margin-top:2px}
+
+/* CARD HEADER */
+.card-title{font-family:var(–font-display);font-size:16px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+
+/* AI OUTPUT */
+.ai-output{background:#040810;border:1px solid var(–bdr);border-left:3px solid var(–amber);border-radius:10px;padding:20px;margin-top:16px}
+.ai-output-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ai-output-label{font-family:var(–font-mono);font-size:11px;color:var(–blue);letter-spacing:1px}
+.ai-output pre{white-space:pre-wrap;font-family:var(–font-body);font-size:13px;line-height:1.85;color:#A8BAC8}
+
+/* SPINNER */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,149,0,.2);border-top-color:var(–amber);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spinner-lg{width:28px;height:28px;border-width:3px}
+
+/* LOADING STATE */
+.loading-state{text-align:center;padding:50px}
+.loading-state .spinner-lg{margin:0 auto 14px}
+.loading-text{font-family:var(–font-display);font-size:18px;color:var(–muted)}
+
+/* DIVIDER */
+.divider{height:1px;background:var(–bdr);margin:10px 0}
+
+/* LEAD ROW */
+.lead-row{background:var(–card);border:1px solid var(–bdr);border-radius:8px;padding:11px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.lead-avatar{width:36px;height:36px;border-radius:50%;background:var(–amberG);border:1.5px solid var(–amber);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(–amber);flex-shrink:0}
+
+/* FILTER PILLS */
+.filter-row{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.filter-pill{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(–bdr);background:transparent;color:var(–muted);font-family:var(–font-body);transition:all .15s}
+.filter-pill.active{background:var(–amber);color:#000;border-color:var(–amber)}
+.filter-pill:hover:not(.active){border-color:var(–amber);color:var(–amber)}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{padding:9px 12px;text-align:left;color:var(–muted);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#050C15;white-space:nowrap}
+.data-table td{padding:9px 12px;border-top:1px solid var(–bdr)}
+.data-table tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+
+/* PRESET CHIPS */
+.preset-chip{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(–bdr);background:transparent;color:var(–muted);font-family:var(–font-body);transition:all .15s}
+.preset-chip:hover,.preset-chip.active{background:var(–amberG);border-color:var(–amber);color:var(–amber)}
+
+/* SUCCESS/ERROR BANNERS */
+.banner-success{background:rgba(34,197,94,.12);border:1px solid var(–green);border-radius:8px;padding:12px 16px;font-weight:700;color:var(–green);display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.banner-error{background:rgba(239,68,68,.12);border:1px solid var(–red);border-radius:8px;padding:12px 16px;color:var(–red);margin-bottom:12px;font-size:12px}
+
+/* INLINE FLEX HELPERS */
+.flex{display:flex}
+.flex-col{display:flex;flex-direction:column}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.gap-16{gap:16px}
+.flex-1{flex:1}
+.flex-wrap{flex-wrap:wrap}
+.mb-12{margin-bottom:12px}
+.mb-16{margin-bottom:16px}
+.mb-20{margin-bottom:20px}
+.mt-12{margin-top:12px}
+
+/* RESPONSIVE fix - prevent overflow */
+.scroll-x{overflow-x:auto}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px;color:var(–muted)}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+</style>
+
+</head>
+<body>
+
+<!-- ═══ TICKER ═══════════════════════════════════════════════ -->
+
+<div id="ticker-bar">
+  <div class="ticker-label">INTEL FEED</div>
+  <div class="ticker-track">
+    <div class="ticker-inner" id="tickerInner"></div>
+  </div>
+</div>
+
+<!-- ═══ APP LAYOUT ════════════════════════════════════════════ -->
+
+<div id="app">
+
+<!-- SIDEBAR -->
+
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="co-name">COMPLETE HOME</div>
+    <div class="co-sub">TODAY LLC</div>
+    <div class="co-tag">LEAD ACQUISITION PLATFORM</div>
+  </div>
+  <div class="sidebar-live">
+    <div class="live-dot pulse"></div>
+    <div class="live-text" id="liveText">LIVE — 0 LEADS</div>
+  </div>
+  <nav id="nav"></nav>
+  <div class="sidebar-footer">
+    📍 Gilroy · Morgan Hill<br>Monterey Co. · Santa Cruz Co.
+  </div>
+</aside>
+
+<!-- CONTENT -->
+
+<div id="content-wrap">
+  <div id="main">
+
+```
+<!-- PAGE: DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="sec-head">
+    <h2>⬡ COMMAND CENTER</h2>
+    <p>Complete Home Today LLC — Real-time lead acquisition overview</p>
+  </div>
+  <div class="grid-6 mb-16" id="kpiGrid"></div>
+  <div class="grid-3 mb-16">
+    <div class="card" id="quickActionsCard"></div>
+    <div class="card" id="cplBenchCard"></div>
+    <div class="card" id="pipelineCard"></div>
+  </div>
+  <div class="card gold" id="territoryCard"></div>
+</div>
+
+<!-- PAGE: LEAD CAPTURE -->
+<div class="page" id="page-capture">
+  <div class="sec-head">
+    <h2>⊕ LEAD CAPTURE</h2>
+    <p>California CCPA-compliant lead intake — all fields optimized for fastest follow-up</p>
+  </div>
+  <div id="captureSuccess" style="display:none" class="banner-success">✅ Lead captured and added to pipeline! Begin 5-minute SMS follow-up now.</div>
+  <div style="display:grid;grid-template-columns:1fr 330px;gap:16px">
+    <div class="flex-col gap-12">
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">◈ CONTACT INFORMATION</div>
+        <div class="flex flex-wrap gap-8 mb-12">
+          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">First Name <span style="color:var(--red)" id="err-firstName"></span></label><input id="cf-firstName" placeholder="Jane"></div></div>
+          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Last Name <span style="color:var(--red)" id="err-lastName"></span></label><input id="cf-lastName" placeholder="Smith"></div></div>
+          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Phone <span style="color:var(--red)" id="err-phone"></span></label><input id="cf-phone" type="tel" placeholder="(831) 555-0000"></div></div>
+          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Email</label><input id="cf-email" type="email" placeholder="jane@email.com"></div></div>
+        </div>
+        <div class="flex flex-wrap gap-8">
+          <div style="flex:2 1 200px"><div class="field-group"><label class="field-label">Street Address</label><input id="cf-address" placeholder="123 Main St"></div></div>
+          <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">City <span style="color:var(--red)" id="err-city"></span></label><select id="cf-city"><option value="">— Select City —</option></select></div></div>
+          <div style="flex:0 0 90px"><div class="field-group"><label class="field-label">ZIP</label><input id="cf-zip" placeholder="93901"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">◈ CAMPAIGN & QUALIFICATION</div>
+        <div class="flex flex-wrap gap-8 mb-12">
+          <div style="flex:1 1 160px"><div class="field-group"><label class="field-label">Service Requested <span style="color:var(--red)" id="err-service"></span></label><select id="cf-service"><option value="">— Select —</option></select></div></div>
+          <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Lead Source</label><select id="cf-source"><option value="">— Select —</option></select></div></div>
+          <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Language</label><select id="cf-language"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div></div>
+          <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Current Provider</label><input id="cf-provider" placeholder="Comcast, None..."></div></div>
+          <div style="flex:1 1 120px"><div class="field-group"><label class="field-label">Budget</label><select id="cf-budget"><option value="">— Any —</option><option>Under $30</option><option>$30–50</option><option>$50–75</option><option>$75–100</option><option>$100+</option></select></div></div>
+          <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Urgency</label><select id="cf-urgency"><option>Normal</option><option>High — Install This Week</option><option>Low — Researching</option></select></div></div>
+          <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">Best Time to Call</label><select id="cf-besttime"><option>Anytime</option><option>Morning (8–11am)</option><option>Afternoon (11–3pm)</option><option>Evening (3–7pm)</option><option>Weekend Only</option></select></div></div>
+        </div>
+        <div class="flex flex-wrap gap-16 mb-12">
+          <label class="checkbox-row"><input type="checkbox" id="cf-newmover"> 🏡 New Mover (&lt;6 months)</label>
+          <label class="checkbox-row"><input type="checkbox" id="cf-homeowner"> 🔑 Confirmed Homeowner</label>
+          <label class="checkbox-row"><input type="checkbox" id="cf-pets"> 🐕 Has Pets (ADT note)</label>
+        </div>
+        <div class="field-group"><label class="field-label">Notes / Disposition</label><textarea id="cf-notes" rows="2" placeholder="Call preferences, objections, deal-breakers, referral name..."></textarea></div>
+      </div>
+      <div class="card" id="ccpaCard">
+        <label class="checkbox-row" style="align-items:flex-start">
+          <input type="checkbox" id="cf-ccpa" style="margin-top:2px">
+          <span style="font-size:12px"><strong style="color:var(--blue)">California CCPA Consent:</strong> I agree to be contacted by Complete Home Today LLC regarding home services. I understand my data may be shared with service partners (ADT, AT&T, Spectrum, Earthlink, Frontier) for the purpose of fulfilling my request. I can opt out at any time by replying STOP. <span style="color:var(--muted)">(Required by California Consumer Privacy Act)</span><span style="color:var(--red)" id="err-ccpa"></span></span>
+        </label>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitLead()">⊕ CAPTURE LEAD TO PIPELINE</button>
+    </div>
+    <div class="flex-col gap-12">
+      <div class="card glow">
+        <div class="card-title" style="color:var(--amber)">⚡ SPEED-TO-LEAD PROTOCOL</div>
+        <div id="speedProtocol"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--blue)">◉ HIGH-VALUE SIGNALS</div>
+        <div id="signalsList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--green)">$ TOP CPL SOURCES</div>
+        <div id="cplSources"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: LEAD LOG -->
+<div class="page" id="page-log">
+  <div class="flex items-center justify-between mb-20">
+    <div class="sec-head" style="margin-bottom:0">
+      <h2>≡ LEAD PIPELINE</h2>
+      <p id="logSubtitle">0 total leads</p>
+    </div>
+    <button class="btn btn-secondary" onclick="exportLeads()">⬇ Export Excel</button>
+  </div>
+  <div class="filter-row">
+    <input id="leadSearch" placeholder="🔍 Search leads..." style="width:210px;flex:0 0 210px" oninput="renderLeadLog()">
+    <div id="statusFilters"></div>
+  </div>
+  <div id="leadList"></div>
+</div>
+
+<!-- PAGE: AD FORGE -->
+<div class="page" id="page-adforge">
+  <div class="sec-head"><h2>⚡ AD FORGE</h2><p>AI-powered high-converting copy — California-optimized psychological frameworks</p></div>
+  <div style="display:grid;grid-template-columns:290px 1fr;gap:16px">
+    <div class="card glow flex-col gap-12">
+      <div class="card-title" style="color:var(--amber)">⚡ CAMPAIGN CONFIG</div>
+      <div class="field-group"><label class="field-label">Client</label><select id="af-client"></select></div>
+      <div class="field-group"><label class="field-label">Platform</label><select id="af-platform"></select></div>
+      <div class="field-group"><label class="field-label">Target City</label><select id="af-city"></select></div>
+      <div class="field-group"><label class="field-label">Target Audience</label><select id="af-audience"></select></div>
+      <div class="field-group"><label class="field-label">Language</label><select id="af-lang"><option>English</option><option>Spanish</option><option>Bilingual — Both Versions</option></select></div>
+      <div class="field-group"><label class="field-label">Psych Framework</label><select id="af-framework"></select></div>
+      <button class="btn btn-primary btn-block" onclick="generateAd()">⚡ FORGE AD COPY</button>
+    </div>
+    <div>
+      <div class="card mb-12">
+        <div class="card-title" style="color:var(--amber)">◈ TOP-CONVERTING FORMULAS IN HOME SERVICES (CA)</div>
+        <div class="grid-2" id="adFormulas"></div>
+      </div>
+      <div id="adLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">FORGING MAXIMUM-CONVERSION COPY...</div></div>
+      <div id="adOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="adOutputLabel">◈ AI OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('adOutputText')">📋 Copy All</button></div>
+        <pre id="adOutputText"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: CAMPAIGN BUILDER -->
+<div class="page" id="page-campaigns">
+  <div class="sec-head"><h2>◎ CAMPAIGN BUILDER</h2><p>Full Facebook & Google campaign plans with budgets, targeting, and projected CPL</p></div>
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+    <div class="card glow flex-col gap-12">
+      <div class="card-title" style="color:var(--amber)">◎ PLAN CONFIG</div>
+      <div class="field-group"><label class="field-label">Client</label><select id="cb-client"></select></div>
+      <div class="field-group"><label class="field-label">Territory</label><select id="cb-territory"><option>All Territory</option><option>Gilroy / Morgan Hill</option><option>Monterey County</option><option>Santa Cruz County</option><option>Salinas Valley Only</option></select></div>
+      <div class="field-group"><label class="field-label">Monthly Budget</label><select id="cb-budget"><option>$500/mo</option><option>$750/mo</option><option selected>$1,000/mo</option><option>$1,500/mo</option><option>$2,000/mo</option><option>$3,000/mo</option><option>$5,000/mo</option></select></div>
+      <div class="field-group"><label class="field-label">Primary Objective</label><select id="cb-objective"><option>Lead Generation — Lowest CPL</option><option>Lead Volume Max</option><option>New Mover Focus</option><option>Spanish Market Focus</option><option>Quality Leads</option></select></div>
+      <button class="btn btn-primary btn-block" onclick="buildCampaign()">◎ BUILD CAMPAIGN PLAN</button>
+    </div>
+    <div>
+      <div class="card mb-12">
+        <div class="card-title" style="color:var(--amber)">📊 REFERENCE: $1,000/MO OPTIMAL SPLIT</div>
+        <div class="scroll-x"><table class="data-table" id="campaignRefTable"></table></div>
+      </div>
+      <div id="cbLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING YOUR CAMPAIGN PLAN...</div></div>
+      <div id="cbOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="cbOutputLabel">◎ AI CAMPAIGN PLAN</div><button class="btn btn-ghost btn-sm" onclick="copyAI('cbOutputText')">📋 Copy All</button></div>
+        <pre id="cbOutputText"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: SMS ENGINE -->
+<div class="page" id="page-sms">
+  <div class="sec-head"><h2>✉ SMS FOLLOW-UP ENGINE</h2><p>California TCPA/CCPA-compliant sequences — highest contact rates in the industry</p></div>
+  <div style="display:grid;grid-template-columns:290px 1fr;gap:16px">
+    <div class="flex-col gap-12">
+      <div class="card glow">
+        <div class="card-title" style="color:var(--amber)">✉ SEQUENCE CONFIG</div>
+        <div class="field-group"><label class="field-label">Sequence Type</label><select id="sms-type"></select></div>
+        <div class="field-group"><label class="field-label">Target City</label><select id="sms-city"></select></div>
+        <div class="field-group"><label class="field-label">Language</label><select id="sms-lang"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div>
+        <button class="btn btn-primary btn-block" onclick="generateSMS()">✉ GENERATE SEQUENCE</button>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--blue)">⚡ SPEED-TO-LEAD FACTS</div>
+        <div id="speedFacts"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-title" style="color:var(--white);margin-bottom:12px">📋 INSTANT-USE TEMPLATES — Copy & Paste Now</div>
+      <div id="smsTemplates" class="mb-16"></div>
+      <div id="smsLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING YOUR SMS SEQUENCE...</div></div>
+      <div id="smsOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="smsOutputLabel">✉ AI SMS SEQUENCE</div><button class="btn btn-ghost btn-sm" onclick="copyAI('smsOutputText')">📋 Copy All</button></div>
+        <pre id="smsOutputText"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: BILINGUAL OPS -->
+<div class="page" id="page-spanish">
+  <div class="sec-head"><h2>◈ BILINGUAL OPS</h2><p>Spanish/English ad pairs for Gilroy, Salinas, and Monterey County Hispanic markets</p></div>
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+    <div class="card glow flex-col gap-12">
+      <div class="card-title" style="color:var(--amber)">◈ AD CONFIG</div>
+      <div class="field-group"><label class="field-label">Client</label><select id="bi-client"></select></div>
+      <div class="field-group"><label class="field-label">City</label><select id="bi-city"><option>Salinas</option><option>Gilroy</option><option>Watsonville</option><option>King City</option><option>Gonzales</option><option>Marina</option><option>Seaside</option></select></div>
+      <div class="field-group"><label class="field-label">Format</label><select id="bi-format"><option>Facebook Lead Form Ad</option><option>Instagram Story</option><option>SMS Text</option><option>WhatsApp Message</option><option>Direct Mail Postcard</option></select></div>
+      <div class="field-group"><label class="field-label">Angle</label><select id="bi-angle"><option>Family Protection / Protección Familiar</option><option>New Home / Nuevo Hogar</option><option>Price and Value / Precio y Valor</option><option>Neighborhood Safety</option><option>Limited Offer / Oferta Limitada</option><option>Community Trust / Confianza</option></select></div>
+      <button class="btn btn-primary btn-block" onclick="generateBilingual()">◈ GENERATE BILINGUAL ADS</button>
+      <div style="background:var(--amberG);border:1px solid rgba(255,149,0,.3);border-radius:8px;padding:12px">
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--amber);margin-bottom:6px">◈ WHY IT MATTERS</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">Spanish-language ads in Salinas/Gilroy achieve <strong style="color:var(--amber)">22% CVR</strong> vs 8% English-only — nearly <strong style="color:var(--green)">3x higher conversion</strong></div>
+      </div>
+    </div>
+    <div>
+      <div id="biExamples" class="mb-12"></div>
+      <div id="biLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING BILINGUAL ADS...</div></div>
+      <div id="biOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="biOutputLabel">◈ BILINGUAL AD OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('biOutputText')">📋 Copy All</button></div>
+        <pre id="biOutputText"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: NEW MOVER ENGINE -->
+<div class="page" id="page-newmover">
+  <div class="sec-head"><h2>⌂ NEW MOVER ENGINE</h2><p>#1 ADT and ISP acquisition strategy — catch homeowners in the 30-day decision window</p></div>
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+    <div class="flex-col gap-12">
+      <div class="card glow">
+        <div class="card-title" style="color:var(--amber)">⌂ PROGRAM CONFIG</div>
+        <div class="field-group"><label class="field-label">Service</label><select id="nm-service"></select></div>
+        <div class="field-group"><label class="field-label">Primary City</label><select id="nm-city"></select></div>
+        <button class="btn btn-primary btn-block" onclick="buildNewMover()">⌂ BUILD PROGRAM</button>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">◉ NEW MOVER STATS</div>
+        <div id="nmStats"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card mb-12">
+        <div class="card-title" style="color:var(--amber)">📅 90-DAY TOUCH SEQUENCE</div>
+        <div id="nmTimeline"></div>
+      </div>
+      <div id="nmLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING NEW MOVER PROGRAM...</div></div>
+      <div id="nmOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="nmOutputLabel">⌂ NEW MOVER PROGRAM</div><button class="btn btn-ghost btn-sm" onclick="copyAI('nmOutputText')">📋 Copy All</button></div>
+        <pre id="nmOutputText"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: MARKET INTEL -->
+<div class="page" id="page-intel">
+  <div class="sec-head"><h2>◉ MARKET INTEL</h2><p>AI-powered competitive intelligence for your exact territory</p></div>
+  <div style="display:grid;grid-template-columns:1fr 270px;gap:16px;margin-bottom:16px">
+    <div class="card">
+      <div class="flex gap-12 mb-12">
+        <div class="flex-1"><div class="field-group"><label class="field-label">Research Query</label><input id="intel-query" placeholder="Type a question or click a preset below..."></div></div>
+        <div style="width:200px"><div class="field-group"><label class="field-label">Focus Market</label><select id="intel-market"><option>All Territory</option><option>Monterey County</option><option>Santa Cruz County</option><option>Gilroy / Morgan Hill</option><option>Salinas Valley</option></select></div></div>
+      </div>
+      <div class="mb-12">
+        <label class="field-label" style="margin-bottom:8px">Quick Presets</label>
+        <div class="flex flex-wrap gap-8" id="intelPresets"></div>
+      </div>
+      <button class="btn btn-primary" onclick="runIntel()">◉ RUN INTEL BRIEF</button>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--amber)">$ CPL BENCHMARK MATRIX</div>
+      <div id="cplMatrix"></div>
+    </div>
+  </div>
+  <div id="intelLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">RUNNING COMPETITIVE ANALYSIS...</div></div>
+  <div id="intelOutput" class="ai-output" style="display:none">
+    <div class="ai-output-header"><div class="ai-output-label" id="intelOutputLabel">◉ INTEL BRIEF</div><button class="btn btn-ghost btn-sm" onclick="copyAI('intelOutputText')">📋 Copy All</button></div>
+    <pre id="intelOutputText"></pre>
+  </div>
+</div>
+
+<!-- PAGE: PRICING VAULT -->
+<div class="page" id="page-pricing">
+  <div class="sec-head"><h2>$ PRICING VAULT</h2><p>Reference pricing for all clients — verify directly with carriers before running ads</p></div>
+  <div class="filter-row" id="pricingTabs"></div>
+  <div class="card" id="pricingTable"></div>
+  <div style="margin-top:12px;padding:12px 16px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:12px;color:var(--muted)">
+    <strong style="color:var(--red)">⚠ California Notice:</strong> Prices are reference estimates only. Always verify current promotions at each carrier's website before running ads. Under CA law, price claims must be accurate at time of publication.
+  </div>
+</div>
+
+<div class="page" id="page-attdeck">
+  <div class="sec-head">
+    <h2>📊 AT&T PITCH DECK</h2>
+    <p>Complete Home Today LLC — AT&T Internet Market Dominance Strategy · 7 Slides</p>
+  </div>
+  <div id="attDeckWrap"></div>
+</div>
+```
+
+  </div><!-- /main -->
+</div><!-- /content-wrap -->
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════════════════════
+const CITIES = ['Gilroy','Morgan Hill','Salinas','Monterey','Pacific Grove','Carmel','Seaside','Marina','King City','Gonzales','Greenfield','Soledad','Santa Cruz','Scotts Valley','Watsonville','Capitola','Aptos','Live Oak'];
+const SERVICES = ['ADT Home Security','AT&T Internet','Spectrum Internet','Earthlink Internet','Frontier Internet'];
+const SOURCES = ['Facebook Lead Form','Instagram Ad','Google Search','Nextdoor','Direct Mail','Referral','Door to Door','TikTok Ad','YouTube Ad','Google LSA','Text/SMS','Other'];
+const STATUS_COLORS = {
+  'New':'#EF4444','Contacted':'#0EA5E9','Scheduled':'#A78BFA',
+  'Installed':'#22C55E','Lost':'#EF4444','Dropped':'#3D4F60'
+};
+const STATUSES = Object.keys(STATUS_COLORS);
+const PLATFORMS = ['Facebook Lead Form Ad','Instagram Story / Reel','Google Responsive Search Ad','YouTube Pre-Roll Script (15s)','YouTube Pre-Roll Script (30s)','Nextdoor Sponsored Post','TikTok Ad Script','Google LSA Profile Copy','SMS Text Message','Direct Mail Postcard','Email Subject + Body'];
+const AUDIENCES = ['New homeowners, 28–45','Homeowners 45–65','Senior homeowners 65+','Spanish-speaking households','Remote workers / home office','New parents / growing families','Budget-conscious renters','Recent college grads','Military / veterans','Small business owners'];
+const FRAMEWORKS = [
+  'Fear of Loss (FOMO) — Most effective for ADT',
+  'Social Proof — Your neighbors in [city] switched',
+  'Scarcity — Only 3 install slots left this week',
+  'Price Anchoring — Show retail price, slash to promo',
+  'Authority — ADT #1 monitored security brand in America',
+  'Reciprocity — Free home assessment / free install offer',
+  'Urgency — Limited-time promotional rate expiry',
+  'Belonging — Join 6M+ homes protected by ADT',
+  'Pain → Solution — Your neighborhood has seen break-ins',
+  'Before/After — Unprotected home vs. monitored home'
+];
+const SMS_TYPES = [
+  'New Mover — ADT Home Security',
+  'Facebook Lead Form — ADT',
+  'Google Search Lead — ADT',
+  'New Mover — AT&T Internet',
+  'New Mover — Spectrum Internet',
+  'Inbound Website Lead — Any Service',
+  '30-Day Cold Re-Engagement',
+  'Post-Install Referral Request'
+];
+const INTEL_PRESETS = [
+  'Top Facebook ad strategies for ADT in California 2025',
+  'How to beat Vivint and Ring on social media in Central CA',
+  'Best Google LSA strategy for ADT authorized dealers',
+  'Nextdoor advertising for home security in affluent CA markets',
+  'Spanish-language home security ad performance in California',
+  'New mover targeting for ISPs in California — best sources 2025',
+  'TikTok ads for ADT targeting homeowners under 40',
+  'ADT Facebook lead form best practices for pre-qualification',
+  'Competitor analysis — Spectrum vs AT&T Santa Cruz County',
+  'How to dominate new mover targeting for Earthlink in rural CA'
+];
+const PRICING_DATA = {
+  ADT: {
+    cols: ['Plan','Type','Price','Promo Offer','Best For','Est. CPA'],
+    rows: [
+      ['Secure Home','Basic 24/7 monitoring','$28.99/mo','$0 install (promo)','New movers, budget-conscious','$140–180'],
+      ['Smart Home','24/7 + smart locks','$40.99/mo','$0 install (promo)','Tech-forward homeowners','$160–200'],
+      ['Complete Home','Premium + cameras','$52.99/mo','Best value bundle','Families, high-crime areas','$180–220'],
+      ['Video + Pro Monitor','Pro video monitoring','$62.99/mo','Limited markets','Premium neighborhoods','$200–260'],
+    ]
+  },
+  'AT&T': {
+    cols: ['Plan','Type','Price','Promo / AutoPay','Best For',''],
+    rows: [
+      ['Internet 300','Fiber 300 Mbps','$55/mo','$35 w/ AutoPay + Paperless','Singles/couples',''],
+      ['Internet 500','Fiber 500 Mbps','$65/mo','$45 w/ AutoPay','Most popular family tier',''],
+      ['Internet 1 Gig','Fiber 1 Gbps','$80/mo','$60 w/ AutoPay','Remote workers, 4K streaming',''],
+      ['Internet 2 Gig','Fiber 2 Gbps','$110/mo','$85 w/ AutoPay','Multi-device power users',''],
+    ]
+  },
+  Spectrum: {
+    cols: ['Plan','Type','Price','Term','Notes',''],
+    rows: [
+      ['Internet 300','Cable 300 Mbps','$49.99/mo','12-mo promo','No data caps, no contracts',''],
+      ['Internet Ultra','Cable 500 Mbps','$69.99/mo','12-mo promo','Best for streaming + gaming',''],
+      ['Internet Gig','Cable 1 Gbps','$89.99/mo','New customers','Top tier — Santa Cruz/Monterey',''],
+    ]
+  },
+  Earthlink: {
+    cols: ['Plan','Type','Price','Contract','Coverage',''],
+    rows: [
+      ['Wireless Home','Fixed wireless','$64.95/mo','No contract','Rural — Salinas ag communities',''],
+      ['Fiber 1 Gig','Fiber 1 Gbps','$79.95/mo','Where available','Very limited coverage area',''],
+    ]
+  },
+  Frontier: {
+    cols: ['Plan','Type','Price','Price Lock','Best For',''],
+    rows: [
+      ['Fiber 500','Fiber 500 Mbps','$49.99/mo','2-yr price lock','Reliable — Morgan Hill market',''],
+      ['Fiber 1 Gig','Fiber 1 Gbps','$74.99/mo','2-yr price lock','Most popular — remote workers',''],
+      ['Fiber 2 Gig','Fiber 2 Gbps','$149.99/mo','Power users','Multi-device households',''],
+    ]
+  }
+};
+const TICKERS = [
+  '⚡ ADT New Mover CPL TARGET: $18–24',
+  '▸ AT&T Fiber: Top ZIP 95020 Gilroy',
+  '◈ Salinas Spanish Ads: 22% CVR vs 8% English-only',
+  '⬡ Facebook Lead Forms beat landing pages by 3.2x in CA',
+  '▸ Speed-to-lead <5 min = 80% higher contact rate',
+  '⚡ Spectrum: Santa Cruz top-converting market',
+  '◈ New Mover window: Days 3–21 post move-in = highest intent',
+  '▸ Google LSA: ADT verified badge = 40% lower CPL',
+  '⬡ Frontier Fiber: Morgan Hill expansion 2025',
+  '⚡ CCPA Compliant Lead Forms required in California',
+  '▸ Nextdoor ADT posts: $8 CPL in Carmel/Pacific Grove'
+];
+const NAV_ITEMS = [
+  {id:'dashboard', icon:'⬡', label:'Command Center'},
+  {id:'capture',   icon:'⊕', label:'Lead Capture'},
+  {id:'log',       icon:'≡', label:'Lead Log'},
+  {id:'adforge',   icon:'⚡', label:'Ad Forge'},
+  {id:'campaigns', icon:'◎', label:'Campaign Builder'},
+  {id:'sms',       icon:'✉', label:'SMS Engine'},
+  {id:'spanish',   icon:'◈', label:'Bilingual Ops'},
+  {id:'newmover',  icon:'⌂', label:'New Mover'},
+  {id:'intel',     icon:'◉', label:'Market Intel'},
+  {id:'pricing',   icon:'$', label:'Pricing Vault'},
+  {id:'attdeck',   icon:'📊', label:'AT&T Pitch Deck'}
+];
+
+// ════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════
+let leads = [];
+let activePage = 'dashboard';
+let activeFilter = 'All';
+let activePricingTab = 'ADT';
+
+// ════════════════════════════════════════════════════════════
+// UTILITY
+// ════════════════════════════════════════════════════════════
+function el(id){ return document.getElementById(id); }
+function pill(text, color){ return '<span class="pill" style="background:'+color+'22;color:'+color+'">'+escHtml(text)+'</span>'; }
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtMono(s, color){ return '<span style="font-family:var(--font-mono);font-size:11px;color:'+color+'">'+escHtml(s)+'</span>'; }
+function copyAI(id){ const t = el(id); if(t){ navigator.clipboard.writeText(t.textContent); } }
+function showAIOutput(outId, labelId, loadId, text, label){
+  el(loadId).style.display='none';
+  el(labelId).textContent='◈ AI OUTPUT — '+(label||'').toUpperCase();
+  el(outId+' pre'||outId.replace('Output','OutputText')).textContent=text;
+  el(outId).style.display='block';
+}
+function setLoading(loadId, outId, show){
+  el(loadId).style.display = show?'block':'none';
+  if(show && el(outId)) el(outId).style.display='none';
+}
+
+// ════════════════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════════════════
+function buildNav(){
+  const nav = el('nav');
+  nav.innerHTML = NAV_ITEMS.map(n =>
+    '<button class="nav-btn'+(activePage===n.id?' active':'')+'" onclick="goTo(\''+n.id+'\')" id="navBtn-'+n.id+'">' +
+    '<span class="nav-icon">'+n.icon+'</span><span>'+n.label+'</span>' +
+    (n.id==='log'?'<span class="nav-badge" id="newBadge" style="display:none">0</span>':'')+
+    '</button>'
+  ).join('');
+}
+function goTo(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  el('page-'+id).classList.add('active');
+  activePage = id;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const btn = el('navBtn-'+id);
+  if(btn) btn.classList.add('active');
+  if(id==='dashboard') renderDashboard();
+  if(id==='log') renderLeadLog();
+  if(id==='pricing') renderPricing();
+  if(id==='attdeck') renderATTDeck();
+}
+function updateNewBadge(){
+  const n = leads.filter(l=>l.status==='New').length;
+  const badge = el('newBadge');
+  if(badge){ badge.textContent=n; badge.style.display=n>0?'inline':'none'; }
+  el('liveText').textContent = 'LIVE — '+leads.length+' LEADS';
+}
+
+// ════════════════════════════════════════════════════════════
+// TICKER
+// ════════════════════════════════════════════════════════════
+function buildTicker(){
+  const inner = el('tickerInner');
+  const all = [...TICKERS,...TICKERS];
+  inner.innerHTML = all.map(t=>'<span>'+escHtml(t)+'</span>').join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// POPULATE SELECTS
+// ════════════════════════════════════════════════════════════
+function populateSelects(){
+  // Cities
+  const citySelects = ['cf-city','af-city','sms-city','nm-city'];
+  citySelects.forEach(id=>{
+    const s = el(id); if(!s) return;
+    CITIES.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; s.appendChild(o); });
+  });
+  // Services
+  ['cf-service','nm-service'].forEach(id=>{
+    const s = el(id); if(!s) return;
+    SERVICES.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; s.appendChild(o); });
+  });
+  // Sources
+  const src = el('cf-source'); if(src) SOURCES.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; src.appendChild(o); });
+  // Client selects
+  ['af-client','cb-client','bi-client'].forEach(id=>{
+    const s = el(id); if(!s) return;
+    SERVICES.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; s.appendChild(o); });
+  });
+  // Platforms
+  const pf = el('af-platform'); if(pf) PLATFORMS.forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; pf.appendChild(o); });
+  // Audiences
+  const aud = el('af-audience'); if(aud) AUDIENCES.forEach(a=>{ const o=document.createElement('option'); o.value=a; o.textContent=a; aud.appendChild(o); });
+  // Frameworks
+  const fw = el('af-framework'); if(fw) FRAMEWORKS.forEach(f=>{ const o=document.createElement('option'); o.value=f; o.textContent=f; fw.appendChild(o); });
+  // SMS types
+  const smsT = el('sms-type'); if(smsT) SMS_TYPES.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; smsT.appendChild(o); });
+}
+
+// ════════════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════════════
+function renderDashboard(){
+  const byStatus = s => leads.filter(l=>l.status===s).length;
+  const today = leads.filter(l=>{ try{ return new Date(l.ts).toDateString()===new Date().toDateString(); }catch{return false;} }).length;
+  const adtLeads = leads.filter(l=>l.service&&l.service.includes('ADT')).length;
+  const ispLeads = leads.length - adtLeads;
+
+  const kpis = [
+    {label:'Total Leads', val:leads.length, sub:'All time', color:'var(--amber)'},
+    {label:'ADT Leads', val:adtLeads, sub:'Security', color:'var(--red)'},
+    {label:'ISP Leads', val:ispLeads, sub:'Internet', color:'var(--blue)'},
+    {label:'New Today', val:today, sub:'Captured today', color:'var(--green)'},
+    {label:'Installed', val:byStatus('Installed'), sub:'Converted', color:'var(--green)'},
+    {label:'Pending', val:byStatus('New')+byStatus('Contacted'), sub:'In pipeline', color:'var(--amber)'},
+  ];
+  el('kpiGrid').innerHTML = kpis.map(k=>
+    '<div class="kpi-card" style="border-left:3px solid '+k.color+'">'+
+    '<div class="kpi-num" style="color:'+k.color+'">'+k.val+'</div>'+
+    '<div class="kpi-label">'+escHtml(k.label)+'</div>'+
+    '<div class="kpi-sub">'+escHtml(k.sub)+'</div></div>'
+  ).join('');
+
+  // Quick actions
+  const qas = [
+    {id:'capture',icon:'⊕',label:'Capture Lead',c:'var(--amber)'},
+    {id:'adforge',icon:'⚡',label:'Generate Ad',c:'var(--blue)'},
+    {id:'campaigns',icon:'◎',label:'Build Campaign',c:'#A78BFA'},
+    {id:'newmover',icon:'⌂',label:'New Mover Plan',c:'var(--green)'},
+    {id:'spanish',icon:'◈',label:'Spanish Ads',c:'var(--red)'},
+    {id:'intel',icon:'◉',label:'Market Intel',c:'var(--amber)'},
+  ];
+  el('quickActionsCard').innerHTML = '<div class="card-title" style="color:var(--amber)">◈ QUICK ACTIONS</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
+    qas.map(q=>'<button onclick="goTo(\''+q.id+'\')" style="background:'+q.c+'18;border:1px solid '+q.c+'35;border-radius:7px;padding:9px 10px;color:'+q.c+';font-size:12px;font-weight:700;text-align:left;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-body)"><span style="font-family:var(--font-mono)">'+q.icon+'</span>'+escHtml(q.label)+'</button>').join('') + '</div>';
+
+  // CPL benchmarks
+  const benchmarks = [
+    {name:'ADT – Facebook New Mover', cpl:'$18–24', r:5},
+    {name:'ADT – Google LSA', cpl:'$22–30', r:4},
+    {name:'AT&T – Facebook Lead Form', cpl:'$20–32', r:4},
+    {name:'Spectrum – Instagram', cpl:'$24–36', r:3},
+    {name:'ADT – Nextdoor', cpl:'$8–14', r:5},
+    {name:'ISP – Direct Mail + Digital', cpl:'$28–45', r:3},
+  ];
+  el('cplBenchCard').innerHTML = '<div class="card-title" style="color:var(--amber)">⬡ CALIFORNIA CPL BENCHMARKS</div>' +
+    benchmarks.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bdr)">'+
+      '<div style="flex:1;font-size:11px">'+escHtml(b.name)+'</div>'+
+      '<div style="font-family:var(--font-mono);font-size:12px;color:var(--green)">'+b.cpl+'</div>'+
+      '<div>'+Array.from({length:5}).map((_,i)=>'<span style="color:'+(i<b.r?'var(--amber)':'var(--dim)')+'">★</span>').join('')+'</div>'+
+    '</div>').join('');
+
+  // Pipeline
+  el('pipelineCard').innerHTML = '<div class="card-title" style="color:var(--amber)">◉ LEAD PIPELINE</div>' +
+    (leads.length===0 ?
+      '<div style="text-align:center;padding:20px 0;color:var(--muted);font-size:12px">No leads yet — capture your first lead</div>' :
+      STATUSES.map(s=>{
+        const count=byStatus(s), pct=leads.length>0?Math.round(count/leads.length*100):0;
+        const c=STATUS_COLORS[s]||'var(--amber)';
+        return '<div style="margin-bottom:10px">'+
+          '<div style="display:flex;justify-content:space-between;margin-bottom:4px">'+
+          '<span style="font-size:11px">'+s+'</span>'+
+          '<span style="font-family:var(--font-mono);font-size:11px;color:'+c+'">'+count+' ('+pct+'%)</span>'+
+          '</div>'+
+          '<div style="height:4px;background:#1a2535;border-radius:2px;overflow:hidden">'+
+          '<div style="height:100%;width:'+pct+'%;background:'+c+';border-radius:2px;transition:width .5s"></div>'+
+          '</div></div>';
+      }).join(''));
+
+  // Territory
+  const territories = [
+    {zone:'Gilroy / Morgan Hill', pop:'90K+', angle:'New developments, 55% Hispanic, AT&T+ADT', hot:'ZIP 95020, 95037'},
+    {zone:'Salinas Valley', pop:'155K+', angle:'Ag workforce, price-sensitive, bilingual critical', hot:'ZIP 93901, 93905'},
+    {zone:'Monterey Peninsula', pop:'85K+', angle:'Premium bundles, Carmel/PG high-value installs', hot:'ZIP 93940, 93950'},
+    {zone:'Santa Cruz County', pop:'270K+', angle:'Remote workers, UCSC, Spectrum stronghold', hot:'ZIP 95060, 95062'},
+  ];
+  el('territoryCard').innerHTML = '<div class="card-title" style="color:var(--amber)">⊕ TERRITORY INTELLIGENCE</div>'+
+    '<div class="grid-4">'+
+    territories.map(t=>'<div style="background:#0A1018;border:1px solid var(--bdr);border-radius:8px;padding:12px">'+
+      '<div style="font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:4px">'+escHtml(t.zone)+'</div>'+
+      '<div style="font-family:var(--font-mono);font-size:10px;color:var(--amber);margin-bottom:6px">POP: '+t.pop+'</div>'+
+      '<div style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:6px">'+escHtml(t.angle)+'</div>'+
+      pill(t.hot, 'var(--blue)')+'</div>'
+    ).join('')+'</div>';
+}
+
+// ════════════════════════════════════════════════════════════
+// CAPTURE PAGE SETUP
+// ════════════════════════════════════════════════════════════
+function buildCaptureStatics(){
+  el('speedProtocol').innerHTML = [
+    ['0–5 min','Send automated SMS immediately'],
+    ['5–15 min','Personal call attempt from agent'],
+    ['1 hour','2nd SMS if no contact'],
+    ['24 hours','Email + 2nd call attempt'],
+    ['48 hours','Final same-week attempt'],
+  ].map(([t,a])=>'<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:12px">'+
+    '<span style="font-family:var(--font-mono);color:var(--amber);width:65px;flex-shrink:0">'+escHtml(t)+'</span>'+
+    '<span style="color:var(--muted)">'+escHtml(a)+'</span></div>'
+  ).join('');
+
+  el('signalsList').innerHTML = [
+    ['🏡 New Mover','3x conversion rate vs. cold'],
+    ['⏰ High Urgency','Close same day when possible'],
+    ['💬 Spanish Pref.','Use bilingual agent immediately'],
+    ['🔑 Homeowner','Required for ADT — verify early'],
+    ['📞 Morning Call','8–11am has highest contact rate'],
+  ].map(([s,d])=>'<div style="font-size:12px;margin-bottom:8px"><strong style="color:var(--white)">'+s+'</strong><span style="color:var(--muted)"> — '+escHtml(d)+'</span></div>').join('');
+
+  el('cplSources').innerHTML = [
+    {src:'Nextdoor',cpl:'$8–14',c:'var(--green)'},
+    {src:'Facebook LF',cpl:'$18–24',c:'var(--amber)'},
+    {src:'Google LSA',cpl:'$22–30',c:'var(--blue)'},
+    {src:'Door-to-Door',cpl:'$25–40',c:'var(--muted)'},
+    {src:'Direct Mail+Dig',cpl:'$28–45',c:'var(--muted)'},
+  ].map(r=>'<div style="display:flex;justify-content:space-between;margin-bottom:7px;font-size:12px">'+
+    '<span style="color:var(--white)">'+escHtml(r.src)+'</span>'+
+    '<span style="font-family:var(--font-mono);color:'+r.c+'">'+r.cpl+'</span></div>'
+  ).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// LEAD CAPTURE SUBMIT
+// ════════════════════════════════════════════════════════════
+function submitLead(){
+  const errs = {};
+  const v = id => el(id) ? el(id).value.trim() : '';
+  const vc = id => el(id) ? el(id).checked : false;
+
+  if(!v('cf-firstName')) errs.firstName='Required';
+  if(!v('cf-lastName'))  errs.lastName='Required';
+  if(!v('cf-phone'))     errs.phone='Required';
+  if(!v('cf-city'))      errs.city='Required';
+  if(!v('cf-service'))   errs.service='Required';
+  if(!vc('cf-ccpa'))     errs.ccpa=' — Consent required under California law';
+
+  ['firstName','lastName','phone','city','service','ccpa'].forEach(k=>{
+    const errEl = el('err-'+k);
+    if(errEl) errEl.textContent = errs[k]||'';
+  });
+  if(Object.keys(errs).length) return;
+
+  const lead = {
+    id: Date.now(),
+    ts: new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}),
+    firstName: v('cf-firstName'), lastName: v('cf-lastName'),
+    phone: v('cf-phone'), email: v('cf-email'),
+    address: v('cf-address'), city: v('cf-city'), zip: v('cf-zip'),
+    service: v('cf-service'), source: v('cf-source'),
+    language: v('cf-language'), provider: v('cf-provider'),
+    budget: v('cf-budget'), urgency: v('cf-urgency'),
+    bestTime: v('cf-besttime'), notes: v('cf-notes'),
+    isNewMover: vc('cf-newmover'), isHomeowner: vc('cf-homeowner'), hasPets: vc('cf-pets'),
+    status: 'New'
+  };
+  leads.push(lead);
+  updateNewBadge();
+
+  // Reset form
+  ['firstName','lastName','phone','email','address','zip','provider','notes'].forEach(k=>{ const i=el('cf-'+k); if(i) i.value=''; });
+  ['city','service','source'].forEach(k=>{ const i=el('cf-'+k); if(i) i.value=''; });
+  ['newmover','homeowner','pets','ccpa'].forEach(k=>{ const i=el('cf-'+k); if(i) i.checked=false; });
+
+  const s = el('captureSuccess');
+  s.style.display='flex'; setTimeout(()=>{ s.style.display='none'; }, 4000);
+}
+
+// ════════════════════════════════════════════════════════════
+// LEAD LOG
+// ════════════════════════════════════════════════════════════
+function buildStatusFilters(){
+  const c = el('statusFilters');
+  const all = ['All',...STATUSES];
+  c.innerHTML = all.map(s=>
+    '<button class="filter-pill'+(activeFilter===s?' active':'')+'" onclick="setFilter(\''+s+'\')">' + escHtml(s) + '</button>'
+  ).join('');
+}
+function setFilter(f){ activeFilter=f; buildStatusFilters(); renderLeadLog(); }
+function renderLeadLog(){
+  const search = (el('leadSearch')||{}).value||'';
+  let shown = leads.filter(l=>activeFilter==='All'||l.status===activeFilter)
+    .filter(l=>!search || (l.firstName+' '+l.lastName+' '+l.phone+' '+l.city).toLowerCase().includes(search.toLowerCase()));
+  shown = [...shown].reverse();
+
+  el('logSubtitle').textContent = leads.length+' total leads · export all to Excel';
+
+  if(shown.length===0){
+    el('leadList').innerHTML = '<div class="empty-state"><div class="icon">⬡</div><div>No leads match this filter. Capture your first lead to build your pipeline.</div></div>';
+    return;
+  }
+  el('leadList').innerHTML = shown.map(lead=>{
+    const sc = STATUS_COLORS[lead.status]||'var(--amber)';
+    const initials = (lead.firstName||'?')[0]+(lead.lastName||'?')[0];
+    return '<div class="lead-row">'+
+      '<div class="lead-avatar">'+escHtml(initials)+'</div>'+
+      '<div style="flex:1 1 150px;min-width:0">'+
+        '<div style="font-weight:700;font-size:14px">'+escHtml(lead.firstName+' '+lead.lastName)+'</div>'+
+        '<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted)">'+escHtml(lead.phone)+'</div>'+
+      '</div>'+
+      '<div style="font-size:12px;color:var(--muted);flex:0 0 100px">'+escHtml(lead.city||'—')+'</div>'+
+      (lead.service ? pill(lead.service.split(' ')[0], lead.service.includes('ADT')?'var(--red)':'var(--blue)') : '')+
+      '<div style="display:flex;gap:5px;flex-wrap:wrap">'+
+        (lead.isNewMover ? pill('🏡 New Mover','var(--amber)') : '')+
+        (lead.isHomeowner ? pill('🔑 Owner','var(--green)') : '')+
+        (lead.urgency&&lead.urgency.includes('High') ? pill('🔥 Urgent','var(--red)') : '')+
+        (lead.language==='Spanish' ? pill('🇲🇽 ES','#A855F7') : '')+
+      '</div>'+
+      '<div style="font-size:11px;color:var(--muted);flex:0 0 110px">'+escHtml(lead.source||'—')+'</div>'+
+      '<select onchange="updateStatus('+lead.id+',this.value)" style="width:130px;font-size:12px;font-weight:700;color:'+sc+';background:var(--card2);border:1px solid '+sc+'">'+
+        STATUSES.map(s=>'<option'+(lead.status===s?' selected':'')+'>'+s+'</option>').join('')+
+      '</select>'+
+      '<div style="font-family:var(--font-mono);font-size:9px;color:var(--dim);flex:0 0 120px">'+escHtml(lead.ts||'')+'</div>'+
+    '</div>';
+  }).join('');
+}
+function updateStatus(id, status){
+  const lead = leads.find(l=>l.id===id);
+  if(lead){ lead.status=status; updateNewBadge(); renderLeadLog(); }
+}
+function exportLeads(){
+  if(!leads.length){ alert('No leads to export.'); return; }
+  const rows = leads.map(l=>({
+    'Timestamp':l.ts,'First Name':l.firstName,'Last Name':l.lastName,
+    'Phone':l.phone,'Email':l.email,'Address':l.address,'City':l.city,'ZIP':l.zip,
+    'Service':l.service,'Lead Source':l.source,'Language':l.language,
+    'Current Provider':l.provider,'Monthly Budget':l.budget,
+    'New Mover':l.isNewMover?'Yes':'No','Homeowner':l.isHomeowner?'Yes':'No',
+    'Has Pets':l.hasPets?'Yes':'No','Urgency':l.urgency,'Best Time':l.bestTime,
+    'Status':l.status,'Notes':l.notes
+  }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+  XLSX.writeFile(wb, 'CompleteHomeToday_Leads_'+Date.now()+'.xlsx');
+}
+
+// ════════════════════════════════════════════════════════════
+// AD FORGE STATICS
+// ════════════════════════════════════════════════════════════
+function buildAdForgeStatics(){
+  const formulas = [
+    {f:'HOOK FORMULA', ex:'"Your [City] neighbor just got [Service] — here\'s why"'},
+    {f:'STAT HOOK', ex:'"[City] saw X% more break-ins last year. ADT stops 94% of them."'},
+    {f:'OFFER STACK', ex:'"Free install ($199 value) + $0 activation + first month free"'},
+    {f:'URGENCY CLOSE', ex:'"Only 4 install slots left in [City] this week"'},
+  ];
+  el('adFormulas').innerHTML = formulas.map(h=>
+    '<div style="background:#0A1018;border-radius:7px;padding:10px 12px;border-left:2px solid var(--amber)">'+
+    '<div style="font-family:var(--font-mono);font-size:9px;color:var(--blue);margin-bottom:4px">'+h.f+'</div>'+
+    '<div style="font-size:12px;color:var(--muted);font-style:italic;line-height:1.5">'+escHtml(h.ex)+'</div></div>'
+  ).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// CAMPAIGN BUILDER STATICS
+// ════════════════════════════════════════════════════════════
+function buildCampaignStatics(){
+  const rows = [
+    ['New Movers — ADT','$300','$18–24','13–17','Facebook'],
+    ['Spanish ADT — Salinas','$200','$14–20','10–14','Facebook'],
+    ['Homeowner Safety — ADT','$150','$22–32','5–7','Facebook'],
+    ['AT&T New Mover — Gilroy','$120','$20–30','4–6','Facebook'],
+    ['ADT Google LSA','$130','$22–28','5–6','Google LSA'],
+    ['Retargeting — All','$100','$10–16','6–10','Meta'],
+  ];
+  el('campaignRefTable').innerHTML =
+    '<thead><tr>'+['Ad Set','Budget','Est. CPL','Leads/Mo','Platform'].map(h=>
+      '<th>'+h+'</th>'
+    ).join('')+'</tr></thead>'+
+    '<tbody>'+rows.map(r=>
+      '<tr>'+
+      '<td style="font-weight:500">'+escHtml(r[0])+'</td>'+
+      '<td style="color:var(--amber);font-family:var(--font-mono)">'+r[1]+'</td>'+
+      '<td style="color:var(--green);font-family:var(--font-mono)">'+r[2]+'</td>'+
+      '<td style="color:var(--blue);font-family:var(--font-mono)">'+r[3]+'</td>'+
+      '<td>'+pill(r[4], r[4]==='Google LSA'?'var(--blue)':'var(--amber)')+'</td>'+
+      '</tr>'
+    ).join('')+
+    '<tr style="border-top:2px solid var(--amber);background:#0A1018"><td style="font-weight:800">TOTAL</td><td style="color:var(--amber);font-family:var(--font-mono);font-weight:800">$1,000</td><td style="color:var(--green);font-family:var(--font-mono)">$14–28</td><td style="color:var(--blue);font-family:var(--font-mono)">43–60</td><td></td></tr>'+
+    '</tbody>';
+}
+
+// ════════════════════════════════════════════════════════════
+// SMS ENGINE STATICS
+// ════════════════════════════════════════════════════════════
+function buildSMSStatics(){
+  el('speedFacts').innerHTML = [
+    ['< 5 min','80% contact rate','var(--red)','var(--green)'],
+    ['< 1 hour','50% contact rate','var(--blue)','var(--muted)'],
+    ['< 24 hours','20% contact rate','var(--blue)','var(--muted)'],
+    ['> 24 hours','< 5% contact rate','var(--dim)','var(--muted)'],
+  ].map(([t,r,tc,rc])=>
+    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:12px">'+
+    '<span style="font-family:var(--font-mono);color:'+tc+'">'+t+'</span>'+
+    '<span style="color:'+rc+'">'+r+'</span></div>'
+  ).join('');
+
+  const templates = [
+    {label:'ADT New Mover — Instant (5 min)', color:'var(--red)',
+     text:'Hi [FirstName]! This is [Agent] w/ Complete Home Today, your local ADT dealer. You recently moved to [City] — congrats! 🏡 Special deal this week. Got 2 min? Reply STOP to opt out.'},
+    {label:'ADT Lead Form — Instant', color:'var(--amber)',
+     text:'Hey [FirstName], [Agent] here from Complete Home Today in [City]. You asked about ADT — I have a special deal for you. Best time for a quick call? Reply STOP to opt out.'},
+    {label:'AT&T Internet — New Mover', color:'var(--blue)',
+     text:'[FirstName], this is [Agent] with Complete Home Today. AT&T Fiber is available at your new [City] address from $35/mo. Want me to check? Reply STOP to opt out.'},
+    {label:'24-Hour Follow-Up', color:'var(--muted)',
+     text:'[FirstName], still thinking about home security? [City] installs are going fast. I can hold a spot for you — 10 min to confirm. Call: [Phone]. Reply STOP to opt out.'},
+  ];
+  el('smsTemplates').innerHTML = templates.map((t,i)=>
+    '<div class="card mb-12" style="border-left:3px solid '+t.color+'">'+
+    '<div style="display:flex;justify-content:space-between;margin-bottom:8px;align-items:center">'+
+    pill(t.label, t.color)+
+    '<button class="btn btn-ghost btn-sm" onclick="navigator.clipboard.writeText('+JSON.stringify(t.text)+')">📋 Copy</button>'+
+    '</div>'+
+    '<div style="font-size:12px;color:#A8BAC8;line-height:1.6">'+escHtml(t.text)+'</div>'+
+    '<div style="font-family:var(--font-mono);font-size:10px;color:var(--dim);margin-top:5px">'+t.text.length+' chars</div>'+
+    '</div>'
+  ).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// BILINGUAL OPS STATICS
+// ════════════════════════════════════════════════════════════
+function buildBilingualStatics(){
+  const examples = [
+    {
+      badge:'ADT · Salinas', color:'var(--red)',
+      es:{h:'¿Tu familia está protegida?', body:'Miles de familias en Salinas confían en ADT. Instalación gratuita esta semana.', cta:'Ver Oferta'},
+      en:{h:'Is Your Family Protected?', body:'Salinas families trust ADT for 24/7 monitoring from $28.99/mo. Free install this week.', cta:'See Offer'},
+    },
+    {
+      badge:'AT&T · Gilroy', color:'var(--blue)',
+      es:{h:'Internet Rápido en Gilroy', body:'AT&T Fiber ya llegó a tu vecindario. Desde $35/mes. Sin límite de datos.', cta:'Verificar Disponibilidad'},
+      en:{h:'Fast Internet in Gilroy', body:'AT&T Fiber is now in your area. From $35/mo. No data caps. Check availability today.', cta:'Check Availability'},
+    },
+  ];
+  el('biExamples').innerHTML = examples.map(ex=>
+    '<div class="card mb-12" style="border-left:3px solid '+ex.color+'">'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">'+
+    pill(ex.badge, ex.color)+
+    '<span style="font-family:var(--font-mono);font-size:10px;color:var(--muted)">EXAMPLE PAIR</span>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+    [['🇲🇽 Español',ex.es],['🇺🇸 English',ex.en]].map(([lang,ad])=>
+      '<div style="background:#0A1018;border-radius:8px;padding:12px">'+
+      '<div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">'+lang+'</div>'+
+      '<div style="font-size:14px;font-weight:800;margin-bottom:4px">'+escHtml(ad.h)+'</div>'+
+      '<div style="font-size:12px;color:#A8BAC8;line-height:1.5;margin-bottom:8px">'+escHtml(ad.body)+'</div>'+
+      '<span style="background:'+ex.color+'22;color:'+ex.color+';padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700">'+escHtml(ad.cta)+'</span>'+
+      '</div>'
+    ).join('')+
+    '</div></div>'
+  ).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// NEW MOVER STATICS
+// ════════════════════════════════════════════════════════════
+function buildNewMoverStatics(){
+  el('nmStats').innerHTML = [
+    ['3×','Conversion vs. cold audience'],
+    ['Day 3–21','Highest intent window'],
+    ['65%','Sign service in first 30 days'],
+    ['$18–24','Target CPL via Facebook'],
+    ['80%','Higher contact if texted <5 min'],
+  ].map(([v,l])=>
+    '<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--bdr);align-items:center">'+
+    '<div style="font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--amber);width:55px;flex-shrink:0">'+v+'</div>'+
+    '<div style="font-size:11px;color:var(--muted)">'+escHtml(l)+'</div></div>'
+  ).join('');
+
+  const timeline = [
+    {d:'Day 1',ch:'Facebook',a:'Recently Moved life event ad fires in ZIP',u:'critical'},
+    {d:'Day 2',ch:'Direct Mail',a:'Welcome postcard from permit/escrow list',u:'critical'},
+    {d:'Day 3',ch:'SMS',a:'Instant personalized text — intro + offer',u:'critical'},
+    {d:'Day 5',ch:'SMS',a:'Follow-up: value + local social proof',u:'high'},
+    {d:'Day 7',ch:'Phone',a:'Agent call attempt — morning preferred',u:'high'},
+    {d:'Day 10',ch:'Retargeting',a:'Website visitor re-engagement ad fires',u:'high'},
+    {d:'Day 14',ch:'SMS',a:'Limited-time offer with expiry date',u:'high'},
+    {d:'Day 21',ch:'Nextdoor',a:'Neighborhood sponsored post in their ZIP',u:'medium'},
+    {d:'Day 30',ch:'Email',a:'Monthly newsletter with local tip',u:'medium'},
+    {d:'Day 45',ch:'SMS',a:'Last chance soft re-engagement',u:'medium'},
+    {d:'Day 90',ch:'SMS',a:'Breakup message — close the loop',u:'low'},
+  ];
+  const uc = {critical:'var(--red)',high:'var(--amber)',medium:'var(--blue)',low:'var(--dim)'};
+  const chc = {SMS:'var(--green)',Facebook:'var(--blue)','Direct Mail':'var(--amber)',Retargeting:'var(--muted)',Nextdoor:'#A855F7',Email:'var(--muted)',Phone:'var(--blue)'};
+  el('nmTimeline').innerHTML = timeline.map(t=>
+    '<div style="display:flex;align-items:center;gap:12px;padding:7px 12px;background:#0A1018;border-radius:7px;border-left:3px solid '+uc[t.u]+';margin-bottom:5px">'+
+    '<div style="font-family:var(--font-mono);font-size:11px;color:'+uc[t.u]+';width:50px;flex-shrink:0">'+t.d+'</div>'+
+    pill(t.ch, chc[t.ch]||'var(--muted)')+
+    '<div style="flex:1;font-size:12px;color:#A8BAC8">'+escHtml(t.a)+'</div></div>'
+  ).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// INTEL STATICS
+// ════════════════════════════════════════════════════════════
+function buildIntelStatics(){
+  el('intelPresets').innerHTML = INTEL_PRESETS.map(p=>
+    '<button class="preset-chip" onclick="setIntelPreset(this,'+JSON.stringify(p)+')">'+(p.length>50?p.slice(0,50)+'…':p)+'</button>'
+  ).join('');
+
+  el('cplMatrix').innerHTML = [
+    {c:'Facebook Lead Form ADT',v:'$18–24 CPL',t:'var(--amber)'},
+    {c:'Facebook New Mover ADT',v:'$20–27 CPL',t:'var(--blue)'},
+    {c:'Google LSA ADT',v:'$22–30 CPL',t:'#00B4D8'},
+    {c:'Nextdoor ADT Sponsored',v:'$8–14 CPL',t:'var(--green)'},
+    {c:'YouTube Pre-Roll ADT',v:'$24–38 CPL',t:'var(--muted)'},
+    {c:'Industry Avg (2025)',v:'$27.66 CPL',t:'var(--muted)'},
+    {c:'Industry CVR (2025)',v:'7.72%',t:'var(--muted)'},
+  ].map(r=>
+    '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--bdr);font-size:11px">'+
+    '<span>'+escHtml(r.c)+'</span>'+
+    '<span style="font-family:var(--font-mono);color:'+r.t+';font-weight:600">'+r.v+'</span></div>'
+  ).join('');
+}
+function setIntelPreset(btn, text){
+  el('intel-query').value = text;
+  document.querySelectorAll('.preset-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ════════════════════════════════════════════════════════════
+// PRICING
+// ════════════════════════════════════════════════════════════
+function buildPricingTabs(){
+  const tabs = el('pricingTabs');
+  tabs.innerHTML = Object.keys(PRICING_DATA).map(k=>
+    '<button class="filter-pill'+(activePricingTab===k?' active':'')+'" onclick="setPricingTab(\''+k+'\')">' + k + '</button>'
+  ).join('');
+}
+function setPricingTab(tab){
+  activePricingTab = tab;
+  buildPricingTabs();
+  renderPricing();
+}
+function renderPricing(){
+  buildPricingTabs();
+  const d = PRICING_DATA[activePricingTab];
+  el('pricingTable').innerHTML =
+    '<div class="scroll-x"><table class="data-table">'+
+    '<thead><tr>'+d.cols.map(c=>'<th>'+escHtml(c)+'</th>').join('')+'</tr></thead>'+
+    '<tbody>'+d.rows.map(r=>
+      '<tr>'+r.map((cell,i)=>{
+        if(i===0) return '<td style="font-weight:700;color:var(--white)">'+escHtml(cell)+'</td>';
+        if(i===2) return '<td style="color:var(--amber);font-family:var(--font-mono);font-weight:700">'+escHtml(cell)+'</td>';
+        if(i===3) return '<td style="color:var(--green);font-weight:600">'+escHtml(cell)+'</td>';
+        return '<td style="color:var(--muted)">'+escHtml(cell)+'</td>';
+      }).join('')+'</tr>'
+    ).join('')+'</tbody></table></div>';
+}
+
+// ════════════════════════════════════════════════════════════
+// CLAUDE API
+// ════════════════════════════════════════════════════════════
+async function callClaude(system, userMsg, maxTokens){
+  maxTokens = maxTokens || 1000;
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      system: system,
+      messages: [{role:'user', content: userMsg}]
+    })
+  });
+  const data = await resp.json();
+  if(data.error) throw new Error(data.error.message);
+  return (data.content||[]).map(b=>b.text||'').join('\n');
+}
+
+// ════════════════════════════════════════════════════════════
+// AD FORGE
+// ════════════════════════════════════════════════════════════
+async function generateAd(){
+  const client = el('af-client').value;
+  const platform = el('af-platform').value;
+  const city = el('af-city').value;
+  const audience = el('af-audience').value;
+  const lang = el('af-lang').value;
+  const framework = el('af-framework').value;
+
+  setLoading('adLoading','adOutput',true);
+  el('adOutput').style.display='none';
+
+  const sys = 'You are the #1 direct-response copywriter in the United States for home security (ADT) and internet service provider advertising in California. You write for Complete Home Today LLC, a boutique regional agency. Your ads achieve sub-$18 CPL in the Central California Coast market. You know that maximum-converting ads use hyper-local city references, specific prices, loss aversion framing, and zero-friction CTAs. You always comply with California CCPA law.';
+  const prompt = 'Write MAXIMUM-CONVERSION ad copy for Complete Home Today LLC:\n\nCLIENT: '+client+'\nPLATFORM: '+platform+'\nTARGET CITY: '+city+', California\nTARGET AUDIENCE: '+audience+'\nLANGUAGE: '+lang+'\nPSYCHOLOGICAL FRAMEWORK: '+framework+'\n\nDeliver:\n\n━━━ VERSION A (Primary) ━━━\nHEADLINE 1: (≤40 chars — use city name)\nHEADLINE 2: (≤40 chars — specific offer/urgency)\nPRIMARY TEXT: (2–3 sentences — hook, proof, CTA)\nCTA BUTTON: (4–6 words max)\nDESCRIPTION: (1 sentence)\n\n━━━ VERSION B (A/B Test) ━━━\n[Same format, different psychological angle]\n\n━━━ VERSION C (POWER HOOK VARIANT) ━━━\n[Open with a shocking local stat or question for '+city+']\n\n━━━ TARGETING DIRECTIVE ━━━\nFacebook audience settings: age, interests, behaviors, life events, ZIP targeting\n\n━━━ CPL OPTIMIZATION NOTE ━━━\nOne specific thing to keep CPL lowest for this market/audience combo\n\n━━━ COMPLIANCE CHECK (California) ━━━\nFlag any language needing adjustment for CA law';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('adOutputLabel').textContent = '◈ AI OUTPUT — '+client.toUpperCase()+' · '+city.toUpperCase()+' · '+platform.toUpperCase();
+    el('adOutputText').textContent = result;
+    el('adOutput').style.display = 'block';
+  } catch(e) {
+    el('adOutputText').textContent = 'Error: '+e.message+'\n\nPlease check your internet connection and try again.';
+    el('adOutput').style.display = 'block';
+  }
+  el('adLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// CAMPAIGN BUILDER
+// ════════════════════════════════════════════════════════════
+async function buildCampaign(){
+  const client = el('cb-client').value;
+  const territory = el('cb-territory').value;
+  const budget = el('cb-budget').value;
+  const objective = el('cb-objective').value;
+
+  setLoading('cbLoading','cbOutput',true);
+  el('cbOutput').style.display='none';
+
+  const sys = 'You are the top Meta Ads and Google Ads campaign strategist for the home services industry in California. You specialize in getting the absolute lowest cost-per-lead for ADT authorized dealers and ISP companies in the Central California Coast market (Gilroy, Morgan Hill, Monterey County, Santa Cruz County, Salinas Valley). Every recommendation is backed by what actually works, not theory.';
+  const prompt = 'Build a COMPLETE campaign plan for Complete Home Today LLC:\n\nCLIENT: '+client+'\nTERRITORY: '+territory+' — Gilroy, Morgan Hill, Monterey Co., Santa Cruz Co.\nTOTAL MONTHLY BUDGET: '+budget+'\nPRIMARY OBJECTIVE: '+objective+'\n\nDeliver:\n\n## 1. CAMPAIGN ARCHITECTURE\nCampaign objective, structure (campaigns/ad sets/ads), CBO vs ABO decision\n\n## 2. AUDIENCE TARGETING (per ad set)\nAge, location ZIPs, exact Facebook interests, behaviors, life events\n\n## 3. CREATIVE BRIEF\nFormat, headline A + B, primary text ready to paste, CTA, visual direction\n\n## 4. BUDGET ALLOCATION\nDaily budget per ad set, bid strategy, when to scale\n\n## 5. LEAD FORM QUESTIONS\nExact questions on the Facebook Lead Form to pre-qualify leads for '+client+'\n\n## 6. PROJECTED RESULTS TABLE\nAd Set | Budget | Est. CPL | Est. Leads/Mo\n\n## 7. OPTIMIZATION SCHEDULE\nDaily / Weekly / Monthly actions\n\n## 8. COMPETITIVE EDGE\nOne unconventional tactic to separate this campaign from every competitor in these ZIPs';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('cbOutputLabel').textContent = '◎ CAMPAIGN PLAN — '+client.toUpperCase()+' · '+territory.toUpperCase();
+    el('cbOutputText').textContent = result;
+    el('cbOutput').style.display = 'block';
+  } catch(e) {
+    el('cbOutputText').textContent = 'Error: '+e.message;
+    el('cbOutput').style.display = 'block';
+  }
+  el('cbLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// SMS ENGINE
+// ════════════════════════════════════════════════════════════
+async function generateSMS(){
+  const seqType = el('sms-type').value;
+  const city = el('sms-city').value;
+  const lang = el('sms-lang').value;
+
+  setLoading('smsLoading','smsOutput',true);
+  el('smsOutput').style.display='none';
+
+  const sys = 'You are the top SMS marketing specialist for home security and ISP authorized dealers in California. Your sequences achieve 34% reply rates and 18% appointment conversion. You know: first message MUST go within 5 minutes, messages under 160 chars, always include STOP opt-out, best windows are Tue–Thu 8–10am or 5–7pm Pacific. You are fully compliant with California TCPA and CCPA.';
+  const prompt = 'Write a complete California-compliant SMS sequence for Complete Home Today LLC:\n\nSequence Type: '+seqType+'\nTarget City: '+city+', CA\nLanguage: '+lang+'\n\nCreate an 8-message sequence. For each message provide:\nTIMING: (exactly when to send)\nMESSAGE: (exact text, under 160 chars, with [FirstName] [City] [AgentName] [Phone] tokens)\nCHAR COUNT: (count)\nGOAL: (what you want the prospect to do)\n\nThen add:\n━━━ SPLIT TEST ━━━\nAlternative version of Message 1\n\n━━━ QUICK REPLY KEYWORDS ━━━\n3 keywords prospects can text back with auto-trigger actions\n\n━━━ APPOINTMENT SETTING SEQUENCE ━━━\nWhen they reply yes — 2–3 message close to book appointment\n\n━━━ CALIFORNIA COMPLIANCE NOTES ━━━\nTCPA/CCPA requirements specific to CA for this sequence';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('smsOutputLabel').textContent = '✉ SMS SEQUENCE — '+seqType.toUpperCase()+' · '+city.toUpperCase();
+    el('smsOutputText').textContent = result;
+    el('smsOutput').style.display = 'block';
+  } catch(e) {
+    el('smsOutputText').textContent = 'Error: '+e.message;
+    el('smsOutput').style.display = 'block';
+  }
+  el('smsLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// BILINGUAL OPS
+// ════════════════════════════════════════════════════════════
+async function generateBilingual(){
+  const client = el('bi-client').value;
+  const city = el('bi-city').value;
+  const format = el('bi-format').value;
+  const angle = el('bi-angle').value;
+
+  setLoading('biLoading','biOutput',true);
+  el('biOutput').style.display='none';
+
+  const sys = 'Eres el mejor redactor publicitario bilingüe (español/inglés) en California para servicios de seguridad del hogar y proveedores de internet. Entiendes la cultura mexicano-americana del Valle de Salinas, Gilroy y el Condado de Monterey. Sabes que las familias hispanas responden mejor a mensajes de protección familiar que a miedo al crimen, el tono debe ser cálido y cercano, y WhatsApp es crítico para esta demografía. Spanish-language ads in Salinas/Gilroy achieve 22% CVR vs 8% English-only.';
+  const prompt = 'Create a COMPLETE BILINGUAL AD PACKAGE for Complete Home Today LLC:\n\nClient: '+client+' | City: '+city+', CA | Format: '+format+' | Angle: '+angle+'\n\n━━━ VERSIÓN ESPAÑOLA ━━━\nTITULAR 1: (≤40 chars)\nTITULAR 2: (≤40 chars)\nTEXTO PRINCIPAL: (2–3 oraciones conversacionales)\nBOTÓN CTA:\nNOTA DE SEGMENTACIÓN: (cómo encontrar esta audiencia en Meta)\n\n━━━ ENGLISH VERSION ━━━\nHEADLINE 1:\nHEADLINE 2:\nPRIMARY TEXT:\nCTA BUTTON:\nTARGETING NOTE:\n\n━━━ WHATSAPP OPENER ━━━\nFirst message in Spanish with English translation, to send immediately after lead form\n\n━━━ CULTURAL NOTES ━━━\n3 insights specific to Mexican-American families in '+city+' that make this ad work\n\n━━━ SEASONAL/LOCAL HOOK VARIANT ━━━\nVersion referencing something hyper-local to '+city+'\n\n━━━ TRANSLATION QUALITY NOTE ━━━\nFlag phrases that should NOT be directly translated and give the cultural equivalent';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('biOutputLabel').textContent = '◈ BILINGUAL OUTPUT — '+client.toUpperCase()+' · '+city.toUpperCase();
+    el('biOutputText').textContent = result;
+    el('biOutput').style.display = 'block';
+  } catch(e) {
+    el('biOutputText').textContent = 'Error: '+e.message;
+    el('biOutput').style.display = 'block';
+  }
+  el('biLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// NEW MOVER ENGINE
+// ════════════════════════════════════════════════════════════
+async function buildNewMover(){
+  const service = el('nm-service').value;
+  const city = el('nm-city').value;
+
+  setLoading('nmLoading','nmOutput',true);
+  el('nmOutput').style.display='none';
+
+  const sys = 'You are a new mover acquisition specialist who has helped ADT authorized dealers and ISP companies in California capture the majority of their market\'s new mover segment. You know every data source, every partnership opportunity, and every touchpoint to win before competitors even know the person moved.';
+  const prompt = 'Build a COMPLETE NEW MOVER ACQUISITION PROGRAM for Complete Home Today LLC:\n\nService: '+service+' | City: '+city+', California\n\n## 1. DATA SOURCES\nHow to identify new movers BEFORE competitors — permit data, USPS NCOA, title companies, Facebook, MLS partnerships. Estimated cost per lead for each source.\n\n## 2. THE 90-DAY SEQUENCE\nSpecific action at each touchpoint with exact messaging templates\n\n## 3. PARTNERSHIP PROGRAM\nSpecific LOCAL partners in '+city+' to approach:\n- Real estate agents/brokers (who to target)\n- Moving companies (partnership terms)\n- Title/escrow companies\n- Revenue share / referral fee structure\n\n## 4. THE CLOSING OFFER\nBest promotional structure for '+service+' that converts new movers specifically\n\n## 5. CONVERSION MATH\nHow many new movers per month in '+city+' market? Realistic capture rate? Revenue potential over 90 days?\n\n## 6. START THIS WEEK\n3 specific actions to launch this program in '+city+' before next Monday';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('nmOutputLabel').textContent = '⌂ NEW MOVER PROGRAM — '+service.toUpperCase()+' · '+city.toUpperCase();
+    el('nmOutputText').textContent = result;
+    el('nmOutput').style.display = 'block';
+  } catch(e) {
+    el('nmOutputText').textContent = 'Error: '+e.message;
+    el('nmOutput').style.display = 'block';
+  }
+  el('nmLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// MARKET INTEL
+// ════════════════════════════════════════════════════════════
+async function runIntel(){
+  const query = el('intel-query').value.trim();
+  const market = el('intel-market').value;
+  if(!query){ el('intel-query').style.borderColor='var(--red)'; return; }
+  el('intel-query').style.borderColor='';
+
+  setLoading('intelLoading','intelOutput',true);
+  el('intelOutput').style.display='none';
+
+  const sys = 'You are a senior media intelligence analyst and competitive strategist specializing in home security (ADT) and ISP advertising in California. You have deep expertise in the Central California Coast markets (Gilroy, Morgan Hill, Monterey County, Santa Cruz County, Salinas Valley). You provide specific, data-backed, actionable intelligence. Reference 2025 Facebook benchmark: avg CPL $27.66, CVR 7.72%. Best ADT CPL with new mover targeting: $18–24.';
+  const prompt = 'Strategic intelligence brief for Complete Home Today LLC:\n\nTOPIC: '+query+'\nFOCUS MARKET: '+market+'\n\n## EXECUTIVE SUMMARY\n2–3 sentences on the key insight\n\n## WHAT\'S WINNING RIGHT NOW (2025)\nTop 3–5 specific strategies with platform, format, copy angle, and why they work\n\n## COMPETITIVE LANDSCAPE\nWho\'s advertising in this space in '+market+'? What are they doing? Where are the gaps?\n\n## AUDIENCE INTELLIGENCE\nSpecific behavioral/demographic signals that predict conversion in this market\n\n## CPL BENCHMARKS\nRealistic CPL ranges by platform and tactic\n\n## ACTIONABLE PLAYS\n3 specific things Complete Home Today can implement this week\n\n## WATCH OUT FOR\n2 common mistakes that destroy ROI in this category/market\n\n## ONE CONTRARIAN TAKE\nSomething most agencies are getting wrong that represents a clear opportunity';
+
+  try {
+    const result = await callClaude(sys, prompt);
+    el('intelOutputLabel').textContent = '◉ INTEL BRIEF — '+market.toUpperCase();
+    el('intelOutputText').textContent = result;
+    el('intelOutput').style.display = 'block';
+  } catch(e) {
+    el('intelOutputText').textContent = 'Error: '+e.message;
+    el('intelOutput').style.display = 'block';
+  }
+  el('intelLoading').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// AT&T PITCH DECK — 7-slide interactive presentation viewer
+// ════════════════════════════════════════════════════════════
+const ATT_SLIDES = [
+  {
+    num: 1,
+    title: 'Title',
+    thumb: 'AT&T Internet<br>Market Dominance',
+    html: `
+      <div style="background:linear-gradient(135deg,#0B1F3A 60%,#122848 100%);height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;width:18px;height:100%;background:#D4A017;"></div>
+        <div style="position:absolute;right:0;top:0;width:30%;height:100%;background:#122848;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+          <div style="width:120px;height:120px;border-radius:50%;border:2px solid #1A7FBD;background:#1A3A5C;"></div>
+          <div style="width:80px;height:80px;border-radius:50%;border:1.5px solid #D4A017;background:#0F2A45;"></div>
+          <div style="width:90px;height:90px;border-radius:50%;border:1.5px solid #1A7FBD;background:#0F2A45;"></div>
+        </div>
+        <div style="padding:32px 32px 0 36px;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:68%;">
+          <div style="font-size:9px;color:#D4A017;font-weight:700;letter-spacing:2px;margin-bottom:20px;">COMPLETE HOME TODAY LLC &nbsp;|&nbsp; REGIONAL MARKETING PARTNER</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;margin-bottom:6px;">AT&T Internet</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:400;color:#C8D9ED;font-style:italic;margin-bottom:24px;">Market Dominance Strategy</div>
+          <div style="height:3px;width:240px;background:#D4A017;margin-bottom:18px;"></div>
+          <div style="font-size:11px;color:#8896A8;">Gilroy · Morgan Hill · Monterey County · Santa Cruz County</div>
+          <div style="font-size:10px;color:#8896A8;margin-top:6px;">2025 Campaign Plan &nbsp;|&nbsp; Prepared by Complete Home Today LLC</div>
+        </div>
+        <div style="background:#D4A017;padding:8px 32px;font-size:8px;font-weight:700;color:#0B1F3A;letter-spacing:1px;">CONFIDENTIAL &nbsp;|&nbsp; FOR AT&T AUTHORIZED DEALER USE ONLY</div>
+      </div>`
+  },
+  {
+    num: 2,
+    title: 'Market Opportunity',
+    thumb: 'Market<br>Opportunity',
+    html: `
+      <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">MARKET OPPORTUNITY</span></div>
+        <div style="flex:1;padding:14px 16px;overflow:auto;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+            ${[
+              {val:'485K+',label:'Households',sub:'In our territory',c:'#0B1F3A'},
+              {val:'~55%',label:'Hispanic in Gilroy',sub:'Bilingual opportunity',c:'#1A7FBD'},
+              {val:'38%',label:'Broadband Gap',sub:'Rural Monterey Co.',c:'#D4A017'},
+              {val:'$89/mo',label:'Avg. ISP Spend',sub:'Per household',c:'#2EAA6E'}
+            ].map(s=>`<div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:10px;border-top:3px solid ${s.c};">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:${s.c};line-height:1;">${s.val}</div>
+              <div style="font-size:10px;font-weight:700;color:#0B1F3A;margin-top:3px;">${s.label}</div>
+              <div style="font-size:9px;color:#8896A8;">${s.sub}</div>
+            </div>`).join('')}
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#0B1F3A;margin-bottom:8px;">Why AT&T Wins Here</div>
+              ${['Fiber infrastructure spans Gilroy, Morgan Hill & key Monterey corridors','New housing developments = untapped installation pipeline','Bundle appeal: internet + TV + wireless on one bill','Strong brand recognition vs. smaller regional ISPs'].map(p=>`<div style="font-size:10px;color:#2C3E50;margin-bottom:5px;display:flex;gap:5px;"><span style="color:#D4A017;flex-shrink:0;">▸</span>${p}</div>`).join('')}
+            </div>
+            <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#0B1F3A;margin-bottom:8px;">Primary Target Markets</div>
+              ${[['Gilroy / Morgan Hill','New developments, families, bilingual'],['Salinas / Monterey','Agricultural workforce, price-sensitive'],['Santa Cruz / Scotts Valley','Remote workers, high-speed demand'],['Pacific Grove / Carmel','Bundle seekers, premium tier']].map(([c,n])=>`<div style="display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;"><span style="width:8px;height:8px;border-radius:50%;background:#D4A017;flex-shrink:0;margin-top:2px;"></span><div><div style="font-size:10px;font-weight:700;color:#0B1F3A;">${c}</div><div style="font-size:9px;color:#8896A8;">${n}</div></div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div style="background:#0B1F3A;padding:5px 16px;font-size:8px;color:#8896A8;">Complete Home Today LLC &nbsp;|&nbsp; AT&T Campaign Strategy</div>
+      </div>`
+  },
+  {
+    num: 3,
+    title: 'Campaign Strategy',
+    thumb: 'Campaign<br>Strategy',
+    html: `
+      <div style="background:#0B1F3A;height:100%;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#122848;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">CAMPAIGN STRATEGY</span></div>
+        <div style="flex:1;padding:12px 14px;overflow:auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+            ${[
+              {icon:'📱',name:'Facebook & Instagram',detail:'ZIP-code geo-fenced lead forms\nNew mover & homeowner targeting\nBilingual creative for Salinas/Gilroy',budget:'$1,200/mo'},
+              {icon:'🔍',name:'Google Search Ads',detail:'High-intent keywords: \'internet Gilroy\'\nCompetitor conquesting\nCall extensions for senior audiences',budget:'$900/mo'},
+              {icon:'📬',name:'Direct Mail + Digital',detail:'\'Postcard + Pixel\' dual-touch method\nAddress-based audience matching\nNew construction permit targeting',budget:'$600/mo'},
+              {icon:'🏘️',name:'Nextdoor Sponsored',detail:'Neighborhood-level trust building\nLocal recommendations format\n#1 platform for word-of-mouth ISP',budget:'$300/mo'},
+              {icon:'📺',name:'YouTube Pre-Roll',detail:'15-sec non-skip by ZIP code\n\'Your neighbors switched\' social proof\nRemote worker angle for Santa Cruz',budget:'$400/mo'},
+              {icon:'🔁',name:'Retargeting',detail:'Re-engage website visitors\nAbandoned availability checkers\nDynamic pricing reminder ads',budget:'$200/mo'}
+            ].map(ch=>`<div style="background:#122848;border:1px solid #1E3A5C;border-radius:6px;padding:10px;border-top:2px solid #D4A017;">
+              <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:5px;">${ch.icon} ${ch.name}</div>
+              <div style="font-size:9px;color:#C8D9ED;line-height:1.5;white-space:pre-line;margin-bottom:8px;">${ch.detail}</div>
+              <div style="background:#D4A017;border-radius:4px;padding:3px 8px;font-size:9px;font-weight:700;color:#0B1F3A;display:inline-block;">${ch.budget}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div style="background:#D4A017;padding:7px 16px;font-size:9px;font-weight:700;color:#0B1F3A;text-align:center;">TOTAL MONTHLY BUDGET: $3,600/mo &nbsp;|&nbsp; EST. 180–240 QUALIFIED LEADS/MONTH</div>
+      </div>`
+  },
+  {
+    num: 4,
+    title: 'Facebook Targeting',
+    thumb: 'Facebook<br>Targeting',
+    html: `
+      <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">FACEBOOK & META TARGETING PLAYBOOK</span></div>
+        <div style="flex:1;padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:auto;">
+          <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#0B1F3A;margin-bottom:10px;">Audience Segments</div>
+            ${[
+              {seg:'New Movers',desc:'Moved within 6 months — #1 conversion segment',c:'#D4A017'},
+              {seg:'Homeowners 28–54',desc:'Primary household decision-makers',c:'#1A7FBD'},
+              {seg:'Spanish-Speaking HH',desc:'Custom bilingual creative, Salinas/Gilroy ZIPs',c:'#2EAA6E'},
+              {seg:'Remote Workers',desc:'Home office, speed-sensitive, Santa Cruz/Carmel',c:'#9B59B6'},
+              {seg:'New Construction',desc:'Target permit-pull ZIPs before move-in',c:'#E67E22'}
+            ].map(a=>`<div style="display:flex;gap:7px;margin-bottom:8px;align-items:flex-start;">
+              <div style="width:4px;height:32px;background:${a.c};border-radius:2px;flex-shrink:0;margin-top:1px;"></div>
+              <div><div style="font-size:11px;font-weight:700;color:#0B1F3A;">${a.seg}</div><div style="font-size:9px;color:#8896A8;">${a.desc}</div></div>
+            </div>`).join('')}
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#0B1F3A;margin-bottom:8px;">Ad Format Performance</div>
+              ${[['Lead Form Ads','Lowest CPL — no landing page needed','#2EAA6E'],['Video (15–30s)','Highest reach, brand recall','#1A7FBD'],['Carousel','Multiple speed tiers in one ad','#D4A017'],['Stories (9:16)','Mobile-first, swipe-up to call','#9B59B6']].map(([f,d,c])=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span style="width:8px;height:8px;border-radius:50%;background:${c};flex-shrink:0;"></span><span style="font-size:10px;font-weight:700;color:#0B1F3A;width:90px;">${f}</span><span style="font-size:9px;color:#8896A8;">${d}</span></div>`).join('')}
+            </div>
+            <div style="background:#0B1F3A;border-radius:6px;padding:12px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#D4A017;margin-bottom:8px;">Target KPIs</div>
+              ${[['Cost Per Lead (CPL)','$18 – $32'],['Lead-to-Install Rate','12 – 18%'],['Cost Per Install (CPI)','$140 – $200'],['Monthly Lead Volume','80 – 120']].map(([k,v])=>`<div style="display:flex;justify-content:space-between;margin-bottom:6px;align-items:center;"><span style="font-size:10px;color:#C8D9ED;background:#122848;padding:3px 8px;border-radius:3px;flex:1;margin-right:6px;">${k}</span><span style="font-size:10px;font-weight:700;color:#0B1F3A;background:#D4A017;padding:3px 8px;border-radius:3px;white-space:nowrap;">${v}</span></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div style="background:#0B1F3A;padding:5px 16px;font-size:8px;color:#8896A8;">Complete Home Today LLC &nbsp;|&nbsp; AT&T Campaign Strategy</div>
+      </div>`
+  },
+  {
+    num: 5,
+    title: 'Bilingual Strategy',
+    thumb: 'Bilingual<br>Creative',
+    html: `
+      <div style="background:#0B1F3A;height:100%;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#122848;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">BILINGUAL CAMPAIGN: GILROY & SALINAS MARKETS</span></div>
+        <div style="flex:1;padding:12px 16px;overflow:auto;">
+          <div style="background:#122848;border:1px solid #1E3A5C;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:#C8D9ED;font-style:italic;line-height:1.5;">
+            55% of Gilroy and Salinas households are Spanish-speaking. Bilingual creative isn't optional — it's the difference between <strong style="color:#D4A017;">8%</strong> and <strong style="color:#2EAA6E;">22%</strong> conversion rates in these ZIPs.
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            ${[
+              {lang:'🇺🇸 English Version',h1:'"Fast Internet Is Finally Here in Gilroy"',body:'AT&T Fiber is now available in your neighborhood. Plans from $35/mo with AutoPay. No data caps. Call today — free same-week installation.',cta:'CHECK AVAILABILITY NOW →',c:'#1A7FBD'},
+              {lang:'🇲🇽 Versión en Español',h1:'"Internet Rápido Ya Llegó a Gilroy"',body:'AT&T Fiber ya está disponible en tu vecindario. Planes desde $35/mes con AutoPago. Sin límite de datos. Llama hoy — instalación gratuita esta semana.',cta:'VERIFICA DISPONIBILIDAD →',c:'#D4A017'}
+            ].map(c=>`<div style="background:#0F2A45;border:1.5px solid ${c.c};border-radius:6px;overflow:hidden;">
+              <div style="background:${c.c};padding:6px 10px;font-size:10px;font-weight:700;color:#0B1F3A;">${c.lang}</div>
+              <div style="padding:12px;">
+                <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;">${c.h1}</div>
+                <div style="font-size:10px;color:#C8D9ED;line-height:1.6;margin-bottom:10px;">${c.body}</div>
+                <div style="background:${c.c};border-radius:4px;padding:5px 10px;font-size:9px;font-weight:700;color:#0B1F3A;text-align:center;">${c.cta}</div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div style="background:#D4A017;padding:7px 16px;font-size:9px;color:#0B1F3A;text-align:center;">Both versions run simultaneously — Meta automatically optimizes delivery by language preference</div>
+      </div>`
+  },
+  {
+    num: 6,
+    title: '90-Day Roadmap',
+    thumb: '90-Day<br>Roadmap',
+    html: `
+      <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">90-DAY LAUNCH ROADMAP</span></div>
+        <div style="flex:1;padding:12px 16px;overflow:auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            ${[
+              {num:'01',label:'Month 1: Foundation',c:'#1A7FBD',items:['Launch Google Search campaigns','Build Facebook audiences & pixel','Deploy ZIP-code targeting by service area','Create English + Spanish ad creative sets','Establish call tracking with CallRail']},
+              {num:'02',label:'Month 2: Optimize',c:'#D4A017',items:['A/B test 3 headline variants per ad set','Identify top-performing ZIPs, scale budget','Launch Nextdoor sponsored posts','Activate new mover data targeting','Start Direct Mail + Digital combo']},
+              {num:'03',label:'Month 3: Scale',c:'#2EAA6E',items:['Double budget on winning campaigns','Launch YouTube pre-roll in top ZIPs','Expand to neighboring county ZIPs','Introduce bundle upsell (internet + TV)','Monthly performance review & forecast']}
+            ].map(p=>`<div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;overflow:hidden;">
+              <div style="background:${p.c};padding:10px 14px;display:flex;align-items:center;gap:10px;">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1;">${p.num}</div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">${p.label}</div>
+              </div>
+              <div style="padding:12px;">
+                ${p.items.map(it=>`<div style="display:flex;gap:7px;margin-bottom:7px;align-items:flex-start;"><span style="width:7px;height:7px;border-radius:1px;background:${p.c};flex-shrink:0;margin-top:3px;"></span><span style="font-size:10px;color:#2C3E50;line-height:1.4;">${it}</span></div>`).join('')}
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div style="background:#0B1F3A;padding:5px 16px;font-size:8px;color:#8896A8;">Complete Home Today LLC &nbsp;|&nbsp; AT&T Campaign Strategy</div>
+      </div>`
+  },
+  {
+    num: 7,
+    title: 'Next Steps',
+    thumb: 'Close &<br>Next Steps',
+    html: `
+      <div style="background:#0B1F3A;height:100%;display:grid;grid-template-columns:55% 45%;overflow:hidden;">
+        <div style="padding:28px 28px;display:flex;flex-direction:column;justify-content:center;">
+          <div style="height:3px;width:60%;background:#D4A017;margin-bottom:16px;"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#fff;margin-bottom:24px;">Next Steps</div>
+          ${[
+            'Sign marketing services agreement',
+            'Share AT&T serviceable address file by ZIP',
+            'Approve English + Spanish creative brief',
+            'Connect Facebook Business Manager access',
+            'Set call tracking numbers per campaign',
+            'Launch target date: within 10 business days'
+          ].map((s,i)=>`<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+            <div style="width:24px;height:24px;border-radius:50%;background:#D4A017;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#0B1F3A;flex-shrink:0;">${i+1}</div>
+            <span style="font-size:11px;color:#C8D9ED;">${s}</span>
+          </div>`).join('')}
+          <div style="background:#D4A017;border-radius:6px;padding:10px 14px;margin-top:16px;font-size:9px;font-weight:700;color:#0B1F3A;line-height:1.6;">Complete Home Today LLC &nbsp;|&nbsp; Serving Gilroy · Morgan Hill · Monterey County · Santa Cruz County</div>
+        </div>
+        <div style="background:#122848;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+          <div style="position:absolute;width:220px;height:220px;border-radius:50%;border:2px solid #1A7FBD;"></div>
+          <div style="position:absolute;width:150px;height:150px;border-radius:50%;border:2px solid #D4A017;background:#0A1F3A;"></div>
+          <div style="position:relative;text-align:center;z-index:1;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;">LET'S BUILD<br>SOMETHING<br>TOGETHER.</div>
+          </div>
+        </div>
+      </div>`
+  }
+];
+
+let attActiveSlide = 0;
+
+function renderATTDeck() {
+  const wrap = el('attDeckWrap');
+  if (!wrap) return;
+
+  wrap.innerHTML = `
+    <style>
+      .att-deck-outer { display:grid; grid-template-columns:180px 1fr; gap:16px; }
+      .att-thumbs { display:flex; flex-direction:column; gap:8px; }
+      .att-thumb-btn {
+        background:var(--card); border:1.5px solid var(--bdr); border-radius:8px;
+        padding:10px 12px; cursor:pointer; transition:all .15s; text-align:left;
+        display:flex; align-items:center; gap:10px;
+      }
+      .att-thumb-btn:hover { border-color:var(--blue); background:var(--blueG); }
+      .att-thumb-btn.active { border-color:#D4A017; background:rgba(212,160,23,.12); }
+      .att-thumb-num { font-family:var(--font-mono); font-size:10px; color:var(--muted); }
+      .att-thumb-label { font-size:11px; color:var(--white); font-weight:600; line-height:1.3; }
+      .att-slide-viewer { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; }
+      .att-slide-frame { height:420px; }
+      .att-slide-nav { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:#060A0F; border-top:1px solid var(--bdr); }
+      .att-nav-btn { background:transparent; border:1px solid var(--bdr); color:var(--white); border-radius:6px; padding:6px 18px; font-size:12px; font-weight:700; cursor:pointer; transition:all .15s; font-family:var(--font-body); }
+      .att-nav-btn:hover { border-color:#D4A017; color:#D4A017; }
+      .att-nav-btn:disabled { opacity:.3; cursor:default; }
+      .att-slide-counter { font-family:var(--font-mono); font-size:11px; color:var(--muted); }
+      .att-slide-dots { display:flex; gap:6px; }
+      .att-dot { width:8px; height:8px; border-radius:50%; background:var(--bdr); cursor:pointer; transition:background .15s; }
+      .att-dot.active { background:#D4A017; }
+    </style>
+
+```
+<div class="att-deck-outer">
+  <div class="att-thumbs" id="attThumbs"></div>
+  <div class="att-slide-viewer">
+    <div class="att-slide-frame" id="attSlideFrame"></div>
+    <div class="att-slide-nav">
+      <button class="att-nav-btn" id="attPrev" onclick="attNav(-1)">← Prev</button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div class="att-slide-counter" id="attCounter"></div>
+        <div class="att-slide-dots" id="attDots"></div>
+      </div>
+      <button class="att-nav-btn" id="attNext" onclick="attNav(1)">Next →</button>
+    </div>
+  </div>
+</div>
+```
+
+`;
+
+buildAttThumbs();
+showAttSlide(attActiveSlide);
+}
+
+function buildAttThumbs() {
+const t = el(‘attThumbs’);
+if (!t) return;
+t.innerHTML = ATT_SLIDES.map((s,i) => `<button class="att-thumb-btn${i===attActiveSlide?' active':''}" onclick="showAttSlide(${i})" id="attThumb${i}"> <span class="att-thumb-num">${String(s.num).padStart(2,'0')}</span> <span class="att-thumb-label">${s.thumb}</span> </button>`).join(’’);
+}
+
+function showAttSlide(idx) {
+attActiveSlide = idx;
+const frame = el(‘attSlideFrame’);
+if (frame) frame.innerHTML = ATT_SLIDES[idx].html;
+
+// update thumbs
+ATT_SLIDES.forEach((_,i) => {
+const b = el(‘attThumb’+i);
+if (b) b.className = ‘att-thumb-btn’+(i===idx?’ active’:’’);
+});
+
+// counter
+const ctr = el(‘attCounter’);
+if (ctr) ctr.textContent = ’Slide ‘+(idx+1)+’ of ‘+ATT_SLIDES.length+’ — ’+ATT_SLIDES[idx].title;
+
+// dots
+const dots = el(‘attDots’);
+if (dots) dots.innerHTML = ATT_SLIDES.map((_,i)=>`<div class="att-dot${i===idx?' active':''}" onclick="showAttSlide(${i})"></div>`).join(’’);
+
+// nav buttons
+const prev = el(‘attPrev’), next = el(‘attNext’);
+if (prev) prev.disabled = idx === 0;
+if (next) next.disabled = idx === ATT_SLIDES.length - 1;
+}
+
+function attNav(dir) {
+const next = attActiveSlide + dir;
+if (next >= 0 && next < ATT_SLIDES.length) showAttSlide(next);
+}
+
+// ════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════
+function init(){
+buildNav();
+buildTicker();
+populateSelects();
+buildCaptureStatics();
+buildAdForgeStatics();
+buildCampaignStatics();
+buildSMSStatics();
+buildBilingualStatics();
+buildNewMoverStatics();
+buildIntelStatics();
+buildStatusFilters();
+buildPricingTabs();
+renderDashboard();
+renderPricing();
+updateNewBadge();
+renderATTDeck();
+}
+
+document.addEventListener(‘DOMContentLoaded’, init);
+</script>
+
+</body>
+</html>

@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#060A0F">
 <title>Complete Home Today LLC — Ultimate Lead Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,10 +29,14 @@
   --font-display: 'Barlow Condensed', sans-serif;
   --font-body: 'Nunito', sans-serif;
   --font-mono: 'DM Mono', monospace;
+  --sidebar-w: 224px;
+  --header-h: 28px;
+  --mobile-topbar: 48px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden}
-body{font-family:var(--font-body);background:var(--bg);color:var(--white);display:flex;flex-direction:column}
+html{height:100%}
+body{font-family:var(--font-body);background:var(--bg);color:var(--white);display:flex;flex-direction:column;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-thumb{background:var(--amber);border-radius:2px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -47,10 +54,10 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--white);displa
 
 /* LAYOUT */
 #app{display:flex;flex:1;overflow:hidden}
-#sidebar{width:224px;min-height:100%;background:#060A0F;border-right:1px solid var(–bdr);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+#sidebar{width:var(–sidebar-w);min-height:100%;background:#060A0F;border-right:1px solid var(–bdr);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s;z-index:160}
 #content-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-#ticker-bar{height:28px;background:#060A0F;border-bottom:1px solid var(–bdr);display:flex;align-items:center;flex-shrink:0;overflow:hidden}
-#main{flex:1;overflow-y:auto;padding:28px 32px}
+#ticker-bar{height:var(–header-h);background:#060A0F;border-bottom:1px solid var(–bdr);display:flex;align-items:center;flex-shrink:0;overflow:hidden}
+#main{flex:1;overflow-y:auto;padding:clamp(14px,3vw,28px) clamp(14px,4vw,32px)}
 .page{display:none;animation:fadeUp .38s ease both}
 .page.active{display:block}
 
@@ -62,14 +69,14 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--white);displa
 
 /* SIDEBAR */
 .sidebar-logo{padding:18px 16px 12px;border-bottom:1px solid var(–bdr)}
-.sidebar-logo .co-name{font-family:var(–font-display);font-size:18px;font-weight:800;color:var(–amber);letter-spacing:1px;line-height:1.1}
-.sidebar-logo .co-sub{font-family:var(–font-display);font-size:18px;font-weight:800;color:var(–white);letter-spacing:1px;line-height:1.1}
+.sidebar-logo .co-name{font-family:var(–font-display);font-size:clamp(15px,2vw,18px);font-weight:800;color:var(–amber);letter-spacing:1px;line-height:1.1}
+.sidebar-logo .co-sub{font-family:var(–font-display);font-size:clamp(15px,2vw,18px);font-weight:800;color:var(–white);letter-spacing:1px;line-height:1.1}
 .sidebar-logo .co-tag{font-family:var(–font-mono);font-size:9px;color:var(–dim);margin-top:5px;letter-spacing:1.5px}
 .sidebar-live{padding:8px 16px;border-bottom:1px solid var(–bdr);display:flex;align-items:center;gap:8px}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(–green);box-shadow:0 0 8px var(–green);flex-shrink:0}
 .live-text{font-family:var(–font-mono);font-size:9px;color:var(–green)}
 nav{flex:1;padding:6px 0}
-.nav-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 16px;background:transparent;border:none;border-left:2.5px solid transparent;color:var(–muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-align:left;font-family:var(–font-body)}
+.nav-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 16px;background:transparent;border:none;border-left:2.5px solid transparent;color:var(–muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-align:left;font-family:var(–font-body);-webkit-tap-highlight-color:transparent}
 .nav-btn:hover{background:var(–amberG);color:var(–white)}
 .nav-btn.active{background:var(–amberG);border-left-color:var(–amber);color:var(–amber);font-weight:700}
 .nav-icon{font-family:var(–font-mono);font-size:14px;width:18px;flex-shrink:0}
@@ -82,15 +89,20 @@ nav{flex:1;padding:6px 0}
 .card.gold{border-color:rgba(245,158,11,.5);box-shadow:0 0 16px rgba(245,158,11,.1)}
 
 /* SECTION HEADER */
-.sec-head{margin-bottom:22px}
-.sec-head h2{font-family:var(–font-display);font-size:26px;font-weight:800;letter-spacing:.5px;color:var(–white)}
-.sec-head p{font-size:13px;color:var(–muted);margin-top:3px}
+.sec-head{margin-bottom:clamp(14px,2.5vw,22px)}
+.sec-head h2{font-family:var(–font-display);font-size:clamp(18px,4vw,26px);font-weight:800;letter-spacing:.5px;color:var(–white)}
+.sec-head p{font-size:clamp(11px,2vw,13px);color:var(–muted);margin-top:3px}
 
 /* GRID HELPERS */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
-.grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.grid-6{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+/* Two-column page layouts — config panel left + output right */
+.page-cols{display:grid;grid-template-columns:290px 1fr;gap:16px}
+.page-cols-sm{display:grid;grid-template-columns:280px 1fr;gap:16px}
+.page-cols-r{display:grid;grid-template-columns:1fr 270px;gap:16px}
+.capture-cols{display:grid;grid-template-columns:1fr 320px;gap:16px}
 
 /* FORM ELEMENTS */
 label.field-label{font-size:11px;font-weight:700;color:var(–muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px}
@@ -188,10 +200,177 @@ textarea{resize:vertical}
 /* EMPTY STATE */
 .empty-state{text-align:center;padding:60px;color:var(–muted)}
 .empty-state .icon{font-size:40px;margin-bottom:12px}
+
+/* LEAD SEARCH */
+.lead-search-input{width:220px;flex:0 0 220px}
+
+/* ═══ MOBILE MENU BUTTON ═══════════════════════════════════ */
+#mobileMenuBtn{
+display:none;
+position:fixed;top:0;left:0;z-index:200;
+background:#060A0F;border:none;
+border-right:1px solid var(–bdr);border-bottom:1px solid var(–bdr);
+width:var(–mobile-topbar);height:var(–mobile-topbar);
+color:var(–amber);font-size:18px;cursor:pointer;
+align-items:center;justify-content:center;
+transition:background .15s;
+}
+#mobileMenuBtn:active{background:var(–amberG)}
+#sidebarOverlay{
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.65);z-index:155;
+backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+}
+#sidebarOverlay.visible{display:block}
+
+/* ═══ TABLET BREAKPOINT (≤960px) ═══════════════════════════ */
+@media (max-width:960px){
+:root{–sidebar-w:232px}
+
+#mobileMenuBtn{display:flex}
+#sidebar{
+position:fixed;top:0;left:0;height:100%;
+transform:translateX(-100%);
+box-shadow:none;
+z-index:160;
+transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;
+}
+#sidebar.open{
+transform:translateX(0);
+box-shadow:8px 0 40px rgba(0,0,0,.7);
+}
+
+/* Full-width content, scrollable */
+html,body{height:auto;overflow:auto}
+#app{display:block;min-height:100vh;overflow:visible}
+#content-wrap{display:flex;flex-direction:column;min-height:100vh}
+#ticker-bar{padding-left:var(–mobile-topbar)}
+#main{
+padding:clamp(12px,3vw,20px);
+padding-top:calc(var(–mobile-topbar) + clamp(10px,2vw,16px));
+flex:1;overflow-y:visible;
+}
+
+/* KPI grid — 3 columns on tablet */
+#kpiGrid{grid-template-columns:repeat(3,1fr)!important}
+
+/* Sec header layout adjustments */
+.flex.items-center.justify-between.mb-20{flex-wrap:wrap;gap:10px}
+
+/* Page col layouts collapse to 1 col */
+.page-cols,.page-cols-sm,.page-cols-r,.capture-cols{
+grid-template-columns:1fr!important;
+}
+
+/* Territory grid — 2 cols */
+#territoryCard .grid-4{grid-template-columns:1fr 1fr!important}
+
+/* Intel market select full width */
+#intel-market{width:100%}
+[style*=“width:200px”]{width:100%!important}
+
+/* Lead search full width */
+.lead-search-input{width:100%!important;flex:1!important}
+#leadSearch{width:100%!important;flex:1!important}
+.filter-row{flex-direction:column;align-items:stretch}
+#statusFilters{display:flex;flex-wrap:wrap;gap:6px}
+
+/* AT&T deck */
+.att-deck-outer{grid-template-columns:1fr!important}
+.att-thumbs{flex-direction:row;flex-wrap:wrap!important}
+.att-thumb-btn{flex:1 1 120px}
+}
+
+/* ═══ MOBILE BREAKPOINT (≤600px) ═══════════════════════════ */
+@media (max-width:600px){
+:root{–mobile-topbar:48px}
+
+/* KPI — 2 cols on phone */
+#kpiGrid{grid-template-columns:repeat(2,1fr)!important}
+
+/* All grids — single col */
+.grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:1fr!important}
+
+/* Cards tighter */
+.card{padding:12px 13px}
+
+/* KPI card */
+.kpi-num{font-size:clamp(24px,6vw,34px)}
+.kpi-card{padding:12px}
+
+/* Section head */
+.sec-head h2{font-size:clamp(17px,5.5vw,22px)}
+
+/* Buttons */
+.btn-primary,.btn-secondary{padding:11px 16px;font-size:14px}
+
+/* Table scroll */
+.scroll-x{-webkit-overflow-scrolling:touch}
+.data-table{font-size:11px}
+.data-table th,.data-table td{padding:7px 8px}
+
+/* Territory — single col on phone */
+#territoryCard .grid-4{grid-template-columns:1fr!important}
+
+/* Bilingual example grid */
+[style*=“grid-template-columns:1fr 1fr”]{grid-template-columns:1fr!important}
+
+/* AI output */
+.ai-output pre{font-size:12px;line-height:1.7}
+.ai-output-header{flex-direction:column;align-items:flex-start;gap:8px}
+
+/* Lead row */
+.lead-row{gap:8px}
+
+/* Nav buttons larger tap target */
+.nav-btn{padding:12px 16px;font-size:14px}
+.nav-icon{font-size:16px}
+
+/* Filter pills tighter */
+.filter-pill{padding:6px 12px;font-size:12px}
+
+/* Pricing tabs wrap */
+#pricingTabs{flex-wrap:wrap}
+
+/* Intel flex row stacks on phone */
+.flex.gap-12.mb-12{flex-direction:column}
+
+/* Quick actions 2-col stays */
+}
+
+/* ═══ SMALL PHONE (≤380px) ═════════════════════════════════ */
+@media (max-width:380px){
+#kpiGrid{grid-template-columns:1fr 1fr!important}
+.kpi-num{font-size:22px}
+#main{padding:10px;padding-top:58px}
+.sec-head h2{font-size:16px}
+}
+
+/* ═══ LARGE DESKTOP ENHANCEMENT (≥1400px) ══════════════════ */
+@media (min-width:1400px){
+:root{–sidebar-w:248px}
+#main{padding:32px 40px}
+.grid-6{grid-template-columns:repeat(6,1fr)}
+}
+
+/* ═══ TOUCH IMPROVEMENTS ════════════════════════════════════ */
+@media (hover:none) and (pointer:coarse){
+.btn{min-height:44px}
+.nav-btn{min-height:48px}
+select,input,textarea{font-size:16px} /* prevent iOS zoom */
+.filter-pill,.preset-chip{min-height:40px;display:inline-flex;align-items:center}
+}
 </style>
 
 </head>
 <body>
+
+<!-- ═══ MOBILE MENU BUTTON ════════════════════════════════════ -->
+
+<button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Open menu">
+  <span id="menuIcon">☰</span>
+</button>
+<div id="sidebarOverlay" onclick="closeMobileMenu()"></div>
 
 <!-- ═══ TICKER ═══════════════════════════════════════════════ -->
 
@@ -252,7 +431,7 @@ textarea{resize:vertical}
     <p>California CCPA-compliant lead intake — all fields optimized for fastest follow-up</p>
   </div>
   <div id="captureSuccess" style="display:none" class="banner-success">✅ Lead captured and added to pipeline! Begin 5-minute SMS follow-up now.</div>
-  <div style="display:grid;grid-template-columns:1fr 330px;gap:16px">
+  <div class="capture-cols">
     <div class="flex-col gap-12">
       <div class="card">
         <div class="card-title" style="color:var(--amber)">◈ CONTACT INFORMATION</div>
@@ -321,7 +500,7 @@ textarea{resize:vertical}
     <button class="btn btn-secondary" onclick="exportLeads()">⬇ Export Excel</button>
   </div>
   <div class="filter-row">
-    <input id="leadSearch" placeholder="🔍 Search leads..." style="width:210px;flex:0 0 210px" oninput="renderLeadLog()">
+    <input id="leadSearch" placeholder="🔍 Search leads..." class="lead-search-input" oninput="renderLeadLog()">
     <div id="statusFilters"></div>
   </div>
   <div id="leadList"></div>
@@ -330,7 +509,7 @@ textarea{resize:vertical}
 <!-- PAGE: AD FORGE -->
 <div class="page" id="page-adforge">
   <div class="sec-head"><h2>⚡ AD FORGE</h2><p>AI-powered high-converting copy — California-optimized psychological frameworks</p></div>
-  <div style="display:grid;grid-template-columns:290px 1fr;gap:16px">
+  <div class="page-cols">
     <div class="card glow flex-col gap-12">
       <div class="card-title" style="color:var(--amber)">⚡ CAMPAIGN CONFIG</div>
       <div class="field-group"><label class="field-label">Client</label><select id="af-client"></select></div>
@@ -358,7 +537,7 @@ textarea{resize:vertical}
 <!-- PAGE: CAMPAIGN BUILDER -->
 <div class="page" id="page-campaigns">
   <div class="sec-head"><h2>◎ CAMPAIGN BUILDER</h2><p>Full Facebook & Google campaign plans with budgets, targeting, and projected CPL</p></div>
-  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+  <div class="page-cols-sm">
     <div class="card glow flex-col gap-12">
       <div class="card-title" style="color:var(--amber)">◎ PLAN CONFIG</div>
       <div class="field-group"><label class="field-label">Client</label><select id="cb-client"></select></div>
@@ -384,7 +563,7 @@ textarea{resize:vertical}
 <!-- PAGE: SMS ENGINE -->
 <div class="page" id="page-sms">
   <div class="sec-head"><h2>✉ SMS FOLLOW-UP ENGINE</h2><p>California TCPA/CCPA-compliant sequences — highest contact rates in the industry</p></div>
-  <div style="display:grid;grid-template-columns:290px 1fr;gap:16px">
+  <div class="page-cols">
     <div class="flex-col gap-12">
       <div class="card glow">
         <div class="card-title" style="color:var(--amber)">✉ SEQUENCE CONFIG</div>
@@ -413,7 +592,7 @@ textarea{resize:vertical}
 <!-- PAGE: BILINGUAL OPS -->
 <div class="page" id="page-spanish">
   <div class="sec-head"><h2>◈ BILINGUAL OPS</h2><p>Spanish/English ad pairs for Gilroy, Salinas, and Monterey County Hispanic markets</p></div>
-  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+  <div class="page-cols-sm">
     <div class="card glow flex-col gap-12">
       <div class="card-title" style="color:var(--amber)">◈ AD CONFIG</div>
       <div class="field-group"><label class="field-label">Client</label><select id="bi-client"></select></div>
@@ -440,7 +619,7 @@ textarea{resize:vertical}
 <!-- PAGE: NEW MOVER ENGINE -->
 <div class="page" id="page-newmover">
   <div class="sec-head"><h2>⌂ NEW MOVER ENGINE</h2><p>#1 ADT and ISP acquisition strategy — catch homeowners in the 30-day decision window</p></div>
-  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px">
+  <div class="page-cols-sm">
     <div class="flex-col gap-12">
       <div class="card glow">
         <div class="card-title" style="color:var(--amber)">⌂ PROGRAM CONFIG</div>
@@ -470,11 +649,11 @@ textarea{resize:vertical}
 <!-- PAGE: MARKET INTEL -->
 <div class="page" id="page-intel">
   <div class="sec-head"><h2>◉ MARKET INTEL</h2><p>AI-powered competitive intelligence for your exact territory</p></div>
-  <div style="display:grid;grid-template-columns:1fr 270px;gap:16px;margin-bottom:16px">
+  <div class="page-cols-r mb-16">
     <div class="card">
-      <div class="flex gap-12 mb-12">
-        <div class="flex-1"><div class="field-group"><label class="field-label">Research Query</label><input id="intel-query" placeholder="Type a question or click a preset below..."></div></div>
-        <div style="width:200px"><div class="field-group"><label class="field-label">Focus Market</label><select id="intel-market"><option>All Territory</option><option>Monterey County</option><option>Santa Cruz County</option><option>Gilroy / Morgan Hill</option><option>Salinas Valley</option></select></div></div>
+      <div class="flex flex-wrap gap-12 mb-12">
+        <div class="flex-1" style="min-width:200px"><div class="field-group"><label class="field-label">Research Query</label><input id="intel-query" placeholder="Type a question or click a preset below..."></div></div>
+        <div style="min-width:160px;flex:0 1 200px"><div class="field-group"><label class="field-label">Focus Market</label><select id="intel-market"><option>All Territory</option><option>Monterey County</option><option>Santa Cruz County</option><option>Gilroy / Morgan Hill</option><option>Salinas Valley</option></select></div></div>
       </div>
       <div class="mb-12">
         <label class="field-label" style="margin-bottom:8px">Quick Presets</label>
@@ -672,6 +851,28 @@ function setLoading(loadId, outId, show){
 }
 
 // ════════════════════════════════════════════════════════════
+// MOBILE MENU
+// ════════════════════════════════════════════════════════════
+function toggleMobileMenu(){
+  const sb = el('sidebar');
+  const ov = el('sidebarOverlay');
+  const ic = el('menuIcon');
+  const isOpen = sb.classList.toggle('open');
+  ov.classList.toggle('visible', isOpen);
+  if(ic) ic.textContent = isOpen ? '✕' : '☰';
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileMenu(){
+  const sb = el('sidebar');
+  const ov = el('sidebarOverlay');
+  const ic = el('menuIcon');
+  sb.classList.remove('open');
+  ov.classList.remove('visible');
+  if(ic) ic.textContent = '☰';
+  document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════════════════════════════
 function buildNav(){
@@ -690,6 +891,10 @@ function goTo(id){
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   const btn = el('navBtn-'+id);
   if(btn) btn.classList.add('active');
+  closeMobileMenu();
+  // Scroll content to top on mobile
+  const main = el('main');
+  if(main) main.scrollTop = 0; else window.scrollTo(0,0);
   if(id==='dashboard') renderDashboard();
   if(id==='log') renderLeadLog();
   if(id==='pricing') renderPricing();

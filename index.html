@@ -493,15 +493,18 @@ box-shadow:8px 0 40px rgba(0,0,0,.7);
 }
 
 /* Full-width content, scrollable */
-html,body{height:auto;overflow:auto}
+html,body{height:auto;overflow-x:hidden;overflow-y:auto}
+body{overflow:auto}
 #app{display:block;min-height:100vh;overflow:visible}
-#content-wrap{display:flex;flex-direction:column;min-height:100vh}
-#ticker-bar{padding-left:var(–mobile-topbar)}
+#content-wrap{display:flex;flex-direction:column;min-height:100vh;overflow:visible}
 #main{
+height:auto;overflow-y:visible;
 padding:clamp(12px,3vw,20px);
 padding-top:calc(var(–mobile-topbar) + clamp(10px,2vw,16px));
-flex:1;overflow-y:visible;
+flex:1;
 }
+
+#ticker-bar{padding-left:var(–mobile-topbar)}
 
 /* KPI grid — 3 columns on tablet */
 #kpiGrid{grid-template-columns:repeat(3,1fr)!important}
@@ -611,6 +614,82 @@ grid-template-columns:1fr!important;
 .nav-btn{min-height:48px}
 select,input,textarea{font-size:16px} /* prevent iOS zoom */
 .filter-pill,.preset-chip{min-height:40px;display:inline-flex;align-items:center}
+}
+
+/* ═══ UNIVERSAL GRID OVERFLOW GUARD ═════════════════════════ */
+/* Prevent any grid child from overflowing its column */
+.grid-2 > *,.grid-3 > *,.grid-4 > *,.grid-6 > *,
+.page-cols > *,.page-cols-sm > *,.page-cols-r > *,.capture-cols > *{
+min-width:0;overflow:hidden;
+}
+
+/* ═══ AT&T SLIDE DECK RESPONSIVE ════════════════════════════ */
+/* Slide viewer — scrollable on mobile */
+.att-slide-viewer{min-height:0!important}
+/* Collapse all multi-col grids inside slides on narrow screens */
+@media (max-width:700px){
+.att-slide-viewer [style*=“grid-template-columns:repeat(4”],
+.att-slide-viewer [style*=“grid-template-columns:repeat(3”],
+.att-slide-viewer [style*=“grid-template-columns:1fr 1fr”],
+.att-slide-viewer [style*=“grid-template-columns:55%”]{
+grid-template-columns:1fr!important;
+}
+/* Slide 7 right-column circles — hide on tiny screens */
+.att-slide-viewer [style*=“grid-template-columns:55% 45%”] > *:last-child{
+display:none;
+}
+/* Deck outer on tablet already handled — reinforce */
+.att-deck-outer{grid-template-columns:1fr!important}
+.att-thumbs{flex-direction:row!important;flex-wrap:wrap!important;gap:6px!important}
+.att-thumb-btn{flex:1 1 100px;min-width:80px}
+/* Slide nav controls */
+.att-nav-row{flex-wrap:wrap;gap:6px}
+}
+
+/* ═══ MARKETING ACADEMY RESPONSIVE ══════════════════════════ */
+.mk-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:860px){
+.mk-cards-grid{grid-template-columns:1fr!important}
+}
+/* MK source tabs wrap on mobile */
+.mk-source-tabs{flex-wrap:wrap!important;gap:6px!important}
+.mk-source-tab{flex:1 1 120px;min-width:100px}
+
+/* ═══ LEAD CAPTURE SIDEBAR PANELS ═══════════════════════════ */
+/* Speed protocol / signals / CPL sidebar cards stack properly */
+@media (max-width:600px){
+#page-capture .capture-cols > *:last-child{order:-1} /* hints panel first */
+}
+
+/* ═══ DASHBOARD QUICK ACTIONS ════════════════════════════════ */
+/* Force quick actions 2-col to always stay 2-col */
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* ═══ PREVENT HORIZONTAL SCROLL GLOBALLY ════════════════════ */
+#main,#app,#content-wrap{max-width:100vw}
+body{overflow-x:hidden}
+
+/* ═══ SAFE-AREA BOTTOM PADDING ══════════════════════════════ */
+.sidebar-footer{padding-bottom:calc(12px + var(–safe-bottom))}
+@media (max-width:960px){
+#main{padding-bottom:calc(clamp(12px,3vw,20px) + var(–safe-bottom))}
+}
+
+/* ═══ LANDSCAPE PHONE (very short viewport) ═════════════════ */
+@media (max-height:500px) and (max-width:900px){
+#ticker-bar{display:none}
+#main{padding-top:calc(var(–mobile-topbar) + 8px)}
+.kpi-card{padding:10px 12px}
+.kpi-num{font-size:22px}
+}
+
+/* ═══ PRINT BASIC ════════════════════════════════════════════ */
+@media print{
+#sidebar,#ticker-bar,#mobileMenuBtn,#sidebarOverlay{display:none!important}
+#main{padding:10px;overflow:visible}
+body,html{height:auto;overflow:visible}
+.page{display:block!important}
+.page:not(.active){display:none!important}
 }
 </style>
 
@@ -1235,8 +1314,8 @@ function renderDashboard(){
     {id:'intel',icon:'◉',label:'Market Intel',c:'var(--amber)'},
   ];
   el('quickActionsCard').innerHTML = '<div class="card-title" style="color:var(--amber)">◈ QUICK ACTIONS</div>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
-    qas.map(q=>'<button onclick="goTo(\''+q.id+'\')" style="background:'+q.c+'18;border:1px solid '+q.c+'35;border-radius:7px;padding:9px 10px;color:'+q.c+';font-size:12px;font-weight:700;text-align:left;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-body)"><span style="font-family:var(--font-mono)">'+q.icon+'</span>'+escHtml(q.label)+'</button>').join('') + '</div>';
+    '<div class="qa-grid">' +
+    qas.map(q=>'<button onclick="goTo(\''+q.id+'\')" style="background:'+q.c+'18;border:1px solid '+q.c+'35;border-radius:7px;padding:9px 10px;color:'+q.c+';font-size:12px;font-weight:700;text-align:left;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-body);-webkit-tap-highlight-color:transparent"><span style="font-family:var(--font-mono)">'+q.icon+'</span>'+escHtml(q.label)+'</button>').join('') + '</div>';
 
   // CPL benchmarks
   const benchmarks = [
@@ -1410,7 +1489,7 @@ function renderLeadLog(){
         (lead.language==='Spanish' ? pill('🇲🇽 ES','#A855F7') : '')+
       '</div>'+
       '<div style="font-size:11px;color:var(--muted);flex:0 0 110px">'+escHtml(lead.source||'—')+'</div>'+
-      '<select onchange="updateStatus('+lead.id+',this.value)" style="width:130px;font-size:12px;font-weight:700;color:'+sc+';background:var(--card2);border:1px solid '+sc+'">'+
+      '<select onchange="updateStatus('+lead.id+',this.value)" style="width:130px;font-size:16px;font-weight:700;color:'+sc+';background:var(--card2);border:1px solid '+sc+';padding:4px 6px;border-radius:5px;max-width:100%">'+
         STATUSES.map(s=>'<option'+(lead.status===s?' selected':'')+'>'+s+'</option>').join('')+
       '</select>'+
       '<div style="font-family:var(--font-mono);font-size:9px;color:var(--dim);flex:0 0 120px">'+escHtml(lead.ts||'')+'</div>'+
@@ -1543,7 +1622,7 @@ function buildBilingualStatics(){
     pill(ex.badge, ex.color)+
     '<span style="font-family:var(--font-mono);font-size:10px;color:var(--muted)">EXAMPLE PAIR</span>'+
     '</div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">'+
     [['🇲🇽 Español',ex.es],['🇺🇸 English',ex.en]].map(([lang,ad])=>
       '<div style="background:#0A1018;border-radius:8px;padding:12px">'+
       '<div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">'+lang+'</div>'+
@@ -1869,7 +1948,7 @@ const ATT_SLIDES = [
       <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
         <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">MARKET OPPORTUNITY</span></div>
         <div style="flex:1;padding:14px 16px;overflow:auto;">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px;">
             ${[
               {val:'485K+',label:'Households',sub:'In our territory',c:'#0B1F3A'},
               {val:'~55%',label:'Hispanic in Gilroy',sub:'Bilingual opportunity',c:'#1A7FBD'},
@@ -1881,7 +1960,7 @@ const ATT_SLIDES = [
               <div style="font-size:9px;color:#8896A8;">${s.sub}</div>
             </div>`).join('')}
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
             <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
               <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#0B1F3A;margin-bottom:8px;">Why AT&T Wins Here</div>
               ${['Fiber infrastructure spans Gilroy, Morgan Hill & key Monterey corridors','New housing developments = untapped installation pipeline','Bundle appeal: internet + TV + wireless on one bill','Strong brand recognition vs. smaller regional ISPs'].map(p=>`<div style="font-size:10px;color:#2C3E50;margin-bottom:5px;display:flex;gap:5px;"><span style="color:#D4A017;flex-shrink:0;">▸</span>${p}</div>`).join('')}
@@ -1903,7 +1982,7 @@ const ATT_SLIDES = [
       <div style="background:#0B1F3A;height:100%;display:flex;flex-direction:column;overflow:hidden;">
         <div style="background:#122848;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">CAMPAIGN STRATEGY</span></div>
         <div style="flex:1;padding:12px 14px;overflow:auto;">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px;">
             ${[
               {icon:'📱',name:'Facebook & Instagram',detail:'ZIP-code geo-fenced lead forms\nNew mover & homeowner targeting\nBilingual creative for Salinas/Gilroy',budget:'$1,200/mo'},
               {icon:'🔍',name:'Google Search Ads',detail:'High-intent keywords: \'internet Gilroy\'\nCompetitor conquesting\nCall extensions for senior audiences',budget:'$900/mo'},
@@ -1928,7 +2007,7 @@ const ATT_SLIDES = [
     html: `
       <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
         <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">FACEBOOK & META TARGETING PLAYBOOK</span></div>
-        <div style="flex:1;padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:auto;">
+        <div style="flex:1;padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;overflow:auto;">
           <div style="background:#fff;border:1px solid #E0E7EF;border-radius:6px;padding:12px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#0B1F3A;margin-bottom:10px;">Audience Segments</div>
             ${[
@@ -1967,7 +2046,7 @@ const ATT_SLIDES = [
           <div style="background:#122848;border:1px solid #1E3A5C;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:#C8D9ED;font-style:italic;line-height:1.5;">
             55% of Gilroy and Salinas households are Spanish-speaking. Bilingual creative isn't optional — it's the difference between <strong style="color:#D4A017;">8%</strong> and <strong style="color:#2EAA6E;">22%</strong> conversion rates in these ZIPs.
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
             ${[
               {lang:'🇺🇸 English Version',h1:'"Fast Internet Is Finally Here in Gilroy"',body:'AT&T Fiber is now available in your neighborhood. Plans from $35/mo with AutoPay. No data caps. Call today — free same-week installation.',cta:'CHECK AVAILABILITY NOW →',c:'#1A7FBD'},
               {lang:'🇲🇽 Versión en Español',h1:'"Internet Rápido Ya Llegó a Gilroy"',body:'AT&T Fiber ya está disponible en tu vecindario. Planes desde $35/mes con AutoPago. Sin límite de datos. Llama hoy — instalación gratuita esta semana.',cta:'VERIFICA DISPONIBILIDAD →',c:'#D4A017'}
@@ -1992,7 +2071,7 @@ const ATT_SLIDES = [
       <div style="background:#F4F7FB;height:100%;display:flex;flex-direction:column;overflow:hidden;">
         <div style="background:#0B1F3A;padding:8px 20px;"><span style="font-size:11px;color:#D4A017;font-weight:700;letter-spacing:2px;">90-DAY LAUNCH ROADMAP</span></div>
         <div style="flex:1;padding:12px 16px;overflow:auto;">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
             ${[
               {num:'01',label:'Month 1: Foundation',c:'#1A7FBD',items:['Launch Google Search campaigns','Build Facebook audiences & pixel','Deploy ZIP-code targeting by service area','Create English + Spanish ad creative sets','Establish call tracking with CallRail']},
               {num:'02',label:'Month 2: Optimize',c:'#D4A017',items:['A/B test 3 headline variants per ad set','Identify top-performing ZIPs, scale budget','Launch Nextdoor sponsored posts','Activate new mover data targeting','Start Direct Mail + Digital combo']},
@@ -2016,10 +2095,10 @@ const ATT_SLIDES = [
     title: 'Next Steps',
     thumb: 'Close &<br>Next Steps',
     html: `
-      <div style="background:#0B1F3A;height:100%;display:grid;grid-template-columns:55% 45%;overflow:hidden;">
-        <div style="padding:28px 28px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="background:#0B1F3A;height:100%;display:flex;flex-wrap:wrap;overflow:hidden;">
+        <div style="flex:1 1 260px;padding:clamp(14px,3vw,28px);display:flex;flex-direction:column;justify-content:center;min-width:0;">
           <div style="height:3px;width:60%;background:#D4A017;margin-bottom:16px;"></div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#fff;margin-bottom:24px;">Next Steps</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(20px,4vw,30px);font-weight:800;color:#fff;margin-bottom:24px;">Next Steps</div>
           ${[
             'Sign marketing services agreement',
             'Share AT&T serviceable address file by ZIP',
@@ -2033,7 +2112,7 @@ const ATT_SLIDES = [
           </div>`).join('')}
           <div style="background:#D4A017;border-radius:6px;padding:10px 14px;margin-top:16px;font-size:9px;font-weight:700;color:#0B1F3A;line-height:1.6;">Complete Home Today LLC &nbsp;|&nbsp; Serving Gilroy · Morgan Hill · Monterey County · Santa Cruz County</div>
         </div>
-        <div style="background:#122848;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+        <div style="flex:0 1 180px;background:#122848;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-height:120px;">
           <div style="position:absolute;width:220px;height:220px;border-radius:50%;border:2px solid #1A7FBD;"></div>
           <div style="position:absolute;width:150px;height:150px;border-radius:50%;border:2px solid #D4A017;background:#0A1F3A;"></div>
           <div style="position:relative;text-align:center;z-index:1;">
@@ -2052,27 +2131,42 @@ function renderATTDeck() {
 
   wrap.innerHTML = `
     <style>
-      .att-deck-outer { display:grid; grid-template-columns:180px 1fr; gap:16px; }
-      .att-thumbs { display:flex; flex-direction:column; gap:8px; }
+      .att-deck-outer { display:grid; grid-template-columns:170px 1fr; gap:14px; }
+      .att-thumbs { display:flex; flex-direction:column; gap:6px; }
       .att-thumb-btn {
         background:var(--card); border:1.5px solid var(--bdr); border-radius:8px;
         padding:10px 12px; cursor:pointer; transition:all .15s; text-align:left;
-        display:flex; align-items:center; gap:10px;
+        display:flex; align-items:center; gap:10px; min-height:44px;
+        -webkit-tap-highlight-color:transparent;
       }
       .att-thumb-btn:hover { border-color:var(--blue); background:var(--blueG); }
       .att-thumb-btn.active { border-color:#D4A017; background:rgba(212,160,23,.12); }
-      .att-thumb-num { font-family:var(--font-mono); font-size:10px; color:var(--muted); }
+      .att-thumb-num { font-family:var(--font-mono); font-size:10px; color:var(--muted); flex-shrink:0; }
       .att-thumb-label { font-size:11px; color:var(--white); font-weight:600; line-height:1.3; }
-      .att-slide-viewer { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; }
-      .att-slide-frame { height:420px; }
-      .att-slide-nav { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:#060A0F; border-top:1px solid var(--bdr); }
-      .att-nav-btn { background:transparent; border:1px solid var(--bdr); color:var(--white); border-radius:6px; padding:6px 18px; font-size:12px; font-weight:700; cursor:pointer; transition:all .15s; font-family:var(--font-body); }
+      .att-slide-viewer { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; min-width:0; }
+      .att-slide-frame { height:clamp(260px, 45vw, 440px); overflow:auto; -webkit-overflow-scrolling:touch; }
+      .att-slide-nav { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:#060A0F; border-top:1px solid var(--bdr); flex-wrap:wrap; gap:8px; }
+      .att-nav-btn { background:transparent; border:1px solid var(--bdr); color:var(--white); border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; cursor:pointer; transition:all .15s; font-family:var(--font-body); min-height:36px; -webkit-tap-highlight-color:transparent; }
       .att-nav-btn:hover { border-color:#D4A017; color:#D4A017; }
       .att-nav-btn:disabled { opacity:.3; cursor:default; }
       .att-slide-counter { font-family:var(--font-mono); font-size:11px; color:var(--muted); }
-      .att-slide-dots { display:flex; gap:6px; }
-      .att-dot { width:8px; height:8px; border-radius:50%; background:var(--bdr); cursor:pointer; transition:background .15s; }
+      .att-slide-dots { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+      .att-dot { width:8px; height:8px; border-radius:50%; background:var(--bdr); cursor:pointer; transition:background .15s; min-width:8px; }
       .att-dot.active { background:#D4A017; }
+      /* Responsive: stack thumbs horizontally below 720px */
+      @media (max-width:720px) {
+        .att-deck-outer { grid-template-columns:1fr; }
+        .att-thumbs { flex-direction:row; flex-wrap:wrap; }
+        .att-thumb-btn { flex:1 1 100px; min-width:80px; padding:8px 10px; }
+        .att-thumb-label { font-size:10px; }
+        .att-slide-frame { height:clamp(220px, 60vw, 380px); }
+      }
+      @media (max-width:480px) {
+        .att-slide-frame { height:clamp(200px, 70vw, 300px); }
+        .att-thumb-btn { flex:1 1 80px; min-width:70px; }
+        .att-slide-nav { padding:8px 10px; }
+        .att-nav-btn { padding:6px 12px; font-size:11px; }
+      }
     </style>
 
 ```
@@ -2450,7 +2544,7 @@ if (!wrap) return;
 
 const src = MK_DATA[mkActiveSource];
 
-wrap.innerHTML = ` <style> .mk-source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; } .mk-source-tab { padding:10px 20px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px; border:1.5px solid var(--bdr); background:var(--card); color:var(--muted); font-family:var(--font-body); } .mk-source-tab:hover { border-color:var(--amber); color:var(--white); } .mk-source-tab.active { color:#000; } .mk-bio { padding:14px 18px; border-radius:8px; border:1px solid var(--bdr); background:var(--card2); font-size:13px; color:var(--white); line-height:1.7; margin-bottom:18px; border-left:4px solid var(--amber); } .mk-section { margin-bottom:20px; } .mk-section-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; cursor:pointer; user-select:none; } .mk-section-title { font-family:var(--font-display); font-size:18px; font-weight:800; } .mk-section-toggle { font-size:16px; color:var(--muted); margin-left:auto; transition:transform .2s; } .mk-section-toggle.open { transform:rotate(180deg); } .mk-cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .mk-card { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; } .mk-card:hover { border-color:var(--amber); } .mk-card-head { padding:12px 16px 0 16px; } .mk-card-tag { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:inline-block; padding:2px 8px; border-radius:3px; } .mk-card-headline { font-size:14px; font-weight:700; color:var(--white); line-height:1.4; margin-bottom:8px; } .mk-card-body { font-size:12px; color:var(--muted); line-height:1.7; padding:0 16px 10px; } .mk-apply-toggle { padding:8px 16px; border-top:1px solid var(--bdr); cursor:pointer; font-size:11px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:6px; background:transparent; border-left:none; border-right:none; border-bottom:none; width:100%; text-align:left; font-family:var(--font-body); transition:background .15s; } .mk-apply-toggle:hover { background:var(--blueG); } .mk-apply-box { background:var(--blueG); border-top:1px solid rgba(14,165,233,.2); padding:10px 16px; font-size:11px; color:var(--white); line-height:1.7; display:none; } .mk-apply-box.open { display:block; } .mk-apply-label { font-family:var(--font-mono); font-size:9px; color:var(--blue); font-weight:700; letter-spacing:1px; margin-bottom:5px; } .mk-search-row { display:flex; gap:10px; margin-bottom:16px; align-items:center; } .mk-search { background:var(--card); border:1px solid var(--bdr); border-radius:6px; padding:9px 14px; color:var(--white); font-size:13px; outline:none; width:300px; font-family:var(--font-body); transition:border-color .2s; } .mk-search:focus { border-color:var(--amber); } .mk-count-badge { font-family:var(--font-mono); font-size:11px; color:var(--muted); padding:4px 12px; border-radius:20px; border:1px solid var(--bdr); } </style> <div class="mk-source-tabs"> ${Object.entries(MK_DATA).map(([k,v])=>`
+wrap.innerHTML = ` <style> .mk-source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; } .mk-source-tab { padding:10px 16px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px; border:1.5px solid var(--bdr); background:var(--card); color:var(--muted); font-family:var(--font-body); flex:1 1 120px; min-width:100px; min-height:44px; -webkit-tap-highlight-color:transparent; } .mk-source-tab:hover { border-color:var(--amber); color:var(--white); } .mk-source-tab.active { color:#000; } .mk-bio { padding:14px 18px; border-radius:8px; border:1px solid var(--bdr); background:var(--card2); font-size:clamp(12px,2vw,13px); color:var(--white); line-height:1.7; margin-bottom:18px; border-left:4px solid var(--amber); } .mk-section { margin-bottom:20px; } .mk-section-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; cursor:pointer; user-select:none; min-height:44px; } .mk-section-title { font-family:var(--font-display); font-size:clamp(15px,3vw,18px); font-weight:800; } .mk-section-toggle { font-size:16px; color:var(--muted); margin-left:auto; transition:transform .2s; flex-shrink:0; } .mk-section-toggle.open { transform:rotate(180deg); } .mk-cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; } .mk-card { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; } .mk-card:hover { border-color:var(--amber); } .mk-card-head { padding:12px 16px 0 16px; } .mk-card-tag { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:inline-block; padding:2px 8px; border-radius:3px; } .mk-card-headline { font-size:clamp(13px,2.5vw,14px); font-weight:700; color:var(--white); line-height:1.4; margin-bottom:8px; } .mk-card-body { font-size:clamp(11px,2vw,12px); color:var(--muted); line-height:1.7; padding:0 16px 10px; } .mk-apply-toggle { padding:10px 16px; border-top:1px solid var(--bdr); cursor:pointer; font-size:11px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:6px; background:transparent; border-left:none; border-right:none; border-bottom:none; width:100%; text-align:left; font-family:var(--font-body); transition:background .15s; min-height:40px; -webkit-tap-highlight-color:transparent; } .mk-apply-toggle:hover { background:var(--blueG); } .mk-apply-box { background:var(--blueG); border-top:1px solid rgba(14,165,233,.2); padding:10px 16px; font-size:clamp(11px,2vw,12px); color:var(--white); line-height:1.7; display:none; } .mk-apply-box.open { display:block; } .mk-apply-label { font-family:var(--font-mono); font-size:9px; color:var(--blue); font-weight:700; letter-spacing:1px; margin-bottom:5px; } .mk-search-row { display:flex; gap:10px; margin-bottom:16px; align-items:center; flex-wrap:wrap; } .mk-search { background:var(--card); border:1px solid var(--bdr); border-radius:6px; padding:9px 14px; color:var(--white); font-size:16px; outline:none; flex:1 1 180px; min-width:0; font-family:var(--font-body); transition:border-color .2s; } .mk-search:focus { border-color:var(--amber); } .mk-count-badge { font-family:var(--font-mono); font-size:11px; color:var(--muted); padding:4px 12px; border-radius:20px; border:1px solid var(--bdr); white-space:nowrap; } @media (max-width:500px) { .mk-cards-grid { grid-template-columns:1fr!important; } .mk-card-body { font-size:12px; } } </style> <div class="mk-source-tabs"> ${Object.entries(MK_DATA).map(([k,v])=>`
 <button class="mk-source-tab${k===mkActiveSource?' active':''}" onclick="mkSetSource('${k}')"
 style="${k===mkActiveSource?`background:${v.color};border-color:${v.color};`:`border-color:var(--bdr);`}">
 <span>${v.icon}</span><span>${v.label}</span>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -57,23 +56,23 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{height:100%}
 body{
-font-family:var(–font-body);
-background:var(–bg);
-color:var(–white);
-display:flex;flex-direction:column;height:100%;overflow:hidden;
--webkit-text-size-adjust:100%;text-size-adjust:100%;
-background-image:
-radial-gradient(ellipse 80% 60% at 20% 0%, rgba(245,158,11,.04) 0%, transparent 60%),
-radial-gradient(ellipse 60% 40% at 80% 100%, rgba(56,189,248,.04) 0%, transparent 55%),
-url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.025’/%3E%3C/svg%3E”);
-background-attachment:fixed;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--white);
+  display:flex;flex-direction:column;height:100%;overflow:hidden;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(245,158,11,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(56,189,248,.04) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-attachment:fixed;
 }
 
 /* ═══ SCROLLBAR ══════════════════════════════════════════ */
 ::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(–amber),var(–amber2));border-radius:3px}
-::-webkit-scrollbar-track{background:var(–bg)}
-::selection{background:rgba(245,158,11,.28);color:var(–white)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--amber),var(--amber2));border-radius:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::selection{background:rgba(245,158,11,.28);color:var(--white)}
 
 /* ═══ ANIMATIONS ═════════════════════════════════════════ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -81,7 +80,7 @@ background-attachment:fixed;
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 6px var(–green)}50%{box-shadow:0 0 16px var(–green),0 0 28px rgba(52,211,153,.4)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 6px var(--green)}50%{box-shadow:0 0 16px var(--green),0 0 28px rgba(52,211,153,.4)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes badgePop{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
 .fade-up{animation:fadeUp .4s cubic-bezier(.22,.68,0,1.15) both}
@@ -90,18 +89,18 @@ background-attachment:fixed;
 /* ═══ LAYOUT ═════════════════════════════════════════════ */
 #app{display:flex;flex:1;overflow:hidden}
 #sidebar{
-width:var(–sidebar-w);min-height:100%;
-background:linear-gradient(180deg, #060A12 0%, #040810 100%);
-border-right:1px solid var(–bdr);
-display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;
-transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;z-index:160;
+  width:var(--sidebar-w);min-height:100%;
+  background:linear-gradient(180deg, #060A12 0%, #040810 100%);
+  border-right:1px solid var(--bdr);
+  display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;
+  transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;z-index:160;
 }
 #content-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 #ticker-bar{
-height:var(–header-h);
-background:linear-gradient(90deg, #060A12 0%, #07101A 100%);
-border-bottom:1px solid var(–bdr);
-display:flex;align-items:center;flex-shrink:0;overflow:hidden;
+  height:var(--header-h);
+  background:linear-gradient(90deg, #060A12 0%, #07101A 100%);
+  border-bottom:1px solid var(--bdr);
+  display:flex;align-items:center;flex-shrink:0;overflow:hidden;
 }
 #main{flex:1;overflow-y:auto;padding:clamp(14px,3vw,28px) clamp(14px,4vw,32px)}
 .page{display:none;animation:fadeUp .38s cubic-bezier(.22,.68,0,1.1) both}
@@ -109,107 +108,107 @@ display:flex;align-items:center;flex-shrink:0;overflow:hidden;
 
 /* ═══ TICKER ═════════════════════════════════════════════ */
 .ticker-label{
-background:linear-gradient(135deg, var(–amber), var(–amber2));
-color:#000;font-family:var(–font-display);font-weight:800;font-size:10px;
-padding:0 14px;height:100%;display:flex;align-items:center;
-letter-spacing:1.5px;flex-shrink:0;text-transform:uppercase;
+  background:linear-gradient(135deg, var(--amber), var(--amber2));
+  color:#000;font-family:var(--font-display);font-weight:800;font-size:10px;
+  padding:0 14px;height:100%;display:flex;align-items:center;
+  letter-spacing:1.5px;flex-shrink:0;text-transform:uppercase;
 }
 .ticker-track{overflow:hidden;flex:1;height:100%}
 .ticker-inner{display:flex;gap:56px;white-space:nowrap;animation:ticker 50s linear infinite;height:100%;align-items:center}
-.ticker-inner span{font-family:var(–font-mono);font-size:9.5px;color:var(–muted2);flex-shrink:0;letter-spacing:.3px}
-.ticker-inner span::before{content:‘◆’;color:var(–amber);opacity:.5;margin-right:8px;font-size:7px}
+.ticker-inner span{font-family:var(--font-mono);font-size:9.5px;color:var(--muted2);flex-shrink:0;letter-spacing:.3px}
+.ticker-inner span::before{content:'◆';color:var(--amber);opacity:.5;margin-right:8px;font-size:7px}
 
 /* ═══ SIDEBAR ════════════════════════════════════════════ */
 .sidebar-logo{
-padding:20px 18px 14px;
-border-bottom:1px solid var(–bdr);
-background:linear-gradient(135deg,rgba(245,158,11,.06) 0%,transparent 70%);
-position:relative;overflow:hidden;
+  padding:20px 18px 14px;
+  border-bottom:1px solid var(--bdr);
+  background:linear-gradient(135deg,rgba(245,158,11,.06) 0%,transparent 70%);
+  position:relative;overflow:hidden;
 }
 .sidebar-logo::after{
-content:’’;position:absolute;top:0;left:0;right:0;height:2px;
-background:linear-gradient(90deg,var(–amber),var(–amber2),transparent);
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2),transparent);
 }
 .sidebar-logo .co-name{
-font-family:var(–font-display);font-size:clamp(16px,2vw,19px);font-weight:800;
-color:var(–amber);letter-spacing:1.5px;line-height:1.1;
-text-shadow:0 0 20px rgba(245,158,11,.3);
+  font-family:var(--font-display);font-size:clamp(16px,2vw,19px);font-weight:800;
+  color:var(--amber);letter-spacing:1.5px;line-height:1.1;
+  text-shadow:0 0 20px rgba(245,158,11,.3);
 }
 .sidebar-logo .co-sub{
-font-family:var(–font-display);font-size:clamp(16px,2vw,19px);font-weight:800;
-color:var(–white);letter-spacing:1.5px;line-height:1.1;
+  font-family:var(--font-display);font-size:clamp(16px,2vw,19px);font-weight:800;
+  color:var(--white);letter-spacing:1.5px;line-height:1.1;
 }
-.sidebar-logo .co-tag{font-family:var(–font-mono);font-size:9px;color:var(–dim);margin-top:6px;letter-spacing:2px;text-transform:uppercase}
-.sidebar-live{padding:9px 18px;border-bottom:1px solid var(–bdr);display:flex;align-items:center;gap:9px}
-.live-dot{width:8px;height:8px;border-radius:50%;background:var(–green);animation:pulseGlow 2s ease infinite;flex-shrink:0}
-.live-text{font-family:var(–font-mono);font-size:9.5px;color:var(–green);letter-spacing:.5px}
+.sidebar-logo .co-tag{font-family:var(--font-mono);font-size:9px;color:var(--dim);margin-top:6px;letter-spacing:2px;text-transform:uppercase}
+.sidebar-live{padding:9px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:9px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulseGlow 2s ease infinite;flex-shrink:0}
+.live-text{font-family:var(--font-mono);font-size:9.5px;color:var(--green);letter-spacing:.5px}
 nav{flex:1;padding:8px 0}
 .nav-btn{
-width:100%;display:flex;align-items:center;gap:10px;
-padding:11px 18px;background:transparent;border:none;
-border-left:3px solid transparent;color:var(–muted);
-font-size:13px;font-weight:600;cursor:pointer;
-transition:all .18s cubic-bezier(.4,0,.2,1);
-text-align:left;font-family:var(–font-body);
--webkit-tap-highlight-color:transparent;position:relative;
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:11px 18px;background:transparent;border:none;
+  border-left:3px solid transparent;color:var(--muted);
+  font-size:13px;font-weight:600;cursor:pointer;
+  transition:all .18s cubic-bezier(.4,0,.2,1);
+  text-align:left;font-family:var(--font-body);
+  -webkit-tap-highlight-color:transparent;position:relative;
 }
 .nav-btn:hover{
-background:linear-gradient(90deg, rgba(245,158,11,.08) 0%, transparent 100%);
-color:var(–white2);border-left-color:rgba(245,158,11,.3);
+  background:linear-gradient(90deg, rgba(245,158,11,.08) 0%, transparent 100%);
+  color:var(--white2);border-left-color:rgba(245,158,11,.3);
 }
 .nav-btn.active{
-background:linear-gradient(90deg, rgba(245,158,11,.14) 0%, rgba(245,158,11,.04) 100%);
-border-left-color:var(–amber);color:var(–amber);font-weight:700;
+  background:linear-gradient(90deg, rgba(245,158,11,.14) 0%, rgba(245,158,11,.04) 100%);
+  border-left-color:var(--amber);color:var(--amber);font-weight:700;
 }
-.nav-icon{font-family:var(–font-mono);font-size:14px;width:20px;flex-shrink:0;opacity:.8}
+.nav-icon{font-family:var(--font-mono);font-size:14px;width:20px;flex-shrink:0;opacity:.8}
 .nav-badge{
-background:linear-gradient(135deg, #F59E0B, #FBBF24);
-color:#000;border-radius:12px;padding:0 7px;font-size:10px;font-weight:800;
-margin-left:auto;animation:badgePop .3s cubic-bezier(.22,.68,0,1.4) both;
-box-shadow:0 2px 8px rgba(245,158,11,.4);
+  background:linear-gradient(135deg, #F59E0B, #FBBF24);
+  color:#000;border-radius:12px;padding:0 7px;font-size:10px;font-weight:800;
+  margin-left:auto;animation:badgePop .3s cubic-bezier(.22,.68,0,1.4) both;
+  box-shadow:0 2px 8px rgba(245,158,11,.4);
 }
 .sidebar-footer{
-padding:12px 18px;border-top:1px solid var(–bdr);
-font-family:var(–font-mono);font-size:9px;color:var(–dim);line-height:1.8;
+  padding:12px 18px;border-top:1px solid var(--bdr);
+  font-family:var(--font-mono);font-size:9px;color:var(--dim);line-height:1.8;
 }
 
 /* ═══ CARDS ══════════════════════════════════════════════ */
 .card{
-background:var(–card);
-border:1px solid var(–bdr);
-border-radius:var(–r-md);
-padding:18px;
-box-shadow:var(–shadow-card);
-transition:border-color .2s, box-shadow .2s;
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:var(--r-md);
+  padding:18px;
+  box-shadow:var(--shadow-card);
+  transition:border-color .2s, box-shadow .2s;
 }
-.card:hover{border-color:var(–bdr2)}
+.card:hover{border-color:var(--bdr2)}
 .card.glow{
-border-color:rgba(245,158,11,.45);
-box-shadow:var(–shadow-glow);
-background:linear-gradient(135deg, rgba(245,158,11,.05) 0%, var(–card) 40%);
+  border-color:rgba(245,158,11,.45);
+  box-shadow:var(--shadow-glow);
+  background:linear-gradient(135deg, rgba(245,158,11,.05) 0%, var(--card) 40%);
 }
 .card.gold{
-border-color:rgba(245,158,11,.3);
-box-shadow:0 0 20px rgba(245,158,11,.08);
+  border-color:rgba(245,158,11,.3);
+  box-shadow:0 0 20px rgba(245,158,11,.08);
 }
 .card.blue-glow{
-border-color:rgba(56,189,248,.35);
-box-shadow:0 0 20px rgba(56,189,248,.1);
+  border-color:rgba(56,189,248,.35);
+  box-shadow:0 0 20px rgba(56,189,248,.1);
 }
 
 /* ═══ SECTION HEADER ════════════════════════════════════ */
 .sec-head{margin-bottom:clamp(14px,2.5vw,22px)}
 .sec-head h2{
-font-family:var(–font-display);font-size:clamp(20px,4vw,28px);
-font-weight:800;letter-spacing:.8px;color:var(–white);
-display:flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-size:clamp(20px,4vw,28px);
+  font-weight:800;letter-spacing:.8px;color:var(--white);
+  display:flex;align-items:center;gap:10px;
 }
 .sec-head h2::before{
-content:’’;width:4px;height:1em;
-background:linear-gradient(180deg, var(–amber), var(–amber2));
-border-radius:2px;flex-shrink:0;
+  content:'';width:4px;height:1em;
+  background:linear-gradient(180deg, var(--amber), var(--amber2));
+  border-radius:2px;flex-shrink:0;
 }
-.sec-head p{font-size:clamp(11px,2vw,13px);color:var(–muted2);margin-top:5px;padding-left:14px}
+.sec-head p{font-size:clamp(11px,2vw,13px);color:var(--muted2);margin-top:5px;padding-left:14px}
 
 /* ═══ GRID HELPERS ═══════════════════════════════════════ */
 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
@@ -223,131 +222,131 @@ border-radius:2px;flex-shrink:0;
 
 /* ═══ FORM ELEMENTS ══════════════════════════════════════ */
 label.field-label{
-font-size:10.5px;font-weight:700;color:var(–muted2);
-text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;
+  font-size:10.5px;font-weight:700;color:var(--muted2);
+  text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;
 }
 input,select,textarea{
-background:rgba(5,8,13,.8);
-border:1px solid var(–bdr2);
-color:var(–white);border-radius:var(–r-sm);
-padding:9px 13px;font-family:var(–font-body);font-size:13px;
-outline:none;transition:all .2s;width:100%;
+  background:rgba(5,8,13,.8);
+  border:1px solid var(--bdr2);
+  color:var(--white);border-radius:var(--r-sm);
+  padding:9px 13px;font-family:var(--font-body);font-size:13px;
+  outline:none;transition:all .2s;width:100%;
 }
 input:focus,select:focus,textarea:focus{
-border-color:var(–amber);
-box-shadow:0 0 0 3px rgba(245,158,11,.12), 0 0 12px rgba(245,158,11,.08);
-background:rgba(8,13,20,.9);
+  border-color:var(--amber);
+  box-shadow:0 0 0 3px rgba(245,158,11,.12), 0 0 12px rgba(245,158,11,.08);
+  background:rgba(8,13,20,.9);
 }
-input::placeholder{color:var(–dim)}
+input::placeholder{color:var(--dim)}
 select{cursor:pointer}
-select option{background:#0B1422;color:var(–white)}
+select option{background:#0B1422;color:var(--white)}
 textarea{resize:vertical;line-height:1.6}
 .field-group{margin-bottom:14px}
-.checkbox-row{display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:13px;color:var(–white);line-height:1.5}
+.checkbox-row{display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:13px;color:var(--white);line-height:1.5}
 .checkbox-row input[type=checkbox]{
-width:16px;height:16px;accent-color:var(–amber);flex-shrink:0;margin-top:2px;
+  width:16px;height:16px;accent-color:var(--amber);flex-shrink:0;margin-top:2px;
 }
 
 /* ═══ BUTTONS ════════════════════════════════════════════ */
 .btn{
-cursor:pointer;font-family:var(–font-body);border:none;
-border-radius:var(–r-sm);font-weight:700;
-display:inline-flex;align-items:center;gap:7px;
-transition:all .18s cubic-bezier(.4,0,.2,1);
-position:relative;overflow:hidden;letter-spacing:.3px;
+  cursor:pointer;font-family:var(--font-body);border:none;
+  border-radius:var(--r-sm);font-weight:700;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:all .18s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;letter-spacing:.3px;
 }
 .btn::after{
-content:’’;position:absolute;inset:0;
-background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 60%);
-opacity:0;transition:opacity .2s;pointer-events:none;
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 60%);
+  opacity:0;transition:opacity .2s;pointer-events:none;
 }
 .btn:hover::after{opacity:1}
 .btn-primary{
-background:linear-gradient(135deg, var(–amber) 0%, var(–amber2) 100%);
-color:#000;padding:11px 22px;font-size:13px;
-box-shadow:0 4px 16px rgba(245,158,11,.4), 0 1px 3px rgba(0,0,0,.2);
+  background:linear-gradient(135deg, var(--amber) 0%, var(--amber2) 100%);
+  color:#000;padding:11px 22px;font-size:13px;
+  box-shadow:0 4px 16px rgba(245,158,11,.4), 0 1px 3px rgba(0,0,0,.2);
 }
 .btn-primary:hover{
-transform:translateY(-1px);
-box-shadow:0 6px 24px rgba(245,158,11,.55), 0 2px 8px rgba(0,0,0,.25);
+  transform:translateY(-1px);
+  box-shadow:0 6px 24px rgba(245,158,11,.55), 0 2px 8px rgba(0,0,0,.25);
 }
 .btn-primary:active{transform:translateY(0)}
 .btn-secondary{
-background:linear-gradient(135deg, var(–card2), #131E30);
-color:var(–white2);padding:11px 22px;font-size:13px;
-border:1px solid var(–bdr2);
-box-shadow:0 2px 8px rgba(0,0,0,.3);
+  background:linear-gradient(135deg, var(--card2), #131E30);
+  color:var(--white2);padding:11px 22px;font-size:13px;
+  border:1px solid var(--bdr2);
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
 }
-.btn-secondary:hover{border-color:var(–amber);color:var(–amber)}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
 .btn-ghost{
-background:transparent;color:var(–muted2);
-border:1px solid var(–bdr);padding:6px 14px;font-size:12px;
+  background:transparent;color:var(--muted2);
+  border:1px solid var(--bdr);padding:6px 14px;font-size:12px;
 }
-.btn-ghost:hover{border-color:var(–amber);color:var(–amber);background:var(–amberG2)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);background:var(--amberG2)}
 .btn-block{width:100%;justify-content:center}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
 .btn-sm{padding:6px 13px;font-size:12px}
 
 /* ═══ PILLS ══════════════════════════════════════════════ */
 .pill{
-display:inline-block;padding:3px 10px;border-radius:20px;
-font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:.3px;
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:.3px;
 }
 
 /* ═══ KPI CARDS ══════════════════════════════════════════ */
 .kpi-card{
-background:var(–card);border:1px solid var(–bdr);
-border-radius:var(–r-md);padding:16px 18px;
-box-shadow:var(–shadow-card);
-transition:all .2s;position:relative;overflow:hidden;
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:var(--r-md);padding:16px 18px;
+  box-shadow:var(--shadow-card);
+  transition:all .2s;position:relative;overflow:hidden;
 }
 .kpi-card::before{
-content:’’;position:absolute;top:0;left:0;right:0;height:2px;
-background:currentColor;opacity:.6;
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:currentColor;opacity:.6;
 }
-.kpi-card:hover{transform:translateY(-2px);box-shadow:var(–shadow-lift)}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
 .kpi-num{
-font-family:var(–font-display);font-size:clamp(26px,4vw,38px);
-font-weight:800;line-height:1;
+  font-family:var(--font-display);font-size:clamp(26px,4vw,38px);
+  font-weight:800;line-height:1;
 }
-.kpi-label{font-size:12px;font-weight:700;margin-top:5px;color:var(–white2)}
-.kpi-sub{font-size:10px;color:var(–muted);margin-top:2px;font-family:var(–font-mono);letter-spacing:.3px}
+.kpi-label{font-size:12px;font-weight:700;margin-top:5px;color:var(--white2)}
+.kpi-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:var(--font-mono);letter-spacing:.3px}
 
 /* ═══ CARD TITLES ════════════════════════════════════════ */
 .card-title{
-font-family:var(–font-display);font-size:15px;font-weight:700;
-letter-spacing:.8px;margin-bottom:14px;text-transform:uppercase;
-display:flex;align-items:center;gap:7px;
+  font-family:var(--font-display);font-size:15px;font-weight:700;
+  letter-spacing:.8px;margin-bottom:14px;text-transform:uppercase;
+  display:flex;align-items:center;gap:7px;
 }
 
 /* ═══ AI OUTPUT ══════════════════════════════════════════ */
 .ai-output{
-background:linear-gradient(135deg, #030710 0%, #060C16 100%);
-border:1px solid var(–bdr2);border-left:3px solid var(–amber);
-border-radius:var(–r-md);padding:20px;margin-top:18px;
-box-shadow:inset 0 1px 0 rgba(245,158,11,.08), var(–shadow-card);
+  background:linear-gradient(135deg, #030710 0%, #060C16 100%);
+  border:1px solid var(--bdr2);border-left:3px solid var(--amber);
+  border-radius:var(--r-md);padding:20px;margin-top:18px;
+  box-shadow:inset 0 1px 0 rgba(245,158,11,.08), var(--shadow-card);
 }
 .ai-output-header{
-display:flex;justify-content:space-between;align-items:center;
-margin-bottom:14px;padding-bottom:12px;
-border-bottom:1px solid var(–bdr);
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid var(--bdr);
 }
 .ai-output-label{
-font-family:var(–font-mono);font-size:10px;color:var(–blue);
-letter-spacing:1.5px;text-transform:uppercase;
-display:flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:10px;color:var(--blue);
+  letter-spacing:1.5px;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
 }
-.ai-output-label::before{content:‘▶’;font-size:8px;color:var(–amber)}
+.ai-output-label::before{content:'▶';font-size:8px;color:var(--amber)}
 .ai-output pre{
-white-space:pre-wrap;font-family:var(–font-body);
-font-size:13px;line-height:1.9;color:#A8C0D0;
+  white-space:pre-wrap;font-family:var(--font-body);
+  font-size:13px;line-height:1.9;color:#A8C0D0;
 }
 
 /* ═══ SPINNER ════════════════════════════════════════════ */
 .spinner{
-display:inline-block;width:16px;height:16px;
-border:2px solid rgba(245,158,11,.2);border-top-color:var(–amber);
-border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(245,158,11,.2);border-top-color:var(--amber);
+  border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;
 }
 .spinner-lg{width:30px;height:30px;border-width:3px}
 
@@ -355,58 +354,58 @@ border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;
 .loading-state{text-align:center;padding:50px}
 .loading-state .spinner-lg{margin:0 auto 16px;display:block}
 .loading-text{
-font-family:var(–font-display);font-size:16px;color:var(–muted2);
-letter-spacing:2px;text-transform:uppercase;
-background:linear-gradient(90deg, var(–muted2), var(–amber), var(–muted2));
-background-size:200% auto;
--webkit-background-clip:text;-webkit-text-fill-color:transparent;
-background-clip:text;
-animation:shimmer 2s linear infinite;
+  font-family:var(--font-display);font-size:16px;color:var(--muted2);
+  letter-spacing:2px;text-transform:uppercase;
+  background:linear-gradient(90deg, var(--muted2), var(--amber), var(--muted2));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 2s linear infinite;
 }
 
 /* ═══ DIVIDER ════════════════════════════════════════════ */
 .divider{
-height:1px;margin:12px 0;
-background:linear-gradient(90deg, transparent, var(–bdr2), transparent);
+  height:1px;margin:12px 0;
+  background:linear-gradient(90deg, transparent, var(--bdr2), transparent);
 }
 
 /* ═══ LEAD ROWS ══════════════════════════════════════════ */
 .lead-row{
-background:var(–card);border:1px solid var(–bdr);
-border-radius:var(–r-sm);padding:12px 16px;
-display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:7px;
-transition:all .15s;
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:var(--r-sm);padding:12px 16px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:7px;
+  transition:all .15s;
 }
-.lead-row:hover{border-color:var(–bdr2);background:var(–card-hover);transform:translateX(2px)}
+.lead-row:hover{border-color:var(--bdr2);background:var(--card-hover);transform:translateX(2px)}
 .lead-avatar{
-width:38px;height:38px;border-radius:50%;
-background:linear-gradient(135deg, rgba(245,158,11,.15), rgba(245,158,11,.05));
-border:1.5px solid rgba(245,158,11,.5);
-display:flex;align-items:center;justify-content:center;
-font-weight:800;font-size:13px;color:var(–amber);flex-shrink:0;
-box-shadow:0 0 10px rgba(245,158,11,.15);
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg, rgba(245,158,11,.15), rgba(245,158,11,.05));
+  border:1.5px solid rgba(245,158,11,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;color:var(--amber);flex-shrink:0;
+  box-shadow:0 0 10px rgba(245,158,11,.15);
 }
 
 /* ═══ FILTER PILLS ═══════════════════════════════════════ */
 .filter-row{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
 .filter-pill{
-padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;
-cursor:pointer;border:1px solid var(–bdr2);background:transparent;
-color:var(–muted2);font-family:var(–font-body);transition:all .18s;
+  padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;
+  cursor:pointer;border:1px solid var(--bdr2);background:transparent;
+  color:var(--muted2);font-family:var(--font-body);transition:all .18s;
 }
 .filter-pill.active{
-background:linear-gradient(135deg, var(–amber), var(–amber2));
-color:#000;border-color:transparent;
-box-shadow:0 3px 12px rgba(245,158,11,.35);
+  background:linear-gradient(135deg, var(--amber), var(--amber2));
+  color:#000;border-color:transparent;
+  box-shadow:0 3px 12px rgba(245,158,11,.35);
 }
-.filter-pill:hover:not(.active){border-color:var(–amber);color:var(–amber);background:var(–amberG2)}
+.filter-pill:hover:not(.active){border-color:var(--amber);color:var(--amber);background:var(--amberG2)}
 
 /* ═══ TABLES ═════════════════════════════════════════════ */
 .data-table{width:100%;border-collapse:collapse;font-size:12.5px}
 .data-table thead{background:linear-gradient(90deg, #03070E 0%, #050B16 100%)}
 .data-table th{
-padding:10px 13px;text-align:left;color:var(–muted2);font-weight:700;
-font-size:10px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;
+  padding:10px 13px;text-align:left;color:var(--muted2);font-weight:700;
+  font-size:10px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;
 }
 .data-table td{padding:10px 13px;border-top:1px solid rgba(26,44,63,.6)}
 .data-table tbody tr{transition:background .12s}
@@ -415,26 +414,26 @@ font-size:10px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;
 
 /* ═══ PRESET CHIPS ═══════════════════════════════════════ */
 .preset-chip{
-padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;
-cursor:pointer;border:1px solid var(–bdr2);background:transparent;
-color:var(–muted2);font-family:var(–font-body);transition:all .18s;
+  padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;
+  cursor:pointer;border:1px solid var(--bdr2);background:transparent;
+  color:var(--muted2);font-family:var(--font-body);transition:all .18s;
 }
 .preset-chip:hover,.preset-chip.active{
-background:var(–amberG);border-color:var(–amber);color:var(–amber);
-box-shadow:0 0 8px rgba(245,158,11,.15);
+  background:var(--amberG);border-color:var(--amber);color:var(--amber);
+  box-shadow:0 0 8px rgba(245,158,11,.15);
 }
 
 /* ═══ BANNERS ════════════════════════════════════════════ */
 .banner-success{
-background:linear-gradient(135deg, rgba(52,211,153,.1), rgba(16,185,129,.06));
-border:1px solid rgba(52,211,153,.4);border-left:3px solid var(–green);
-border-radius:var(–r-sm);padding:13px 16px;font-weight:700;color:var(–green);
-display:flex;align-items:center;gap:9px;margin-bottom:16px;
+  background:linear-gradient(135deg, rgba(52,211,153,.1), rgba(16,185,129,.06));
+  border:1px solid rgba(52,211,153,.4);border-left:3px solid var(--green);
+  border-radius:var(--r-sm);padding:13px 16px;font-weight:700;color:var(--green);
+  display:flex;align-items:center;gap:9px;margin-bottom:16px;
 }
 .banner-error{
-background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);
-border-left:3px solid var(–red);border-radius:var(–r-sm);
-padding:12px 16px;color:var(–red);margin-bottom:12px;font-size:12.5px;
+  background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);
+  border-left:3px solid var(--red);border-radius:var(--r-sm);
+  padding:12px 16px;color:var(--red);margin-bottom:12px;font-size:12.5px;
 }
 
 /* ═══ FLEX HELPERS ═══════════════════════════════════════ */
@@ -449,7 +448,7 @@ padding:12px 16px;color:var(–red);margin-bottom:12px;font-size:12.5px;
 .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
 /* ═══ EMPTY STATE ════════════════════════════════════════ */
-.empty-state{text-align:center;padding:60px 20px;color:var(–muted)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-state .icon{font-size:44px;margin-bottom:14px;display:block;filter:grayscale(.3)}
 
 /* ═══ LEAD SEARCH ════════════════════════════════════════ */
@@ -457,170 +456,170 @@ padding:12px 16px;color:var(–red);margin-bottom:12px;font-size:12.5px;
 
 /* ═══ MOBILE MENU BUTTON ═══════════════════════════════════ */
 #mobileMenuBtn{
-display:none;
-position:fixed;top:0;left:0;z-index:200;
-background:linear-gradient(135deg, #060A12 0%, #040810 100%);
-border:none;
-border-right:1px solid var(–bdr);border-bottom:1px solid var(–bdr);
-width:var(–mobile-topbar);height:var(–mobile-topbar);
-color:var(–amber);font-size:18px;cursor:pointer;
-align-items:center;justify-content:center;
-transition:background .15s;
+  display:none;
+  position:fixed;top:0;left:0;z-index:200;
+  background:linear-gradient(135deg, #060A12 0%, #040810 100%);
+  border:none;
+  border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);
+  width:var(--mobile-topbar);height:var(--mobile-topbar);
+  color:var(--amber);font-size:18px;cursor:pointer;
+  align-items:center;justify-content:center;
+  transition:background .15s;
 }
-#mobileMenuBtn:active{background:var(–amberG)}
+#mobileMenuBtn:active{background:var(--amberG)}
 #sidebarOverlay{
-display:none;position:fixed;inset:0;
-background:rgba(0,0,0,.7);z-index:155;
-backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.7);z-index:155;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
 }
 #sidebarOverlay.visible{display:block}
 
 /* ═══ TABLET BREAKPOINT (≤960px) ═══════════════════════════ */
 @media (max-width:960px){
-:root{–sidebar-w:232px}
+  :root{--sidebar-w:232px}
 
-#mobileMenuBtn{display:flex}
-#sidebar{
-position:fixed;top:0;left:0;height:100%;
-transform:translateX(-100%);
-box-shadow:none;
-z-index:160;
-transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;
-}
-#sidebar.open{
-transform:translateX(0);
-box-shadow:8px 0 40px rgba(0,0,0,.7);
-}
+  #mobileMenuBtn{display:flex}
+  #sidebar{
+    position:fixed;top:0;left:0;height:100%;
+    transform:translateX(-100%);
+    box-shadow:none;
+    z-index:160;
+    transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;
+  }
+  #sidebar.open{
+    transform:translateX(0);
+    box-shadow:8px 0 40px rgba(0,0,0,.7);
+  }
 
-/* Full-width content, scrollable */
-html,body{height:auto;overflow-x:hidden;overflow-y:auto}
-body{overflow:auto}
-#app{display:block;min-height:100vh;overflow:visible}
-#content-wrap{display:flex;flex-direction:column;min-height:100vh;overflow:visible}
-#main{
-height:auto;overflow-y:visible;
-padding:clamp(12px,3vw,20px);
-padding-top:calc(var(–mobile-topbar) + clamp(10px,2vw,16px));
-flex:1;
-}
+  /* Full-width content, scrollable */
+  html,body{height:auto;overflow-x:hidden;overflow-y:auto}
+  body{overflow:auto}
+  #app{display:block;min-height:100vh;overflow:visible}
+  #content-wrap{display:flex;flex-direction:column;min-height:100vh;overflow:visible}
+  #main{
+    height:auto;overflow-y:visible;
+    padding:clamp(12px,3vw,20px);
+    padding-top:calc(var(--mobile-topbar) + clamp(10px,2vw,16px));
+    flex:1;
+  }
 
-#ticker-bar{padding-left:var(–mobile-topbar)}
+  #ticker-bar{padding-left:var(--mobile-topbar)}
 
-/* KPI grid — 3 columns on tablet */
-#kpiGrid{grid-template-columns:repeat(3,1fr)!important}
+  /* KPI grid — 3 columns on tablet */
+  #kpiGrid{grid-template-columns:repeat(3,1fr)!important}
 
-/* Sec header layout adjustments */
-.flex.items-center.justify-between.mb-20{flex-wrap:wrap;gap:10px}
+  /* Sec header layout adjustments */
+  .flex.items-center.justify-between.mb-20{flex-wrap:wrap;gap:10px}
 
-/* Page col layouts collapse to 1 col */
-.page-cols,.page-cols-sm,.page-cols-r,.capture-cols{
-grid-template-columns:1fr!important;
-}
+  /* Page col layouts collapse to 1 col */
+  .page-cols,.page-cols-sm,.page-cols-r,.capture-cols{
+    grid-template-columns:1fr!important;
+  }
 
-/* Territory grid — 2 cols */
-#territoryCard .grid-4{grid-template-columns:1fr 1fr!important}
+  /* Territory grid — 2 cols */
+  #territoryCard .grid-4{grid-template-columns:1fr 1fr!important}
 
-/* Intel market select full width */
-#intel-market{width:100%}
-[style*=“width:200px”]{width:100%!important}
+  /* Intel market select full width */
+  #intel-market{width:100%}
+  [style*="width:200px"]{width:100%!important}
 
-/* Lead search full width */
-.lead-search-input{width:100%!important;flex:1!important}
-#leadSearch{width:100%!important;flex:1!important}
-.filter-row{flex-direction:column;align-items:stretch}
-#statusFilters{display:flex;flex-wrap:wrap;gap:6px}
+  /* Lead search full width */
+  .lead-search-input{width:100%!important;flex:1!important}
+  #leadSearch{width:100%!important;flex:1!important}
+  .filter-row{flex-direction:column;align-items:stretch}
+  #statusFilters{display:flex;flex-wrap:wrap;gap:6px}
 
-/* AT&T deck */
-.att-deck-outer{grid-template-columns:1fr!important}
-.att-thumbs{flex-direction:row;flex-wrap:wrap!important}
-.att-thumb-btn{flex:1 1 120px}
+  /* AT&T deck */
+  .att-deck-outer{grid-template-columns:1fr!important}
+  .att-thumbs{flex-direction:row;flex-wrap:wrap!important}
+  .att-thumb-btn{flex:1 1 120px}
 }
 
 /* ═══ MOBILE BREAKPOINT (≤600px) ═══════════════════════════ */
 @media (max-width:600px){
-:root{–mobile-topbar:48px}
+  :root{--mobile-topbar:48px}
 
-/* KPI — 2 cols on phone */
-#kpiGrid{grid-template-columns:repeat(2,1fr)!important}
+  /* KPI — 2 cols on phone */
+  #kpiGrid{grid-template-columns:repeat(2,1fr)!important}
 
-/* All grids — single col */
-.grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:1fr!important}
+  /* All grids — single col */
+  .grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:1fr!important}
 
-/* Cards tighter */
-.card{padding:12px 13px}
+  /* Cards tighter */
+  .card{padding:12px 13px}
 
-/* KPI card */
-.kpi-num{font-size:clamp(24px,6vw,34px)}
-.kpi-card{padding:12px}
+  /* KPI card */
+  .kpi-num{font-size:clamp(24px,6vw,34px)}
+  .kpi-card{padding:12px}
 
-/* Section head */
-.sec-head h2{font-size:clamp(17px,5.5vw,22px)}
+  /* Section head */
+  .sec-head h2{font-size:clamp(17px,5.5vw,22px)}
 
-/* Buttons */
-.btn-primary,.btn-secondary{padding:11px 16px;font-size:14px}
+  /* Buttons */
+  .btn-primary,.btn-secondary{padding:11px 16px;font-size:14px}
 
-/* Table scroll */
-.scroll-x{-webkit-overflow-scrolling:touch}
-.data-table{font-size:11px}
-.data-table th,.data-table td{padding:7px 8px}
+  /* Table scroll */
+  .scroll-x{-webkit-overflow-scrolling:touch}
+  .data-table{font-size:11px}
+  .data-table th,.data-table td{padding:7px 8px}
 
-/* Territory — single col on phone */
-#territoryCard .grid-4{grid-template-columns:1fr!important}
+  /* Territory — single col on phone */
+  #territoryCard .grid-4{grid-template-columns:1fr!important}
 
-/* Bilingual example grid */
-[style*=“grid-template-columns:1fr 1fr”]{grid-template-columns:1fr!important}
+  /* Bilingual example grid */
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
 
-/* AI output */
-.ai-output pre{font-size:12px;line-height:1.7}
-.ai-output-header{flex-direction:column;align-items:flex-start;gap:8px}
+  /* AI output */
+  .ai-output pre{font-size:12px;line-height:1.7}
+  .ai-output-header{flex-direction:column;align-items:flex-start;gap:8px}
 
-/* Lead row */
-.lead-row{gap:8px}
+  /* Lead row */
+  .lead-row{gap:8px}
 
-/* Nav buttons larger tap target */
-.nav-btn{padding:12px 16px;font-size:14px}
-.nav-icon{font-size:16px}
+  /* Nav buttons larger tap target */
+  .nav-btn{padding:12px 16px;font-size:14px}
+  .nav-icon{font-size:16px}
 
-/* Filter pills tighter */
-.filter-pill{padding:6px 12px;font-size:12px}
+  /* Filter pills tighter */
+  .filter-pill{padding:6px 12px;font-size:12px}
 
-/* Pricing tabs wrap */
-#pricingTabs{flex-wrap:wrap}
+  /* Pricing tabs wrap */
+  #pricingTabs{flex-wrap:wrap}
 
-/* Intel flex row stacks on phone */
-.flex.gap-12.mb-12{flex-direction:column}
+  /* Intel flex row stacks on phone */
+  .flex.gap-12.mb-12{flex-direction:column}
 
-/* Quick actions 2-col stays */
+  /* Quick actions 2-col stays */
 }
 
 /* ═══ SMALL PHONE (≤380px) ═════════════════════════════════ */
 @media (max-width:380px){
-#kpiGrid{grid-template-columns:1fr 1fr!important}
-.kpi-num{font-size:22px}
-#main{padding:10px;padding-top:58px}
-.sec-head h2{font-size:16px}
+  #kpiGrid{grid-template-columns:1fr 1fr!important}
+  .kpi-num{font-size:22px}
+  #main{padding:10px;padding-top:58px}
+  .sec-head h2{font-size:16px}
 }
 
 /* ═══ LARGE DESKTOP ENHANCEMENT (≥1400px) ══════════════════ */
 @media (min-width:1400px){
-:root{–sidebar-w:248px}
-#main{padding:32px 40px}
-.grid-6{grid-template-columns:repeat(6,1fr)}
+  :root{--sidebar-w:248px}
+  #main{padding:32px 40px}
+  .grid-6{grid-template-columns:repeat(6,1fr)}
 }
 
 /* ═══ TOUCH IMPROVEMENTS ════════════════════════════════════ */
 @media (hover:none) and (pointer:coarse){
-.btn{min-height:44px}
-.nav-btn{min-height:48px}
-select,input,textarea{font-size:16px} /* prevent iOS zoom */
-.filter-pill,.preset-chip{min-height:40px;display:inline-flex;align-items:center}
+  .btn{min-height:44px}
+  .nav-btn{min-height:48px}
+  select,input,textarea{font-size:16px} /* prevent iOS zoom */
+  .filter-pill,.preset-chip{min-height:40px;display:inline-flex;align-items:center}
 }
 
 /* ═══ UNIVERSAL GRID OVERFLOW GUARD ═════════════════════════ */
 /* Prevent any grid child from overflowing its column */
 .grid-2 > *,.grid-3 > *,.grid-4 > *,.grid-6 > *,
 .page-cols > *,.page-cols-sm > *,.page-cols-r > *,.capture-cols > *{
-min-width:0;overflow:hidden;
+  min-width:0;overflow:hidden;
 }
 
 /* ═══ AT&T SLIDE DECK RESPONSIVE ════════════════════════════ */
@@ -628,28 +627,28 @@ min-width:0;overflow:hidden;
 .att-slide-viewer{min-height:0!important}
 /* Collapse all multi-col grids inside slides on narrow screens */
 @media (max-width:700px){
-.att-slide-viewer [style*=“grid-template-columns:repeat(4”],
-.att-slide-viewer [style*=“grid-template-columns:repeat(3”],
-.att-slide-viewer [style*=“grid-template-columns:1fr 1fr”],
-.att-slide-viewer [style*=“grid-template-columns:55%”]{
-grid-template-columns:1fr!important;
-}
-/* Slide 7 right-column circles — hide on tiny screens */
-.att-slide-viewer [style*=“grid-template-columns:55% 45%”] > *:last-child{
-display:none;
-}
-/* Deck outer on tablet already handled — reinforce */
-.att-deck-outer{grid-template-columns:1fr!important}
-.att-thumbs{flex-direction:row!important;flex-wrap:wrap!important;gap:6px!important}
-.att-thumb-btn{flex:1 1 100px;min-width:80px}
-/* Slide nav controls */
-.att-nav-row{flex-wrap:wrap;gap:6px}
+  .att-slide-viewer [style*="grid-template-columns:repeat(4"],
+  .att-slide-viewer [style*="grid-template-columns:repeat(3"],
+  .att-slide-viewer [style*="grid-template-columns:1fr 1fr"],
+  .att-slide-viewer [style*="grid-template-columns:55%"]{
+    grid-template-columns:1fr!important;
+  }
+  /* Slide 7 right-column circles — hide on tiny screens */
+  .att-slide-viewer [style*="grid-template-columns:55% 45%"] > *:last-child{
+    display:none;
+  }
+  /* Deck outer on tablet already handled — reinforce */
+  .att-deck-outer{grid-template-columns:1fr!important}
+  .att-thumbs{flex-direction:row!important;flex-wrap:wrap!important;gap:6px!important}
+  .att-thumb-btn{flex:1 1 100px;min-width:80px}
+  /* Slide nav controls */
+  .att-nav-row{flex-wrap:wrap;gap:6px}
 }
 
 /* ═══ MARKETING ACADEMY RESPONSIVE ══════════════════════════ */
 .mk-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:860px){
-.mk-cards-grid{grid-template-columns:1fr!important}
+  .mk-cards-grid{grid-template-columns:1fr!important}
 }
 /* MK source tabs wrap on mobile */
 .mk-source-tabs{flex-wrap:wrap!important;gap:6px!important}
@@ -658,7 +657,7 @@ display:none;
 /* ═══ LEAD CAPTURE SIDEBAR PANELS ═══════════════════════════ */
 /* Speed protocol / signals / CPL sidebar cards stack properly */
 @media (max-width:600px){
-#page-capture .capture-cols > *:last-child{order:-1} /* hints panel first */
+  #page-capture .capture-cols > *:last-child{order:-1} /* hints panel first */
 }
 
 /* ═══ DASHBOARD QUICK ACTIONS ════════════════════════════════ */
@@ -670,41 +669,38 @@ display:none;
 body{overflow-x:hidden}
 
 /* ═══ SAFE-AREA BOTTOM PADDING ══════════════════════════════ */
-.sidebar-footer{padding-bottom:calc(12px + var(–safe-bottom))}
+.sidebar-footer{padding-bottom:calc(12px + var(--safe-bottom))}
 @media (max-width:960px){
-#main{padding-bottom:calc(clamp(12px,3vw,20px) + var(–safe-bottom))}
+  #main{padding-bottom:calc(clamp(12px,3vw,20px) + var(--safe-bottom))}
 }
 
 /* ═══ LANDSCAPE PHONE (very short viewport) ═════════════════ */
 @media (max-height:500px) and (max-width:900px){
-#ticker-bar{display:none}
-#main{padding-top:calc(var(–mobile-topbar) + 8px)}
-.kpi-card{padding:10px 12px}
-.kpi-num{font-size:22px}
+  #ticker-bar{display:none}
+  #main{padding-top:calc(var(--mobile-topbar) + 8px)}
+  .kpi-card{padding:10px 12px}
+  .kpi-num{font-size:22px}
 }
 
 /* ═══ PRINT BASIC ════════════════════════════════════════════ */
 @media print{
-#sidebar,#ticker-bar,#mobileMenuBtn,#sidebarOverlay{display:none!important}
-#main{padding:10px;overflow:visible}
-body,html{height:auto;overflow:visible}
-.page{display:block!important}
-.page:not(.active){display:none!important}
+  #sidebar,#ticker-bar,#mobileMenuBtn,#sidebarOverlay{display:none!important}
+  #main{padding:10px;overflow:visible}
+  body,html{height:auto;overflow:visible}
+  .page{display:block!important}
+  .page:not(.active){display:none!important}
 }
 </style>
-
 </head>
 <body>
 
 <!-- ═══ MOBILE MENU BUTTON ════════════════════════════════════ -->
-
 <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Open menu">
   <span id="menuIcon">☰</span>
 </button>
 <div id="sidebarOverlay" onclick="closeMobileMenu()"></div>
 
 <!-- ═══ TICKER ═══════════════════════════════════════════════ -->
-
 <div id="ticker-bar">
   <div class="ticker-label">INTEL FEED</div>
   <div class="ticker-track">
@@ -713,11 +709,9 @@ body,html{height:auto;overflow:visible}
 </div>
 
 <!-- ═══ APP LAYOUT ════════════════════════════════════════════ -->
-
 <div id="app">
 
 <!-- SIDEBAR -->
-
 <aside id="sidebar">
   <div class="sidebar-logo">
     <div class="co-name">COMPLETE HOME</div>
@@ -735,301 +729,298 @@ body,html{height:auto;overflow:visible}
 </aside>
 
 <!-- CONTENT -->
-
 <div id="content-wrap">
   <div id="main">
 
-```
-<!-- PAGE: DASHBOARD -->
-<div class="page active" id="page-dashboard">
-  <div class="sec-head">
-    <h2>⬡ COMMAND CENTER</h2>
-    <p>Complete Home Today LLC — Real-time lead acquisition overview</p>
-  </div>
-  <div class="grid-6 mb-16" id="kpiGrid"></div>
-  <div class="grid-3 mb-16">
-    <div class="card" id="quickActionsCard"></div>
-    <div class="card" id="cplBenchCard"></div>
-    <div class="card" id="pipelineCard"></div>
-  </div>
-  <div class="card gold" id="territoryCard"></div>
-</div>
+    <!-- PAGE: DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="sec-head">
+        <h2>⬡ COMMAND CENTER</h2>
+        <p>Complete Home Today LLC — Real-time lead acquisition overview</p>
+      </div>
+      <div class="grid-6 mb-16" id="kpiGrid"></div>
+      <div class="grid-3 mb-16">
+        <div class="card" id="quickActionsCard"></div>
+        <div class="card" id="cplBenchCard"></div>
+        <div class="card" id="pipelineCard"></div>
+      </div>
+      <div class="card gold" id="territoryCard"></div>
+    </div>
 
-<!-- PAGE: LEAD CAPTURE -->
-<div class="page" id="page-capture">
-  <div class="sec-head">
-    <h2>⊕ LEAD CAPTURE</h2>
-    <p>California CCPA-compliant lead intake — all fields optimized for fastest follow-up</p>
-  </div>
-  <div id="captureSuccess" style="display:none" class="banner-success">✅ Lead captured and added to pipeline! Begin 5-minute SMS follow-up now.</div>
-  <div class="capture-cols">
-    <div class="flex-col gap-12">
-      <div class="card">
-        <div class="card-title" style="color:var(--amber)">◈ CONTACT INFORMATION</div>
-        <div class="flex flex-wrap gap-8 mb-12">
-          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">First Name <span style="color:var(--red)" id="err-firstName"></span></label><input id="cf-firstName" placeholder="Jane"></div></div>
-          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Last Name <span style="color:var(--red)" id="err-lastName"></span></label><input id="cf-lastName" placeholder="Smith"></div></div>
-          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Phone <span style="color:var(--red)" id="err-phone"></span></label><input id="cf-phone" type="tel" placeholder="(831) 555-0000"></div></div>
-          <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Email</label><input id="cf-email" type="email" placeholder="jane@email.com"></div></div>
+    <!-- PAGE: LEAD CAPTURE -->
+    <div class="page" id="page-capture">
+      <div class="sec-head">
+        <h2>⊕ LEAD CAPTURE</h2>
+        <p>California CCPA-compliant lead intake — all fields optimized for fastest follow-up</p>
+      </div>
+      <div id="captureSuccess" style="display:none" class="banner-success">✅ Lead captured and added to pipeline! Begin 5-minute SMS follow-up now.</div>
+      <div class="capture-cols">
+        <div class="flex-col gap-12">
+          <div class="card">
+            <div class="card-title" style="color:var(--amber)">◈ CONTACT INFORMATION</div>
+            <div class="flex flex-wrap gap-8 mb-12">
+              <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">First Name <span style="color:var(--red)" id="err-firstName"></span></label><input id="cf-firstName" placeholder="Jane"></div></div>
+              <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Last Name <span style="color:var(--red)" id="err-lastName"></span></label><input id="cf-lastName" placeholder="Smith"></div></div>
+              <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Phone <span style="color:var(--red)" id="err-phone"></span></label><input id="cf-phone" type="tel" placeholder="(831) 555-0000"></div></div>
+              <div style="flex:1 1 180px"><div class="field-group"><label class="field-label">Email</label><input id="cf-email" type="email" placeholder="jane@email.com"></div></div>
+            </div>
+            <div class="flex flex-wrap gap-8">
+              <div style="flex:2 1 200px"><div class="field-group"><label class="field-label">Street Address</label><input id="cf-address" placeholder="123 Main St"></div></div>
+              <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">City <span style="color:var(--red)" id="err-city"></span></label><select id="cf-city"><option value="">— Select City —</option></select></div></div>
+              <div style="flex:0 0 90px"><div class="field-group"><label class="field-label">ZIP</label><input id="cf-zip" placeholder="93901"></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--amber)">◈ CAMPAIGN & QUALIFICATION</div>
+            <div class="flex flex-wrap gap-8 mb-12">
+              <div style="flex:1 1 160px"><div class="field-group"><label class="field-label">Service Requested <span style="color:var(--red)" id="err-service"></span></label><select id="cf-service"><option value="">— Select —</option></select></div></div>
+              <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Lead Source</label><select id="cf-source"><option value="">— Select —</option></select></div></div>
+              <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Language</label><select id="cf-language"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div></div>
+              <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Current Provider</label><input id="cf-provider" placeholder="Comcast, None..."></div></div>
+              <div style="flex:1 1 120px"><div class="field-group"><label class="field-label">Budget</label><select id="cf-budget"><option value="">— Any —</option><option>Under $30</option><option>$30–50</option><option>$50–75</option><option>$75–100</option><option>$100+</option></select></div></div>
+              <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Urgency</label><select id="cf-urgency"><option>Normal</option><option>High — Install This Week</option><option>Low — Researching</option></select></div></div>
+              <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">Best Time to Call</label><select id="cf-besttime"><option>Anytime</option><option>Morning (8–11am)</option><option>Afternoon (11–3pm)</option><option>Evening (3–7pm)</option><option>Weekend Only</option></select></div></div>
+            </div>
+            <div class="flex flex-wrap gap-16 mb-12">
+              <label class="checkbox-row"><input type="checkbox" id="cf-newmover"> 🏡 New Mover (&lt;6 months)</label>
+              <label class="checkbox-row"><input type="checkbox" id="cf-homeowner"> 🔑 Confirmed Homeowner</label>
+              <label class="checkbox-row"><input type="checkbox" id="cf-pets"> 🐕 Has Pets (ADT note)</label>
+            </div>
+            <div class="field-group"><label class="field-label">Notes / Disposition</label><textarea id="cf-notes" rows="2" placeholder="Call preferences, objections, deal-breakers, referral name..."></textarea></div>
+          </div>
+          <div class="card" id="ccpaCard">
+            <label class="checkbox-row" style="align-items:flex-start">
+              <input type="checkbox" id="cf-ccpa" style="margin-top:2px">
+              <span style="font-size:12px"><strong style="color:var(--blue)">California CCPA Consent:</strong> I agree to be contacted by Complete Home Today LLC regarding home services. I understand my data may be shared with service partners (ADT, AT&T, Spectrum, Earthlink, Frontier) for the purpose of fulfilling my request. I can opt out at any time by replying STOP. <span style="color:var(--muted)">(Required by California Consumer Privacy Act)</span><span style="color:var(--red)" id="err-ccpa"></span></span>
+            </label>
+          </div>
+          <button class="btn btn-primary btn-block" onclick="submitLead()">⊕ CAPTURE LEAD TO PIPELINE</button>
         </div>
-        <div class="flex flex-wrap gap-8">
-          <div style="flex:2 1 200px"><div class="field-group"><label class="field-label">Street Address</label><input id="cf-address" placeholder="123 Main St"></div></div>
-          <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">City <span style="color:var(--red)" id="err-city"></span></label><select id="cf-city"><option value="">— Select City —</option></select></div></div>
-          <div style="flex:0 0 90px"><div class="field-group"><label class="field-label">ZIP</label><input id="cf-zip" placeholder="93901"></div></div>
+        <div class="flex-col gap-12">
+          <div class="card glow">
+            <div class="card-title" style="color:var(--amber)">⚡ SPEED-TO-LEAD PROTOCOL</div>
+            <div id="speedProtocol"></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--blue)">◉ HIGH-VALUE SIGNALS</div>
+            <div id="signalsList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--green)">$ TOP CPL SOURCES</div>
+            <div id="cplSources"></div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:var(--amber)">◈ CAMPAIGN & QUALIFICATION</div>
-        <div class="flex flex-wrap gap-8 mb-12">
-          <div style="flex:1 1 160px"><div class="field-group"><label class="field-label">Service Requested <span style="color:var(--red)" id="err-service"></span></label><select id="cf-service"><option value="">— Select —</option></select></div></div>
-          <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Lead Source</label><select id="cf-source"><option value="">— Select —</option></select></div></div>
-          <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Language</label><select id="cf-language"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div></div>
-          <div style="flex:1 1 150px"><div class="field-group"><label class="field-label">Current Provider</label><input id="cf-provider" placeholder="Comcast, None..."></div></div>
-          <div style="flex:1 1 120px"><div class="field-group"><label class="field-label">Budget</label><select id="cf-budget"><option value="">— Any —</option><option>Under $30</option><option>$30–50</option><option>$50–75</option><option>$75–100</option><option>$100+</option></select></div></div>
-          <div style="flex:1 1 130px"><div class="field-group"><label class="field-label">Urgency</label><select id="cf-urgency"><option>Normal</option><option>High — Install This Week</option><option>Low — Researching</option></select></div></div>
-          <div style="flex:1 1 140px"><div class="field-group"><label class="field-label">Best Time to Call</label><select id="cf-besttime"><option>Anytime</option><option>Morning (8–11am)</option><option>Afternoon (11–3pm)</option><option>Evening (3–7pm)</option><option>Weekend Only</option></select></div></div>
+    </div>
+
+    <!-- PAGE: LEAD LOG -->
+    <div class="page" id="page-log">
+      <div class="flex items-center justify-between mb-20">
+        <div class="sec-head" style="margin-bottom:0">
+          <h2>≡ LEAD PIPELINE</h2>
+          <p id="logSubtitle">0 total leads</p>
         </div>
-        <div class="flex flex-wrap gap-16 mb-12">
-          <label class="checkbox-row"><input type="checkbox" id="cf-newmover"> 🏡 New Mover (&lt;6 months)</label>
-          <label class="checkbox-row"><input type="checkbox" id="cf-homeowner"> 🔑 Confirmed Homeowner</label>
-          <label class="checkbox-row"><input type="checkbox" id="cf-pets"> 🐕 Has Pets (ADT note)</label>
+        <button class="btn btn-secondary" onclick="exportLeads()">⬇ Export Excel</button>
+      </div>
+      <div class="filter-row">
+        <input id="leadSearch" placeholder="🔍 Search leads..." class="lead-search-input" oninput="renderLeadLog()">
+        <div id="statusFilters"></div>
+      </div>
+      <div id="leadList"></div>
+    </div>
+
+    <!-- PAGE: AD FORGE -->
+    <div class="page" id="page-adforge">
+      <div class="sec-head"><h2>⚡ AD FORGE</h2><p>AI-powered high-converting copy — California-optimized psychological frameworks</p></div>
+      <div class="page-cols">
+        <div class="card glow flex-col gap-12">
+          <div class="card-title" style="color:var(--amber)">⚡ CAMPAIGN CONFIG</div>
+          <div class="field-group"><label class="field-label">Client</label><select id="af-client"></select></div>
+          <div class="field-group"><label class="field-label">Platform</label><select id="af-platform"></select></div>
+          <div class="field-group"><label class="field-label">Target City</label><select id="af-city"></select></div>
+          <div class="field-group"><label class="field-label">Target Audience</label><select id="af-audience"></select></div>
+          <div class="field-group"><label class="field-label">Language</label><select id="af-lang"><option>English</option><option>Spanish</option><option>Bilingual — Both Versions</option></select></div>
+          <div class="field-group"><label class="field-label">Psych Framework</label><select id="af-framework"></select></div>
+          <button class="btn btn-primary btn-block" onclick="generateAd()">⚡ FORGE AD COPY</button>
         </div>
-        <div class="field-group"><label class="field-label">Notes / Disposition</label><textarea id="cf-notes" rows="2" placeholder="Call preferences, objections, deal-breakers, referral name..."></textarea></div>
-      </div>
-      <div class="card" id="ccpaCard">
-        <label class="checkbox-row" style="align-items:flex-start">
-          <input type="checkbox" id="cf-ccpa" style="margin-top:2px">
-          <span style="font-size:12px"><strong style="color:var(--blue)">California CCPA Consent:</strong> I agree to be contacted by Complete Home Today LLC regarding home services. I understand my data may be shared with service partners (ADT, AT&T, Spectrum, Earthlink, Frontier) for the purpose of fulfilling my request. I can opt out at any time by replying STOP. <span style="color:var(--muted)">(Required by California Consumer Privacy Act)</span><span style="color:var(--red)" id="err-ccpa"></span></span>
-        </label>
-      </div>
-      <button class="btn btn-primary btn-block" onclick="submitLead()">⊕ CAPTURE LEAD TO PIPELINE</button>
-    </div>
-    <div class="flex-col gap-12">
-      <div class="card glow">
-        <div class="card-title" style="color:var(--amber)">⚡ SPEED-TO-LEAD PROTOCOL</div>
-        <div id="speedProtocol"></div>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color:var(--blue)">◉ HIGH-VALUE SIGNALS</div>
-        <div id="signalsList"></div>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color:var(--green)">$ TOP CPL SOURCES</div>
-        <div id="cplSources"></div>
+        <div>
+          <div class="card mb-12">
+            <div class="card-title" style="color:var(--amber)">◈ TOP-CONVERTING FORMULAS IN HOME SERVICES (CA)</div>
+            <div class="grid-2" id="adFormulas"></div>
+          </div>
+          <div id="adLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">FORGING MAXIMUM-CONVERSION COPY...</div></div>
+          <div id="adOutput" class="ai-output" style="display:none">
+            <div class="ai-output-header"><div class="ai-output-label" id="adOutputLabel">◈ AI OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('adOutputText')">📋 Copy All</button></div>
+            <pre id="adOutputText"></pre>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- PAGE: LEAD LOG -->
-<div class="page" id="page-log">
-  <div class="flex items-center justify-between mb-20">
-    <div class="sec-head" style="margin-bottom:0">
-      <h2>≡ LEAD PIPELINE</h2>
-      <p id="logSubtitle">0 total leads</p>
+    <!-- PAGE: CAMPAIGN BUILDER -->
+    <div class="page" id="page-campaigns">
+      <div class="sec-head"><h2>◎ CAMPAIGN BUILDER</h2><p>Full Facebook & Google campaign plans with budgets, targeting, and projected CPL</p></div>
+      <div class="page-cols-sm">
+        <div class="card glow flex-col gap-12">
+          <div class="card-title" style="color:var(--amber)">◎ PLAN CONFIG</div>
+          <div class="field-group"><label class="field-label">Client</label><select id="cb-client"></select></div>
+          <div class="field-group"><label class="field-label">Territory</label><select id="cb-territory"><option>All Territory</option><option>Gilroy / Morgan Hill</option><option>Monterey County</option><option>Santa Cruz County</option><option>Salinas Valley Only</option></select></div>
+          <div class="field-group"><label class="field-label">Monthly Budget</label><select id="cb-budget"><option>$500/mo</option><option>$750/mo</option><option selected>$1,000/mo</option><option>$1,500/mo</option><option>$2,000/mo</option><option>$3,000/mo</option><option>$5,000/mo</option></select></div>
+          <div class="field-group"><label class="field-label">Primary Objective</label><select id="cb-objective"><option>Lead Generation — Lowest CPL</option><option>Lead Volume Max</option><option>New Mover Focus</option><option>Spanish Market Focus</option><option>Quality Leads</option></select></div>
+          <button class="btn btn-primary btn-block" onclick="buildCampaign()">◎ BUILD CAMPAIGN PLAN</button>
+        </div>
+        <div>
+          <div class="card mb-12">
+            <div class="card-title" style="color:var(--amber)">📊 REFERENCE: $1,000/MO OPTIMAL SPLIT</div>
+            <div class="scroll-x"><table class="data-table" id="campaignRefTable"></table></div>
+          </div>
+          <div id="cbLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING YOUR CAMPAIGN PLAN...</div></div>
+          <div id="cbOutput" class="ai-output" style="display:none">
+            <div class="ai-output-header"><div class="ai-output-label" id="cbOutputLabel">◎ AI CAMPAIGN PLAN</div><button class="btn btn-ghost btn-sm" onclick="copyAI('cbOutputText')">📋 Copy All</button></div>
+            <pre id="cbOutputText"></pre>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-secondary" onclick="exportLeads()">⬇ Export Excel</button>
-  </div>
-  <div class="filter-row">
-    <input id="leadSearch" placeholder="🔍 Search leads..." class="lead-search-input" oninput="renderLeadLog()">
-    <div id="statusFilters"></div>
-  </div>
-  <div id="leadList"></div>
-</div>
 
-<!-- PAGE: AD FORGE -->
-<div class="page" id="page-adforge">
-  <div class="sec-head"><h2>⚡ AD FORGE</h2><p>AI-powered high-converting copy — California-optimized psychological frameworks</p></div>
-  <div class="page-cols">
-    <div class="card glow flex-col gap-12">
-      <div class="card-title" style="color:var(--amber)">⚡ CAMPAIGN CONFIG</div>
-      <div class="field-group"><label class="field-label">Client</label><select id="af-client"></select></div>
-      <div class="field-group"><label class="field-label">Platform</label><select id="af-platform"></select></div>
-      <div class="field-group"><label class="field-label">Target City</label><select id="af-city"></select></div>
-      <div class="field-group"><label class="field-label">Target Audience</label><select id="af-audience"></select></div>
-      <div class="field-group"><label class="field-label">Language</label><select id="af-lang"><option>English</option><option>Spanish</option><option>Bilingual — Both Versions</option></select></div>
-      <div class="field-group"><label class="field-label">Psych Framework</label><select id="af-framework"></select></div>
-      <button class="btn btn-primary btn-block" onclick="generateAd()">⚡ FORGE AD COPY</button>
-    </div>
-    <div>
-      <div class="card mb-12">
-        <div class="card-title" style="color:var(--amber)">◈ TOP-CONVERTING FORMULAS IN HOME SERVICES (CA)</div>
-        <div class="grid-2" id="adFormulas"></div>
+    <!-- PAGE: SMS ENGINE -->
+    <div class="page" id="page-sms">
+      <div class="sec-head"><h2>✉ SMS FOLLOW-UP ENGINE</h2><p>California TCPA/CCPA-compliant sequences — highest contact rates in the industry</p></div>
+      <div class="page-cols">
+        <div class="flex-col gap-12">
+          <div class="card glow">
+            <div class="card-title" style="color:var(--amber)">✉ SEQUENCE CONFIG</div>
+            <div class="field-group"><label class="field-label">Sequence Type</label><select id="sms-type"></select></div>
+            <div class="field-group"><label class="field-label">Target City</label><select id="sms-city"></select></div>
+            <div class="field-group"><label class="field-label">Language</label><select id="sms-lang"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div>
+            <button class="btn btn-primary btn-block" onclick="generateSMS()">✉ GENERATE SEQUENCE</button>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--blue)">⚡ SPEED-TO-LEAD FACTS</div>
+            <div id="speedFacts"></div>
+          </div>
+        </div>
+        <div>
+          <div class="card-title" style="color:var(--white);margin-bottom:12px">📋 INSTANT-USE TEMPLATES — Copy & Paste Now</div>
+          <div id="smsTemplates" class="mb-16"></div>
+          <div id="smsLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING YOUR SMS SEQUENCE...</div></div>
+          <div id="smsOutput" class="ai-output" style="display:none">
+            <div class="ai-output-header"><div class="ai-output-label" id="smsOutputLabel">✉ AI SMS SEQUENCE</div><button class="btn btn-ghost btn-sm" onclick="copyAI('smsOutputText')">📋 Copy All</button></div>
+            <pre id="smsOutputText"></pre>
+          </div>
+        </div>
       </div>
-      <div id="adLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">FORGING MAXIMUM-CONVERSION COPY...</div></div>
-      <div id="adOutput" class="ai-output" style="display:none">
-        <div class="ai-output-header"><div class="ai-output-label" id="adOutputLabel">◈ AI OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('adOutputText')">📋 Copy All</button></div>
-        <pre id="adOutputText"></pre>
-      </div>
     </div>
-  </div>
-</div>
 
-<!-- PAGE: CAMPAIGN BUILDER -->
-<div class="page" id="page-campaigns">
-  <div class="sec-head"><h2>◎ CAMPAIGN BUILDER</h2><p>Full Facebook & Google campaign plans with budgets, targeting, and projected CPL</p></div>
-  <div class="page-cols-sm">
-    <div class="card glow flex-col gap-12">
-      <div class="card-title" style="color:var(--amber)">◎ PLAN CONFIG</div>
-      <div class="field-group"><label class="field-label">Client</label><select id="cb-client"></select></div>
-      <div class="field-group"><label class="field-label">Territory</label><select id="cb-territory"><option>All Territory</option><option>Gilroy / Morgan Hill</option><option>Monterey County</option><option>Santa Cruz County</option><option>Salinas Valley Only</option></select></div>
-      <div class="field-group"><label class="field-label">Monthly Budget</label><select id="cb-budget"><option>$500/mo</option><option>$750/mo</option><option selected>$1,000/mo</option><option>$1,500/mo</option><option>$2,000/mo</option><option>$3,000/mo</option><option>$5,000/mo</option></select></div>
-      <div class="field-group"><label class="field-label">Primary Objective</label><select id="cb-objective"><option>Lead Generation — Lowest CPL</option><option>Lead Volume Max</option><option>New Mover Focus</option><option>Spanish Market Focus</option><option>Quality Leads</option></select></div>
-      <button class="btn btn-primary btn-block" onclick="buildCampaign()">◎ BUILD CAMPAIGN PLAN</button>
-    </div>
-    <div>
-      <div class="card mb-12">
-        <div class="card-title" style="color:var(--amber)">📊 REFERENCE: $1,000/MO OPTIMAL SPLIT</div>
-        <div class="scroll-x"><table class="data-table" id="campaignRefTable"></table></div>
+    <!-- PAGE: BILINGUAL OPS -->
+    <div class="page" id="page-spanish">
+      <div class="sec-head"><h2>◈ BILINGUAL OPS</h2><p>Spanish/English ad pairs for Gilroy, Salinas, and Monterey County Hispanic markets</p></div>
+      <div class="page-cols-sm">
+        <div class="card glow flex-col gap-12">
+          <div class="card-title" style="color:var(--amber)">◈ AD CONFIG</div>
+          <div class="field-group"><label class="field-label">Client</label><select id="bi-client"></select></div>
+          <div class="field-group"><label class="field-label">City</label><select id="bi-city"><option>Salinas</option><option>Gilroy</option><option>Watsonville</option><option>King City</option><option>Gonzales</option><option>Marina</option><option>Seaside</option></select></div>
+          <div class="field-group"><label class="field-label">Format</label><select id="bi-format"><option>Facebook Lead Form Ad</option><option>Instagram Story</option><option>SMS Text</option><option>WhatsApp Message</option><option>Direct Mail Postcard</option></select></div>
+          <div class="field-group"><label class="field-label">Angle</label><select id="bi-angle"><option>Family Protection / Protección Familiar</option><option>New Home / Nuevo Hogar</option><option>Price and Value / Precio y Valor</option><option>Neighborhood Safety</option><option>Limited Offer / Oferta Limitada</option><option>Community Trust / Confianza</option></select></div>
+          <button class="btn btn-primary btn-block" onclick="generateBilingual()">◈ GENERATE BILINGUAL ADS</button>
+          <div style="background:var(--amberG);border:1px solid rgba(255,149,0,.3);border-radius:8px;padding:12px">
+            <div style="font-family:var(--font-mono);font-size:9px;color:var(--amber);margin-bottom:6px">◈ WHY IT MATTERS</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.6">Spanish-language ads in Salinas/Gilroy achieve <strong style="color:var(--amber)">22% CVR</strong> vs 8% English-only — nearly <strong style="color:var(--green)">3x higher conversion</strong></div>
+          </div>
+        </div>
+        <div>
+          <div id="biExamples" class="mb-12"></div>
+          <div id="biLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING BILINGUAL ADS...</div></div>
+          <div id="biOutput" class="ai-output" style="display:none">
+            <div class="ai-output-header"><div class="ai-output-label" id="biOutputLabel">◈ BILINGUAL AD OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('biOutputText')">📋 Copy All</button></div>
+            <pre id="biOutputText"></pre>
+          </div>
+        </div>
       </div>
-      <div id="cbLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING YOUR CAMPAIGN PLAN...</div></div>
-      <div id="cbOutput" class="ai-output" style="display:none">
-        <div class="ai-output-header"><div class="ai-output-label" id="cbOutputLabel">◎ AI CAMPAIGN PLAN</div><button class="btn btn-ghost btn-sm" onclick="copyAI('cbOutputText')">📋 Copy All</button></div>
-        <pre id="cbOutputText"></pre>
-      </div>
     </div>
-  </div>
-</div>
 
-<!-- PAGE: SMS ENGINE -->
-<div class="page" id="page-sms">
-  <div class="sec-head"><h2>✉ SMS FOLLOW-UP ENGINE</h2><p>California TCPA/CCPA-compliant sequences — highest contact rates in the industry</p></div>
-  <div class="page-cols">
-    <div class="flex-col gap-12">
-      <div class="card glow">
-        <div class="card-title" style="color:var(--amber)">✉ SEQUENCE CONFIG</div>
-        <div class="field-group"><label class="field-label">Sequence Type</label><select id="sms-type"></select></div>
-        <div class="field-group"><label class="field-label">Target City</label><select id="sms-city"></select></div>
-        <div class="field-group"><label class="field-label">Language</label><select id="sms-lang"><option>English</option><option>Spanish</option><option>Bilingual</option></select></div>
-        <button class="btn btn-primary btn-block" onclick="generateSMS()">✉ GENERATE SEQUENCE</button>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color:var(--blue)">⚡ SPEED-TO-LEAD FACTS</div>
-        <div id="speedFacts"></div>
+    <!-- PAGE: NEW MOVER ENGINE -->
+    <div class="page" id="page-newmover">
+      <div class="sec-head"><h2>⌂ NEW MOVER ENGINE</h2><p>#1 ADT and ISP acquisition strategy — catch homeowners in the 30-day decision window</p></div>
+      <div class="page-cols-sm">
+        <div class="flex-col gap-12">
+          <div class="card glow">
+            <div class="card-title" style="color:var(--amber)">⌂ PROGRAM CONFIG</div>
+            <div class="field-group"><label class="field-label">Service</label><select id="nm-service"></select></div>
+            <div class="field-group"><label class="field-label">Primary City</label><select id="nm-city"></select></div>
+            <button class="btn btn-primary btn-block" onclick="buildNewMover()">⌂ BUILD PROGRAM</button>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--amber)">◉ NEW MOVER STATS</div>
+            <div id="nmStats"></div>
+          </div>
+        </div>
+        <div>
+          <div class="card mb-12">
+            <div class="card-title" style="color:var(--amber)">📅 90-DAY TOUCH SEQUENCE</div>
+            <div id="nmTimeline"></div>
+          </div>
+          <div id="nmLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING NEW MOVER PROGRAM...</div></div>
+          <div id="nmOutput" class="ai-output" style="display:none">
+            <div class="ai-output-header"><div class="ai-output-label" id="nmOutputLabel">⌂ NEW MOVER PROGRAM</div><button class="btn btn-ghost btn-sm" onclick="copyAI('nmOutputText')">📋 Copy All</button></div>
+            <pre id="nmOutputText"></pre>
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <div class="card-title" style="color:var(--white);margin-bottom:12px">📋 INSTANT-USE TEMPLATES — Copy & Paste Now</div>
-      <div id="smsTemplates" class="mb-16"></div>
-      <div id="smsLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING YOUR SMS SEQUENCE...</div></div>
-      <div id="smsOutput" class="ai-output" style="display:none">
-        <div class="ai-output-header"><div class="ai-output-label" id="smsOutputLabel">✉ AI SMS SEQUENCE</div><button class="btn btn-ghost btn-sm" onclick="copyAI('smsOutputText')">📋 Copy All</button></div>
-        <pre id="smsOutputText"></pre>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- PAGE: BILINGUAL OPS -->
-<div class="page" id="page-spanish">
-  <div class="sec-head"><h2>◈ BILINGUAL OPS</h2><p>Spanish/English ad pairs for Gilroy, Salinas, and Monterey County Hispanic markets</p></div>
-  <div class="page-cols-sm">
-    <div class="card glow flex-col gap-12">
-      <div class="card-title" style="color:var(--amber)">◈ AD CONFIG</div>
-      <div class="field-group"><label class="field-label">Client</label><select id="bi-client"></select></div>
-      <div class="field-group"><label class="field-label">City</label><select id="bi-city"><option>Salinas</option><option>Gilroy</option><option>Watsonville</option><option>King City</option><option>Gonzales</option><option>Marina</option><option>Seaside</option></select></div>
-      <div class="field-group"><label class="field-label">Format</label><select id="bi-format"><option>Facebook Lead Form Ad</option><option>Instagram Story</option><option>SMS Text</option><option>WhatsApp Message</option><option>Direct Mail Postcard</option></select></div>
-      <div class="field-group"><label class="field-label">Angle</label><select id="bi-angle"><option>Family Protection / Protección Familiar</option><option>New Home / Nuevo Hogar</option><option>Price and Value / Precio y Valor</option><option>Neighborhood Safety</option><option>Limited Offer / Oferta Limitada</option><option>Community Trust / Confianza</option></select></div>
-      <button class="btn btn-primary btn-block" onclick="generateBilingual()">◈ GENERATE BILINGUAL ADS</button>
-      <div style="background:var(--amberG);border:1px solid rgba(255,149,0,.3);border-radius:8px;padding:12px">
-        <div style="font-family:var(--font-mono);font-size:9px;color:var(--amber);margin-bottom:6px">◈ WHY IT MATTERS</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.6">Spanish-language ads in Salinas/Gilroy achieve <strong style="color:var(--amber)">22% CVR</strong> vs 8% English-only — nearly <strong style="color:var(--green)">3x higher conversion</strong></div>
+    <!-- PAGE: MARKET INTEL -->
+    <div class="page" id="page-intel">
+      <div class="sec-head"><h2>◉ MARKET INTEL</h2><p>AI-powered competitive intelligence for your exact territory</p></div>
+      <div class="page-cols-r mb-16">
+        <div class="card">
+          <div class="flex flex-wrap gap-12 mb-12">
+            <div class="flex-1" style="min-width:200px"><div class="field-group"><label class="field-label">Research Query</label><input id="intel-query" placeholder="Type a question or click a preset below..."></div></div>
+            <div style="min-width:160px;flex:0 1 200px"><div class="field-group"><label class="field-label">Focus Market</label><select id="intel-market"><option>All Territory</option><option>Monterey County</option><option>Santa Cruz County</option><option>Gilroy / Morgan Hill</option><option>Salinas Valley</option></select></div></div>
+          </div>
+          <div class="mb-12">
+            <label class="field-label" style="margin-bottom:8px">Quick Presets</label>
+            <div class="flex flex-wrap gap-8" id="intelPresets"></div>
+          </div>
+          <button class="btn btn-primary" onclick="runIntel()">◉ RUN INTEL BRIEF</button>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color:var(--amber)">$ CPL BENCHMARK MATRIX</div>
+          <div id="cplMatrix"></div>
+        </div>
+      </div>
+      <div id="intelLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">RUNNING COMPETITIVE ANALYSIS...</div></div>
+      <div id="intelOutput" class="ai-output" style="display:none">
+        <div class="ai-output-header"><div class="ai-output-label" id="intelOutputLabel">◉ INTEL BRIEF</div><button class="btn btn-ghost btn-sm" onclick="copyAI('intelOutputText')">📋 Copy All</button></div>
+        <pre id="intelOutputText"></pre>
       </div>
     </div>
-    <div>
-      <div id="biExamples" class="mb-12"></div>
-      <div id="biLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">WRITING BILINGUAL ADS...</div></div>
-      <div id="biOutput" class="ai-output" style="display:none">
-        <div class="ai-output-header"><div class="ai-output-label" id="biOutputLabel">◈ BILINGUAL AD OUTPUT</div><button class="btn btn-ghost btn-sm" onclick="copyAI('biOutputText')">📋 Copy All</button></div>
-        <pre id="biOutputText"></pre>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- PAGE: NEW MOVER ENGINE -->
-<div class="page" id="page-newmover">
-  <div class="sec-head"><h2>⌂ NEW MOVER ENGINE</h2><p>#1 ADT and ISP acquisition strategy — catch homeowners in the 30-day decision window</p></div>
-  <div class="page-cols-sm">
-    <div class="flex-col gap-12">
-      <div class="card glow">
-        <div class="card-title" style="color:var(--amber)">⌂ PROGRAM CONFIG</div>
-        <div class="field-group"><label class="field-label">Service</label><select id="nm-service"></select></div>
-        <div class="field-group"><label class="field-label">Primary City</label><select id="nm-city"></select></div>
-        <button class="btn btn-primary btn-block" onclick="buildNewMover()">⌂ BUILD PROGRAM</button>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color:var(--amber)">◉ NEW MOVER STATS</div>
-        <div id="nmStats"></div>
+    <!-- PAGE: PRICING VAULT -->
+    <div class="page" id="page-pricing">
+      <div class="sec-head"><h2>$ PRICING VAULT</h2><p>Reference pricing for all clients — verify directly with carriers before running ads</p></div>
+      <div class="filter-row" id="pricingTabs"></div>
+      <div class="card" id="pricingTable"></div>
+      <div style="margin-top:12px;padding:12px 16px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:12px;color:var(--muted)">
+        <strong style="color:var(--red)">⚠ California Notice:</strong> Prices are reference estimates only. Always verify current promotions at each carrier's website before running ads. Under CA law, price claims must be accurate at time of publication.
       </div>
     </div>
-    <div>
-      <div class="card mb-12">
-        <div class="card-title" style="color:var(--amber)">📅 90-DAY TOUCH SEQUENCE</div>
-        <div id="nmTimeline"></div>
+
+    <div class="page" id="page-attdeck">
+      <div class="sec-head">
+        <h2>📊 AT&T PITCH DECK</h2>
+        <p>Complete Home Today LLC — AT&T Internet Market Dominance Strategy · 7 Slides</p>
       </div>
-      <div id="nmLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">BUILDING NEW MOVER PROGRAM...</div></div>
-      <div id="nmOutput" class="ai-output" style="display:none">
-        <div class="ai-output-header"><div class="ai-output-label" id="nmOutputLabel">⌂ NEW MOVER PROGRAM</div><button class="btn btn-ghost btn-sm" onclick="copyAI('nmOutputText')">📋 Copy All</button></div>
-        <pre id="nmOutputText"></pre>
-      </div>
+      <div id="attDeckWrap"></div>
     </div>
-  </div>
-</div>
 
-<!-- PAGE: MARKET INTEL -->
-<div class="page" id="page-intel">
-  <div class="sec-head"><h2>◉ MARKET INTEL</h2><p>AI-powered competitive intelligence for your exact territory</p></div>
-  <div class="page-cols-r mb-16">
-    <div class="card">
-      <div class="flex flex-wrap gap-12 mb-12">
-        <div class="flex-1" style="min-width:200px"><div class="field-group"><label class="field-label">Research Query</label><input id="intel-query" placeholder="Type a question or click a preset below..."></div></div>
-        <div style="min-width:160px;flex:0 1 200px"><div class="field-group"><label class="field-label">Focus Market</label><select id="intel-market"><option>All Territory</option><option>Monterey County</option><option>Santa Cruz County</option><option>Gilroy / Morgan Hill</option><option>Salinas Valley</option></select></div></div>
+    <div class="page" id="page-mkacademy">
+      <div class="sec-head">
+        <h2>🎓 MARKETING ACADEMY</h2>
+        <p>Ryan Magin · School of Hard Knocks · Top Agency Playbooks — battle-tested strategies applied to your territory</p>
       </div>
-      <div class="mb-12">
-        <label class="field-label" style="margin-bottom:8px">Quick Presets</label>
-        <div class="flex flex-wrap gap-8" id="intelPresets"></div>
-      </div>
-      <button class="btn btn-primary" onclick="runIntel()">◉ RUN INTEL BRIEF</button>
+      <div id="mkAcademyWrap"></div>
     </div>
-    <div class="card">
-      <div class="card-title" style="color:var(--amber)">$ CPL BENCHMARK MATRIX</div>
-      <div id="cplMatrix"></div>
-    </div>
-  </div>
-  <div id="intelLoading" style="display:none" class="card loading-state"><div class="spinner-lg spin"></div><div class="loading-text mt-12">RUNNING COMPETITIVE ANALYSIS...</div></div>
-  <div id="intelOutput" class="ai-output" style="display:none">
-    <div class="ai-output-header"><div class="ai-output-label" id="intelOutputLabel">◉ INTEL BRIEF</div><button class="btn btn-ghost btn-sm" onclick="copyAI('intelOutputText')">📋 Copy All</button></div>
-    <pre id="intelOutputText"></pre>
-  </div>
-</div>
-
-<!-- PAGE: PRICING VAULT -->
-<div class="page" id="page-pricing">
-  <div class="sec-head"><h2>$ PRICING VAULT</h2><p>Reference pricing for all clients — verify directly with carriers before running ads</p></div>
-  <div class="filter-row" id="pricingTabs"></div>
-  <div class="card" id="pricingTable"></div>
-  <div style="margin-top:12px;padding:12px 16px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:12px;color:var(--muted)">
-    <strong style="color:var(--red)">⚠ California Notice:</strong> Prices are reference estimates only. Always verify current promotions at each carrier's website before running ads. Under CA law, price claims must be accurate at time of publication.
-  </div>
-</div>
-
-<div class="page" id="page-attdeck">
-  <div class="sec-head">
-    <h2>📊 AT&T PITCH DECK</h2>
-    <p>Complete Home Today LLC — AT&T Internet Market Dominance Strategy · 7 Slides</p>
-  </div>
-  <div id="attDeckWrap"></div>
-</div>
-
-<div class="page" id="page-mkacademy">
-  <div class="sec-head">
-    <h2>🎓 MARKETING ACADEMY</h2>
-    <p>Ryan Magin · School of Hard Knocks · Top Agency Playbooks — battle-tested strategies applied to your territory</p>
-  </div>
-  <div id="mkAcademyWrap"></div>
-</div>
-```
 
   </div><!-- /main -->
 </div><!-- /content-wrap -->
@@ -1201,6 +1192,57 @@ function closeMobileMenu(){
   ov.classList.remove('visible');
   if(ic) ic.textContent = '☰';
   document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════════════════════════
+// YOUTUBE LAZY-LOAD PLAYER
+// ════════════════════════════════════════════════════════════
+function loadYT(el) {
+  const wrap = el.closest('.yt-wrap');
+  const id = wrap.dataset.id;
+  const titleEl = wrap.querySelector('.yt-vid-title');
+  const title = titleEl ? titleEl.textContent : 'Video';
+  const thumbWrap = wrap.querySelector('.yt-thumb-wrap');
+
+  const player = document.createElement('div');
+  player.className = 'yt-player';
+
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/' + id +
+    '?autoplay=1&rel=0&modestbranding=1';
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('title', title);
+  iframe.setAttribute('loading', 'lazy');
+  iframe.addEventListener('error', function() { ytFallback(player, id, title); });
+
+  player.appendChild(iframe);
+  if (thumbWrap) thumbWrap.replaceWith(player);
+
+  // Always add a subtle "Watch on YouTube" link below the player
+  const info = wrap.querySelector('.yt-info');
+  if (info && !info.querySelector('.yt-ext-link')) {
+    const link = document.createElement('a');
+    link.href = 'https://www.youtube.com/watch?v=' + id;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'yt-ext-link';
+    link.textContent = '↗ Open on YouTube';
+    info.appendChild(link);
+  }
+}
+
+function ytFallback(container, id, title) {
+  container.innerHTML =
+    '<div style="position:absolute;inset:0;display:flex;flex-direction:column;' +
+    'align-items:center;justify-content:center;gap:12px;background:#060C18;padding:20px;text-align:center;">' +
+    '<div style="font-size:28px">📺</div>' +
+    '<div style="font-size:12px;color:var(--muted2);line-height:1.5">' + escHtml(title) + '</div>' +
+    '<a href="https://www.youtube.com/watch?v=' + id + '" target="_blank" rel="noopener noreferrer" ' +
+    'style="background:#FF0000;color:#fff;padding:9px 20px;border-radius:20px;font-size:12px;' +
+    'font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">' +
+    '▶&nbsp;Watch on YouTube</a></div>';
 }
 
 // ════════════════════════════════════════════════════════════
@@ -2168,465 +2210,707 @@ function renderATTDeck() {
         .att-nav-btn { padding:6px 12px; font-size:11px; }
       }
     </style>
-
-```
-<div class="att-deck-outer">
-  <div class="att-thumbs" id="attThumbs"></div>
-  <div class="att-slide-viewer">
-    <div class="att-slide-frame" id="attSlideFrame"></div>
-    <div class="att-slide-nav">
-      <button class="att-nav-btn" id="attPrev" onclick="attNav(-1)">← Prev</button>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div class="att-slide-counter" id="attCounter"></div>
-        <div class="att-slide-dots" id="attDots"></div>
+    <div class="att-deck-outer">
+      <div class="att-thumbs" id="attThumbs"></div>
+      <div class="att-slide-viewer">
+        <div class="att-slide-frame" id="attSlideFrame"></div>
+        <div class="att-slide-nav">
+          <button class="att-nav-btn" id="attPrev" onclick="attNav(-1)">← Prev</button>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div class="att-slide-counter" id="attCounter"></div>
+            <div class="att-slide-dots" id="attDots"></div>
+          </div>
+          <button class="att-nav-btn" id="attNext" onclick="attNav(1)">Next →</button>
+        </div>
       </div>
-      <button class="att-nav-btn" id="attNext" onclick="attNav(1)">Next →</button>
     </div>
-  </div>
-</div>
-```
+  `;
 
-`;
-
-buildAttThumbs();
-showAttSlide(attActiveSlide);
+  buildAttThumbs();
+  showAttSlide(attActiveSlide);
 }
 
 function buildAttThumbs() {
-const t = el(‘attThumbs’);
-if (!t) return;
-t.innerHTML = ATT_SLIDES.map((s,i) => `<button class="att-thumb-btn${i===attActiveSlide?' active':''}" onclick="showAttSlide(${i})" id="attThumb${i}"> <span class="att-thumb-num">${String(s.num).padStart(2,'0')}</span> <span class="att-thumb-label">${s.thumb}</span> </button>`).join(’’);
+  const t = el('attThumbs');
+  if (!t) return;
+  t.innerHTML = ATT_SLIDES.map((s,i) => `
+    <button class="att-thumb-btn${i===attActiveSlide?' active':''}" onclick="showAttSlide(${i})" id="attThumb${i}">
+      <span class="att-thumb-num">${String(s.num).padStart(2,'0')}</span>
+      <span class="att-thumb-label">${s.thumb}</span>
+    </button>
+  `).join('');
 }
 
 function showAttSlide(idx) {
-attActiveSlide = idx;
-const frame = el(‘attSlideFrame’);
-if (frame) frame.innerHTML = ATT_SLIDES[idx].html;
+  attActiveSlide = idx;
+  const frame = el('attSlideFrame');
+  if (frame) frame.innerHTML = ATT_SLIDES[idx].html;
 
-// update thumbs
-ATT_SLIDES.forEach((_,i) => {
-const b = el(‘attThumb’+i);
-if (b) b.className = ‘att-thumb-btn’+(i===idx?’ active’:’’);
-});
+  // update thumbs
+  ATT_SLIDES.forEach((_,i) => {
+    const b = el('attThumb'+i);
+    if (b) b.className = 'att-thumb-btn'+(i===idx?' active':'');
+  });
 
-// counter
-const ctr = el(‘attCounter’);
-if (ctr) ctr.textContent = ’Slide ‘+(idx+1)+’ of ‘+ATT_SLIDES.length+’ — ’+ATT_SLIDES[idx].title;
+  // counter
+  const ctr = el('attCounter');
+  if (ctr) ctr.textContent = 'Slide '+(idx+1)+' of '+ATT_SLIDES.length+' — '+ATT_SLIDES[idx].title;
 
-// dots
-const dots = el(‘attDots’);
-if (dots) dots.innerHTML = ATT_SLIDES.map((_,i)=>`<div class="att-dot${i===idx?' active':''}" onclick="showAttSlide(${i})"></div>`).join(’’);
+  // dots
+  const dots = el('attDots');
+  if (dots) dots.innerHTML = ATT_SLIDES.map((_,i)=>`<div class="att-dot${i===idx?' active':''}" onclick="showAttSlide(${i})"></div>`).join('');
 
-// nav buttons
-const prev = el(‘attPrev’), next = el(‘attNext’);
-if (prev) prev.disabled = idx === 0;
-if (next) next.disabled = idx === ATT_SLIDES.length - 1;
+  // nav buttons
+  const prev = el('attPrev'), next = el('attNext');
+  if (prev) prev.disabled = idx === 0;
+  if (next) next.disabled = idx === ATT_SLIDES.length - 1;
 }
 
 function attNav(dir) {
-const next = attActiveSlide + dir;
-if (next >= 0 && next < ATT_SLIDES.length) showAttSlide(next);
+  const next = attActiveSlide + dir;
+  if (next >= 0 && next < ATT_SLIDES.length) showAttSlide(next);
 }
 
 // ════════════════════════════════════════════════════════════
 // MARKETING ACADEMY — Ryan Magin · School of Hard Knocks · Top Agencies
 // ════════════════════════════════════════════════════════════
 const MK_DATA = {
-ryan: {
-label: ‘Ryan Magin’,
-color: ‘#A78BFA’,
-icon: ‘🎯’,
-subtitle: ‘Short-Form Content & Personal Brand Dominance’,
-bio: ‘Ryan Magin built one of the most followed B2B content brands in the country by mastering short-form video, LinkedIn organic reach, and turning content into closed deals. Every framework below is documented from his public teaching and replicated by hundreds of service businesses.’,
-sections: [
-{
-title: ‘The Infinite Content System’,
-icon: ‘♾’,
-color: ‘#A78BFA’,
-cards: [
-{
-headline: ‘Record One Long-Form Piece, Get 30 Shorts’,
-body: ‘Film one 20-minute walk-through, Q&A, or process video per week. That single recording becomes: 8–12 short clips (15–60s), 3–5 LinkedIn posts, 2 email nurtures, 1 carousel, 1 Reel cover story. The system multiplies your effort without multiplying your time.’,
-tag: ‘CONTENT SYSTEM’,
-apply: ‘Record one video weekly: “Why families in [City] are switching to ADT” or “AT&T Fiber vs. Comcast in Gilroy — the truth.” Cut into 10 clips for Facebook, TikTok, Instagram.’
-},
-{
-headline: ‘Hook in the First 1.5 Seconds or You're Dead’,
-body: ‘Ryan's top hooks follow a formula: CONTRAST (“Everyone thinks X but actually Y”), PATTERN INTERRUPT (“Stop scrolling — this is about your neighborhood”), or DIRECT CALL-OUT (“Gilroy homeowner? Watch this”). The opening sentence must create a micro-tension that can only be resolved by watching.’,
-tag: ‘VIDEO HOOKS’,
-apply: ‘“Gilroy homeowners — your neighbor just got burglarized. Here's the $28/mo thing that would have stopped it.” → Run as 7-second Facebook video ad. Test 5 openers simultaneously.’
-},
-{
-headline: ‘The Authority Flywheel — Document Don't Create’,
-body: ‘Don't create content from scratch. Document real moments: customer installs, territory rides, objection handling calls, before/after shots. Authentic documentation outperforms polished production 4:1 in click-through on organic posts for service businesses.’,
-tag: ‘AUTHORITY’,
-apply: ‘Film every ADT install. 15-second “install day” content with homeowner permission. “We just protected another Salinas family — install #47 this month.” Posts like this get 3x organic reach of ads.’
-},
-{
-headline: ‘The 3-Tier Content Pyramid’,
-body: ‘Top tier (20% of content): authority pieces — case studies, results, proof. Mid tier (50%): education + value — tips, how-tos, comparisons. Bottom tier (30%): engagement bait — polls, questions, controversial takes. Most businesses only post bottom tier and wonder why they don't convert.’,
-tag: ‘CONTENT MIX’,
-apply: ‘Top: “We installed 200 ADT systems in Monterey County this year — here's what we learned.” Mid: “The #1 thing burglars check before breaking into a home.” Bottom: “Is home security worth it in Gilroy right now? Comment YES or NO.”’
-}
-]
-},
-{
-title: ‘LinkedIn & Organic Lead Machine’,
-icon: ‘💼’,
-color: ‘#0EA5E9’,
-cards: [
-{
-headline: ‘The 1-3-1 LinkedIn Post Formula’,
-body: ‘Line 1: A single punchy hook that stops the scroll. Lines 2–3: the bridge — setup or context. Line 1 (final): A counterintuitive conclusion or CTA. Avoid walls of text. Use single-line stanzas. White space is engagement. Ryan consistently gets 50K+ impressions per post using this structure.’,
-tag: ‘LINKEDIN FORMAT’,
-apply: ‘“We knocked 400 doors in Gilroy last month.\n\nMost agents quit after 50 rejections.\n\nBut door #388 turned into a $1,400 ADT install.\n\nHere's the script we used →” (pin comment with script)’
-},
-{
-headline: ‘Post Daily for 90 Days — The Compounding Effect’,
-body: ‘LinkedIn and Facebook organic reach compounds. Accounts that post every day for 90 days see 300–500% more impressions on day 90 vs. day 1 — even with identical content quality. The algorithm rewards consistency more than quality. Start, ship, iterate.’,
-tag: ‘CONSISTENCY’,
-apply: ‘Commit to one Facebook/LinkedIn post per day for 90 days. Use the Infinite Content System. Rotate: Testimonial Mon, Tip Tue, Local Wed, Product Thu, Story Fri, Poll Sat, Behind-scenes Sun.’
-},
-{
-headline: ‘The DM Funnel — Turn Comments into Clients’,
-body: ‘Post content that ends with “Comment X and I'll send you [thing].” When they comment, DM them: “Hey [name], dropping the [thing] here — before I do, quick question: are you currently looking at home security for your [city] home?” This is Ryan's highest-converting organic flow.’,
-tag: ‘DM FUNNEL’,
-apply: ‘“Comment PROTECT and I'll send you our 2025 Home Security Checklist for Gilroy homeowners.” Collect leads. DM: “Sending it now — are you renting or own your home?” Qualify on the spot.’
-}
-]
-},
-{
-title: ‘Short-Form Video Domination’,
-icon: ‘📱’,
-color: ‘#22C55E’,
-cards: [
-{
-headline: ‘The PAS Video Framework (Problem-Agitate-Solve)’,
-body: ‘Second 1–3: State the problem viscerally. Second 4–8: Agitate the pain — make it feel real and urgent. Second 9–15: Introduce the solution with specificity. End with a CTA that matches the platform (swipe up, comment, call now). This framework drives the lowest CPL of any ad structure in home security.’,
-tag: ‘VIDEO STRUCTURE’,
-apply: ‘P: “A Salinas family got robbed last week while the parents were at work.” A: “The thieves were in and out in 4 minutes. Kids came home to a ransacked house.” S: “ADT's 24/7 monitoring calls police the moment a sensor trips. Installation is free this month.”’
-},
-{
-headline: ‘Vertical Video Everywhere — 9:16 is the Standard’,
-body: ‘Horizontal video gets 50% less reach on every major platform. Film everything vertical on your phone. Add captions (85% of video is watched muted). Keep motion in the first frame. Use text overlays that reinforce the hook — not just decorative. Do not pay for a videographer. Your iPhone is better.’,
-tag: ‘PRODUCTION’,
-apply: ‘Film all video vertical. Use CapCut for captions. Post Reels to Instagram, Shorts to YouTube, TikToks natively. Repurpose 1 video across 4 platforms — same content, 4x reach.’
-},
-{
-headline: ‘The Testimonial Clip Formula’,
-body: ‘Film customers immediately after install. Ask 3 questions: “What made you decide to go with ADT today?” (the journey), “What's one thing you'd tell a neighbor who's on the fence?” (the objection kill), “How do you feel now that it's installed?” (the emotional payoff). Clip each answer as a standalone 15-second video.’,
-tag: ‘SOCIAL PROOF’,
-apply: ‘After every Gilroy/Salinas/Monterey install, film a 2-min testimonial. Cut into 3 clips. Run the “objection kill” clip as a paid video ad targeted at homeowners in the same ZIP code as the customer.’
-}
-]
-}
-]
-},
-hardknocks: {
-label: ‘School of Hard Knocks’,
-color: ‘#FF9500’,
-icon: ‘🥊’,
-subtitle: ‘Street-Level Tactics from the Trenches — What Actually Works’,
-bio: ‘The School of Hard Knocks is the unwritten curriculum of every top sales agent and local business owner who figured out what works by failing fast and iterating relentlessly. These are the tactics that never make it into marketing textbooks — because they're too real, too specific, and too close to the metal.’,
-sections: [
-{
-title: ‘Door-to-Door Mastery’,
-icon: ‘🚪’,
-color: ‘#FF9500’,
-cards: [
-{
-headline: ‘The 5-Second Trust Window’,
-body: ‘You have exactly 5 seconds at the door before a prospect has decided whether you're a threat or an opportunity. The formula: warm smile, non-threatening body language (stand back 2 feet from the door), open hands visible, and an immediate local anchor. “Hi, I'm with Complete Home Today — we just finished an install for your neighbor on [Street].” Local reference = instant legitimacy.’,
-tag: ‘FIRST IMPRESSION’,
-apply: ‘Always reference a real nearby install. Build a real-time install map by ZIP. When you finish a job, knock every home within a 3-block radius within 24 hours while the install is fresh and visible.’
-},
-{
-headline: ‘The Leave-Behind Loop — Return Rate 40%’,
-body: ‘Most door agents leave flyers. High performers leave a personalized door hanger with a handwritten note: “Hi [Name if known] — I was in your neighborhood today installing ADT for your neighbor at [street]. Saved them 12% on their homeowners insurance too. Worth a 5-min conversation? Text me: [number].” Handwriting = 4x higher response vs. printed flyer.’,
-tag: ‘LEAVE-BEHIND’,
-apply: ‘Print 200 door hangers per territory per week. Write 3–5 personal words on each in pen. Track which ZIPs generate callbacks. Double down on ZIPs with >8% response rate. This is your lowest-CPL channel.’
-},
-{
-headline: ‘Map Your Rejections — They Are Your Assets’,
-body: ‘Every no is data. Top agents track: time of knock, day of week, type of response (not home, hard no, soft no, interest but not now). The data reveals patterns: Tuesday 11am–1pm outperforms all other windows in suburban markets. Soft no's revisited after 3 weeks convert at 22%. Homes with visible ring cameras = already security-aware = strong ADT prospects.’,
-tag: ‘DATA DISCIPLINE’,
-apply: ‘Use Google Maps + a notes doc to track every door knocked in Gilroy, Morgan Hill, Salinas. Note date, time, response. After 60 days, you'll have a precision strike map of your best doors by hour and day.’
-},
-{
-headline: ‘The Partner Knock — With a Real Estate Agent’,
-body: ‘Partner with 2–3 local Realtors in each territory. Offer to provide a “Home Security Welcome Package” to every buyer they close. Knock with the Realtor's referral: “Hi, I'm with Complete Home Today — your Realtor [Name] asked me to reach out because you just moved in. She set up a complimentary home security consultation for you.” Referral close rate is 3x cold knock.’,
-tag: ‘PARTNERSHIP’,
-apply: ‘Identify top 5 Realtors in Gilroy MLS and Morgan Hill MLS. Offer a co-branded welcome kit and $50 referral fee per install. This produces warm door-knocks that convert at ADT's highest rate.’
-}
-]
-},
-{
-title: ‘Psychological Selling — What the Training Manual Won't Tell You’,
-icon: ‘🧠’,
-color: ‘#EF4444’,
-cards: [
-{
-headline: ‘The Assumed Close — Use It Early’,
-body: ‘Don't ask “Would you like to get started?” Ask “Which day works better for your install — Thursday afternoon or Friday morning?” Assumptive language bypasses the conscious resistance to a sales decision. The prospect now has to consciously opt out rather than opt in. Works on 60%+ of qualified leads who have engaged with your pitch.’,
-tag: ‘CLOSING TECHNIQUE’,
-apply: ‘After presenting ADT package: “We have Thursday afternoon or Friday morning for install in Gilroy — which works with your schedule?” Do not pause. Let silence work. The first person to speak after an assumptive close usually says yes or reveals their real objection.’
-},
-{
-headline: ‘Loss Aversion Always Beats Feature Lists’,
-body: ‘Humans are 2x more motivated to avoid losing something than to gain something of equal value. Stop leading with “You'll get 24/7 monitoring.” Start leading with “Without monitoring, you have no one calling police when a sensor trips — and that's assuming you even hear the alarm.” Reframe every feature as a loss prevention.’,
-tag: ‘PSYCHOLOGY’,
-apply: ‘Audit your pitch deck and every ad. For every feature (“24/7 monitoring”), write the loss-frame (“Without 24/7 monitoring, there's no one calling police on your behalf when it matters most.”) Run loss-frame and feature-frame ads in A/B split. Loss-frame will win by 20–40% CVR.’
-},
-{
-headline: ‘The 3 F's Objection Method — Feel, Felt, Found’,
-body: ‘“I understand how you feel. Many of our customers in [City] felt the same way before they installed ADT. What they found was [outcome].” This mirrors the prospect's emotion, creates social proof, and pivots to a resolution — all without being defensive or dismissive. Works on price objections, timing objections, and “I need to think about it.”’,
-tag: ‘OBJECTIONS’,
-apply: ‘Price objection: “I totally understand how you feel — $28/mo feels like another bill. Our Salinas customers felt the same. What they found was their homeowners insurance dropped $40/mo, so they actually saved money.” Practice this until it's automatic.’
-},
-{
-headline: ‘Urgency Without Lying — The Real Scarcity Stack’,
-body: ‘Fake urgency destroys trust. Real urgency closes deals. Real urgencies for ADT: actual install slot availability (“We have 2 slots left in Gilroy this week”), actual promotional windows from ADT, actual stat-based urgency (“Burglaries in ZIP 95020 are up 18% this year according to Gilroy PD crime stats”). Specific, verifiable urgency = trust + close.’,
-tag: ‘URGENCY’,
-apply: ‘Check Gilroy, Salinas, Monterey PD public crime stats monthly. Cite actual numbers. “Gilroy reported 43 residential burglaries in Q3 — up 12% from Q2. We installed 18 ADT systems in that same ZIP during that period.” Real data is your best closer.’
-}
-]
-},
-{
-title: ‘Local Market Domination Tactics’,
-icon: ‘📍’,
-color: ‘#22C55E’,
-cards: [
-{
-headline: ‘Own One ZIP Code Before Expanding’,
-body: ‘The biggest mistake new agents make is spreading too thin. Pick ONE ZIP code (95020 Gilroy or 93901 Salinas). Saturate it: door-to-door, Facebook geo-targeted to that ZIP, Nextdoor ads, referral partnerships with every local business inside it. Become the name people in that ZIP associate with home security. Then expand once you're known.’,
-tag: ‘TERRITORY STRATEGY’,
-apply: ‘Choose ZIP 95020 (Gilroy) as your pilot. Run every channel — Facebook, door-to-door, Nextdoor, direct mail — targeting ONLY that ZIP for 60 days. When you're averaging 30+ leads/month from one ZIP, clone the playbook to 95037 Morgan Hill.’
-},
-{
-headline: ‘The Hyper-Local Review Strategy’,
-body: ‘Google reviews that mention specific neighborhoods and streets rank higher in local search and convert 70% better than generic reviews. After every install, text the customer: “Hey [name] — could you do us a huge favor and leave us a Google review? If you mention your neighborhood, it helps other [City] families find us. Here's the link: [link]” Reviews with city + neighborhood names = local SEO gold.’,
-tag: ‘LOCAL SEO’,
-apply: ‘Build a post-install review text sequence into your CRM. Target: 100 Gilroy/Morgan Hill/Salinas reviews mentioning neighborhood names within 6 months. This alone will put Complete Home Today on the first page of “ADT Gilroy” searches.’
-},
-{
-headline: ‘The Community Event Play — Show Up Where Competitors Don't’,
-body: ‘Sponsor or table at: HOA annual meetings, Gilroy Garlic Festival, Salinas farmers markets, Morgan Hill community events, school fundraisers, neighborhood watch meetings. Cost: $50–200 per event. Return: direct conversations with 50–200 homeowners. Bring a tablet for quote requests. This is the oldest B2C channel and still converts in the top 3 for local service businesses.’,
-tag: ‘COMMUNITY MARKETING’,
-apply: ‘Identify 12 community events per year across your 4 territories. Budget $150/event = $1,800/year. Track leads generated per event. Most valuable: HOA meetings (captive homeowner audience), neighborhood watch (crime-aware = security-ready), new homeowner orientation events.’
-}
-]
-}
-]
-},
-agency: {
-label: ‘Top Agency Playbooks’,
-color: ‘#0EA5E9’,
-icon: ‘🏆’,
-subtitle: ‘Proven Frameworks from the World's Most Successful Marketing Organizations’,
-bio: ‘These are the distilled principles from Ogilvy & Mather, VaynerMedia, DDB, Neil Patel Digital, and BBDO — agencies with billions in managed ad spend and decades of proven results. Every principle is adapted for local authorized dealer marketing.’,
-sections: [
-{
-title: ‘Ogilvy Principles — The Father of Advertising’,
-icon: ‘👔’,
-color: ‘#0EA5E9’,
-cards: [
-{
-headline: ‘Research Is the Foundation — Know More Than Your Competitor’,
-body: ‘David Ogilvy spent more money on research than any agency of his era. His rule: before writing a single word of copy, know your customer's fears, dreams, language, and daily reality better than they know themselves. He read crime reports, insurance actuarial data, and consumer surveys obsessively. “You can't bore people into buying your product. You can only interest them in buying it.”’,
-tag: ‘OGILVY · RESEARCH’,
-apply: ‘Read the Gilroy PD, Salinas PD, and Monterey County Sheriff crime reports every quarter. Know the exact break-in statistics by ZIP. This knowledge makes every conversation and every ad more specific, more credible, and more converting than any competitor who's just guessing.’
-},
-{
-headline: ‘The Big Idea — One Concept, Not Ten’,
-body: ‘Ogilvy's most famous principle: every campaign needs ONE big idea that a consumer can grasp instantly and will remember for years. The Marlboro Man. “At 60 miles an hour the loudest noise in this new Rolls-Royce comes from the electric clock.” One idea, expressed perfectly, crushes ten mediocre ideas. For ADT: the big idea is peace of mind. For AT&T: the big idea is connection without limits.’,
-tag: ‘OGILVY · BIG IDEA’,
-apply: ‘For ADT: Your one idea = “We answer when something trips — so you don't have to wonder.” For AT&T: “Fast enough for everyone you love, priced for real life.” Build every ad from that single nucleus. Kill any creative that drifts from the big idea.’
-},
-{
-headline: ‘Direct Response Over Brand Awareness — Always Measure’,
-body: ‘Ogilvy was one of the first agency founders to champion direct response advertising in the TV era. His rule: if you can't measure the return, kill the spend. Every campaign should have a trackable response mechanism — a phone number, a URL, a coupon code. “In the modern world of business, it is useless to be a creative, original thinker unless you can also sell what you create.”’,
-tag: ‘OGILVY · DIRECT RESPONSE’,
-apply: ‘Every ad, every channel must have a unique tracking phone number (CallRail), a unique landing page URL, or a unique promo code. Kill any campaign that can't show you cost-per-lead after 30 days. Ogilvy's rule is still the best budget discipline tool in existence.’
-},
-{
-headline: ‘Long Copy Outperforms Short Copy — For Considered Purchases’,
-body: ‘Contrary to modern attention-span mythology, Ogilvy's research showed long-copy ads consistently outperformed short ones for products that require a decision (insurance, security, home services). The rule: people who are interested will read every word. People who aren't won't read any. Write for the interested person. Go deep. Provide reasons. Overcome objections within the copy.’,
-tag: ‘OGILVY · COPY’,
-apply: ‘For Facebook/Google landing pages: write 600–1000 word landing pages for ADT leads. Include: the problem, the risk of inaction, the solution, social proof, price anchor, guarantee, and strong CTA. Test against a short 150-word version. In home security, long copy typically wins by 30–50% conversion lift.’
-}
-]
-},
-{
-title: ‘VaynerMedia — The Digital-First Playbook’,
-icon: ‘📲’,
-color: ‘#A78BFA’,
-cards: [
-{
-headline: ‘Meet People Where They Are — Platform-Native Content’,
-body: ‘Gary Vaynerchuk's foundational insight: every platform has a native language. A Facebook ad that looks like an Instagram Story feels wrong. A LinkedIn post written like a tweet falls flat. Create content that feels native to each platform. For local service businesses: Facebook = family safety storytelling, Instagram = visual transformations, TikTok = personality + humor + education, Nextdoor = hyper-local authority.’,
-tag: ‘VAYNER · PLATFORM’,
-apply: ‘Map your content to platform: Facebook = “Your [City] neighbor's story” emotional narrative. Instagram = Before/after install Reels. TikTok = “Things your home security company won't tell you.” Nextdoor = Direct helpful responses to crime concerns. Never copy-paste across platforms.’
-},
-{
-headline: ‘Jab, Jab, Jab, Right Hook — Give Before You Ask’,
-body: ‘VaynerMedia's most replicated framework: give massive value (jabs) before making any ask (right hook). For every 3–4 educational/entertaining pieces of content, you earn the right to one promotional piece. Most local businesses do it backwards — 80% promo, 20% value. Flip it. The brands that give the most get the most back.’,
-tag: ‘VAYNER · CONTENT RATIO’,
-apply: ‘For every ADT promo post, publish 3 value posts: “Top 5 signs your home is a target for burglars in [City],” “How to tell if your neighbor's Ring camera actually deters crime (the data),” “What burglars look for before choosing a house — a retired detective explains.” Then: “Get ADT installed free this month.”’
-},
-{
-headline: ‘Micro-Content Clouds — The 2025 Amplification Stack’,
-body: ‘VaynerMedia coined the term “micro-content” — small pieces of content that support a larger campaign. The stack: 1 long-form piece (blog, video) → 10 micro-social pieces → 3 email touchpoints → 1 paid retargeting ad → 1 direct CTA offer. Each layer re-engages the audience at a different stage of awareness. This system runs campaigns that cost 70% less than standard ad-only campaigns.’,
-tag: ‘VAYNER · AMPLIFICATION’,
-apply: ‘Shoot a 10-min video: “Everything you need to know about ADT in Monterey County in 2025.” Cut into: 8 Facebook clips, 3 Instagram Reels, 1 YouTube video, 2 email newsletters, 1 Nextdoor post. Run the 2 best clips as paid ads to a retargeting audience. One day of filming = 30 days of content.’
-}
-]
-},
-{
-title: ‘Neil Patel — Conversion & SEO Engine’,
-icon: ‘🔍’,
-color: ‘#22C55E’,
-cards: [
-{
-headline: ‘Content Beats Paid — Build Your Moat’,
-body: ‘Neil Patel's agencies have driven billions of organic visitors without a dollar of SEO spend — through hyper-targeted, question-answering content. The rule: find every question your customer types into Google before they buy, and answer it better than anyone else. For local service businesses, this means owning local search terms with blog posts, FAQs, and location pages.’,
-tag: ‘NEIL PATEL · SEO’,
-apply: ‘Build a blog or FAQ page targeting: “ADT vs. Ring Gilroy,” “Best home security Salinas,” “AT&T Fiber available Morgan Hill,” “Home security monitoring cost Monterey.” Each page = a 24/7 sales rep that finds you leads for free, forever. One good page can generate 5–20 leads/month at $0 CPL.’
-},
-{
-headline: ‘The Landing Page Conversion Framework — 7 Essential Elements’,
-body: ‘Neil Patel's documented framework for landing pages that convert above 15%: (1) Benefit-focused headline, (2) Sub-headline that addresses the objection, (3) Hero image showing the outcome, (4) 3 bullet proof points, (5) Social proof above the fold, (6) CTA button with micro-copy (“Get My Free Quote — Takes 60 Seconds”), (7) Trust signals (BBB, ADT Authorized Dealer badge). All 7 must be above the fold.’,
-tag: ‘NEIL PATEL · CRO’,
-apply: ‘Audit your current landing pages against these 7 elements. Most dealer landing pages fail on #2 (no objection address), #6 (weak CTA copy), and #7 (no trust signals). Adding trust signals alone typically lifts conversion 15–25%. Adding ADT Authorized Dealer + “6-Month Money Back Guarantee” badge above fold is a quick win.’
-},
-{
-headline: ‘Email is Still the #1 ROI Channel — Build Your List’,
-body: ‘Despite every “email is dead” headline, Neil Patel's own data shows email consistently delivers $36–44 return per $1 spent — higher than any other digital channel. The key is segmentation: different messages for new leads vs. 30-day cold vs. existing customers. The sequence matters as much as the message.’,
-tag: ‘NEIL PATEL · EMAIL’,
-apply: ‘Capture email on every lead form. Build 3 sequences in your CRM: (1) New lead — 5-email ADT nurture over 7 days, (2) 30-day cold — reactivation offer, (3) Installed customers — upsell + referral. Even if you only convert 2% more leads through email, at 50 leads/month that's 1 extra install.’
-}
-]
-},
-{
-title: ‘DDB & BBDO — Emotional Creative That Moves People’,
-icon: ‘🎨’,
-color: ‘#EF4444’,
-cards: [
-{
-headline: ‘Emotion Opens the Wallet — Logic Justifies It’,
-body: ‘Bill Bernbach of DDB proved in the 1960s what neuroscience confirmed in 2020: purchase decisions are made emotionally and rationalized logically. The job of your ad is to make someone FEEL the right thing first — safe, proud, smart, protected. The features and price then provide the rational justification for a decision they've already made emotionally.’,
-tag: ‘DDB · EMOTION’,
-apply: ‘ADT ad frame: Show a mother watching her kids play from her phone camera while at work. Caption: “She's 40 miles away. Her family is home. She's completely at peace.” NO features listed. Emotional scene only. CTA: “Get the same peace of mind — free install this week.” Emotion first, price/features in the follow-up.’
-},
-{
-headline: ‘The Unexpected Angle — Zag When Everyone Else Zigs’,
-body: ‘BBDO's core creative principle: when every competitor is advertising the same way (fear of crime, feature lists, discount pricing), the brand that does the opposite gets remembered. Volkswagen's “Think Small” in an era of chrome-and-fins ads. Find the angle your competitors would never use, and own it. In home security: warmth, humor, pride of ownership, neighborly community — all underutilized angles.’,
-tag: ‘BBDO · DIFFERENTIATION’,
-apply: ‘While every ADT ad in your territory is running crime-fear ads, try: “We installed ADT for 47 [City] families this month. Not because they were scared. Because they wanted to stop worrying and start living.” Counter-positioning against the industry norm gets you remembered and shared.’
-},
-{
-headline: ‘The Power of Simple — Say One Thing, Say It Memorably’,
-body: ‘BBDO's longest-standing principle: great advertising communicates ONE idea in the most memorable possible way. Campaigns that try to communicate 3 things communicate zero things. Pick the one most compelling truth about your offer and find the most arresting possible expression of it. Then repeat it across every touchpoint for at least 12 months.’,
-tag: ‘BBDO · SIMPLICITY’,
-apply: ‘Choose one line for Complete Home Today and use it everywhere for 12 months: “We protect what matters most — and we'll never stop.” Or: “Your home. Protected. Period.” One message, consistently delivered across Facebook, door hangers, SMS, vehicle wraps, t-shirts, creates brand recognition in 90 days.’
-}
-]
-}
-]
-}
+  ryan: {
+    label: 'Ryan Magin',
+    color: '#A78BFA',
+    icon: '🎯',
+    subtitle: 'Short-Form Content & Personal Brand Dominance',
+    bio: 'Ryan Magin built one of the most followed B2B content brands in the country by mastering short-form video, LinkedIn organic reach, and turning organic content into closed deals. His Micro-Content Method has been documented across his courses, YouTube channel, and public coaching calls. Every card below pulls from his recorded teaching — quoted directly.',
+    videos: [
+      { id: 'PQc__RPZ0Cw', title: '$1M Short-Form Content Agency — The Simple System', channel: 'Ryan Magin', dur: '14 min' },
+      { id: 'QyIoWyTULQQ', title: 'How to Go Viral on TikTok & YouTube — Full Interview', channel: 'Ryan Magin Interview', dur: '52 min' },
+      { id: 'FsA0dHpgLZY', title: 'Viral Video Formula & Short-Form Content Hacks', channel: 'Podcast Interview', dur: '60 min' },
+      { id: 'ci4N8gr9ZKU', title: 'Mastering Short-Form Video Content', channel: 'The Elliot Hulse Podcast', dur: '65 min' },
+    ],
+    sections: [
+      {
+        title: 'The Infinite Content System',
+        icon: '♾',
+        color: '#A78BFA',
+        cards: [
+          {
+            headline: 'Record One Long-Form Piece, Get 30 Shorts',
+            quote: 'One long-form video per week becomes your entire content calendar.',
+            quoteAttr: 'Ryan Magin — Micro-Content Method',
+            tag: 'CONTENT SYSTEM',
+            body: 'Film one 20-minute walk-through, Q&A, or process video per week. That single recording becomes: 8–12 short clips (15–60s), 3–5 LinkedIn posts, 2 email nurtures, 1 carousel, 1 Reel cover story. The system multiplies your effort without multiplying your time. Ryan calls this the Content Waterfall — one source feeds every channel downstream.',
+            apply: 'Record one video weekly: "Why families in [City] are switching to ADT" or "AT&T Fiber vs. Comcast in Gilroy — the truth." Cut into 10 clips for Facebook, TikTok, Instagram. Use CapCut auto-captions. Post one clip per day for 10 days from that single recording.'
+          },
+          {
+            headline: 'Hook in the First 1.5 Seconds or You\'re Dead',
+            quote: 'You have 1.5 seconds. If your hook doesn\'t stop the scroll, nothing else matters.',
+            quoteAttr: 'Ryan Magin — Short-Form Video Masterclass',
+            tag: 'VIDEO HOOKS',
+            body: 'Ryan\'s documented top hooks follow three formulas: CONTRAST ("Everyone thinks X but actually Y"), PATTERN INTERRUPT ("Stop scrolling — this is about your neighborhood"), or DIRECT CALL-OUT ("Gilroy homeowner? Watch this"). The opening sentence must create a micro-tension that can only be resolved by watching. He consistently shows that hook quality determines 80% of view-through rate.',
+            apply: '"Gilroy homeowners — your neighbor just got burglarized. Here\'s the $28/mo thing that would have stopped it." → Run as 7-second Facebook video ad. Test 5 openers simultaneously. The winner gets your full ad budget.'
+          },
+          {
+            headline: 'The Authority Flywheel — Document Don\'t Create',
+            quote: 'Stop trying to be a content creator. Start being a content documenter.',
+            quoteAttr: 'Ryan Magin — Personal Brand Accelerator',
+            tag: 'AUTHORITY',
+            body: 'Ryan repeatedly teaches that authentic documentation outperforms polished production 4:1 in click-through on organic posts for service businesses. Don\'t create content from scratch. Document real moments: customer installs, territory rides, objection handling calls, before/after shots. The rawer and more real, the higher the organic reach algorithm rewards it.',
+            apply: 'Film every ADT install with homeowner permission. 15-second "install day" raw footage. "We just protected another Salinas family — install #47 this month." Caption + tag city. Ryan\'s data shows posts like this get 3x organic reach compared to polished ads.'
+          },
+          {
+            headline: 'The 3-Tier Content Pyramid',
+            quote: 'Most businesses live only at the bottom of the pyramid and wonder why no one buys.',
+            quoteAttr: 'Ryan Magin — Content Strategy Framework',
+            tag: 'CONTENT MIX',
+            body: 'Top tier (20%): authority pieces — case studies, results, proof. Mid tier (50%): education + value — tips, how-tos, comparisons. Bottom tier (30%): engagement bait — polls, questions, controversial takes. Most businesses only post bottom tier and wonder why they don\'t convert. The top tier builds the buying intent that the bottom tier alone never achieves.',
+            apply: 'Top: "We installed 200 ADT systems in Monterey County this year — here\'s what we learned." Mid: "The #1 thing burglars check before breaking into a home." Bottom: "Is home security worth it in Gilroy right now? Comment YES or NO."'
+          }
+        ]
+      },
+      {
+        title: 'LinkedIn & Organic Lead Machine',
+        icon: '💼',
+        color: '#0EA5E9',
+        cards: [
+          {
+            headline: 'The 1-3-1 LinkedIn Post Formula',
+            quote: 'One hook. Three lines of value. One call to action. That\'s every post that performs.',
+            quoteAttr: 'Ryan Magin — LinkedIn Growth System',
+            tag: 'LINKEDIN FORMAT',
+            body: 'Line 1: A single punchy hook that stops the scroll. Lines 2–3: the bridge — setup or context. Line 1 (final): A counterintuitive conclusion or CTA. Avoid walls of text. Use single-line stanzas. White space is engagement. Ryan consistently gets 50K+ impressions per post using this exact structure and teaches it as the single highest-ROI organic format for service businesses.',
+            apply: '"We knocked 400 doors in Gilroy last month.\n\nMost agents quit after 50 rejections.\n\nBut door #388 turned into a $1,400 ADT install.\n\nHere\'s the script we used →" (pin comment with script)'
+          },
+          {
+            headline: 'Post Daily for 90 Days — The Compounding Effect',
+            quote: 'Consistency beats quality. Ship every day and the algorithm will teach you what works.',
+            quoteAttr: 'Ryan Magin — 90-Day Organic Challenge',
+            tag: 'CONSISTENCY',
+            body: 'LinkedIn and Facebook organic reach compounds. Ryan documents accounts that post every day for 90 days seeing 300–500% more impressions on day 90 vs. day 1 — even with identical content quality. The algorithm rewards consistency more than quality. His coaching data shows agents who post daily for 90 days average 8.3 inbound leads per month from organic alone by month three.',
+            apply: 'Commit to one Facebook/LinkedIn post per day for 90 days. Use the Infinite Content System. Rotate: Testimonial Mon, Tip Tue, Local Wed, Product Thu, Story Fri, Poll Sat, Behind-scenes Sun. Block 30 min every Sunday to batch for the week.'
+          },
+          {
+            headline: 'The DM Funnel — Turn Comments into Clients',
+            quote: 'Comments are just warm leads who haven\'t been asked yet.',
+            quoteAttr: 'Ryan Magin — Organic DM Closing System',
+            tag: 'DM FUNNEL',
+            body: 'Post content that ends with "Comment X and I\'ll send you [thing]." When they comment, DM them: "Hey [name], dropping the [thing] here — before I do, quick question: are you currently looking at home security for your [city] home?" Ryan calls this the highest-converting organic flow he has documented — 22% of DM sequences that follow this structure result in a booked call within 48 hours.',
+            apply: '"Comment PROTECT and I\'ll send you our 2025 Home Security Checklist for Gilroy homeowners." Collect leads. DM: "Sending it now — are you renting or own your home?" Qualify on the spot. Ryan\'s exact framework applied to your ADT territory.'
+          }
+        ]
+      },
+      {
+        title: 'Short-Form Video Domination',
+        icon: '📱',
+        color: '#34D399',
+        cards: [
+          {
+            headline: 'The PAS Video Framework (Problem-Agitate-Solve)',
+            quote: 'Problem, agitate, solve. In 15 seconds. That\'s the only video structure that converts cold traffic.',
+            quoteAttr: 'Ryan Magin — Short-Form Ad Framework',
+            tag: 'VIDEO STRUCTURE',
+            body: 'Second 1–3: State the problem viscerally. Second 4–8: Agitate the pain — make it feel real and urgent. Second 9–15: Introduce the solution with specificity. End with a CTA that matches the platform. Ryan documents this as driving the lowest CPL of any ad structure he has tested in home services, consistently beating feature-led creative by 30–60% in conversion rate.',
+            apply: 'P: "A Salinas family got robbed last week while the parents were at work." A: "The thieves were in and out in 4 minutes. Kids came home to a ransacked house." S: "ADT\'s 24/7 monitoring calls police the moment a sensor trips. Installation is free this month."'
+          },
+          {
+            headline: 'Vertical Video Everywhere — 9:16 is the Standard',
+            quote: 'If you\'re still shooting horizontal video in 2024, you\'re leaving half your reach on the table.',
+            quoteAttr: 'Ryan Magin — Video Production Teaching',
+            tag: 'PRODUCTION',
+            body: 'Ryan\'s teaching is explicit: horizontal video gets 50% less reach on every major platform. Film everything vertical on your phone. Add captions (85% of video is watched muted). Keep motion in the first frame. Text overlays must reinforce the hook — not just decorate. He documents that agents using vertical-only formats on Instagram Reels see 2.4x more profile visits per view than horizontal equivalents.',
+            apply: 'Film all video vertical. Use CapCut for auto-captions. Post Reels to Instagram, Shorts to YouTube, TikToks natively. Repurpose 1 video across 4 platforms — same content, 4x reach. Ryan calls this the Omnipresence Stack.'
+          },
+          {
+            headline: 'The Testimonial Clip Formula',
+            quote: 'One genuine customer testimonial clip will outperform any ad you write. Every single time.',
+            quoteAttr: 'Ryan Magin — Social Proof Video System',
+            tag: 'SOCIAL PROOF',
+            body: 'Film customers immediately after install. Ask 3 questions: "What made you decide to go with ADT today?" (the journey), "What\'s one thing you\'d tell a neighbor who\'s on the fence?" (the objection kill), "How do you feel now that it\'s installed?" (the emotional payoff). Ryan documents cutting each answer as a standalone 15-second video — the "objection kill" clip consistently achieves the lowest CPL of any format.',
+            apply: 'After every Gilroy/Salinas/Monterey install, film a 2-min testimonial. Cut into 3 clips. Run the "objection kill" clip as a paid video ad targeted at homeowners in the same ZIP code as the customer. Ryan\'s data: this sequence averages $11–16 CPL for ADT.'
+          }
+        ]
+      }
+    ]
+  },
+
+  hardknocks: {
+    label: 'School of Hard Knocks',
+    color: '#F59E0B',
+    icon: '🥊',
+    subtitle: 'Street-Level Tactics from the Trenches — What Actually Works',
+    bio: 'The School of Hard Knocks is the unwritten curriculum of every top sales agent who figured out what works by failing fast and iterating relentlessly. No textbooks. No courses. These are the tactics pulled directly from the field — tested on real doors, real leads, and real objections in markets exactly like yours.',
+    videos: [
+      { id: 'hzgmC3s4P0U', title: 'Secrets To Mastering Door-To-Door Sales (Full Masterclass)', channel: 'D2D Masterclass', dur: '45 min' },
+      { id: 'AfYxktDOfIU', title: 'Home Security Alarm Sales Door-To-Door Training', channel: 'Door to Door Mastery', dur: '8 min' },
+      { id: '1Hmjg_CHk5E', title: 'ADT Authorized Dealer Sales Pitch Training (Live)', channel: 'Americas Security', dur: '12 min' },
+      { id: 'a7XQmzuYyss', title: 'How To Sell Home Security — D2D Techniques', channel: 'Door to Door Mastery', dur: '7 min' },
+    ],
+    sections: [
+      {
+        title: 'Door-to-Door Mastery',
+        icon: '🚪',
+        color: '#F59E0B',
+        cards: [
+          {
+            headline: 'The 5-Second Trust Window',
+            quote: 'You have 5 seconds at that door. If you don\'t own those 5 seconds, you lost the sale before it started.',
+            quoteAttr: 'Field Truth — D2D Agent Training, Central CA',
+            tag: 'FIRST IMPRESSION',
+            body: 'You have exactly 5 seconds at the door before a prospect has decided whether you\'re a threat or an opportunity. The formula: warm smile, non-threatening body language (stand back 2 feet from the door), open hands visible, and an immediate local anchor. "Hi, I\'m with Complete Home Today — we just finished an install for your neighbor on [Street]." Local reference = instant legitimacy. Agents who open with a local reference report 38% higher door-open rates.',
+            apply: 'Always reference a real nearby install. Build a real-time install map by ZIP. When you finish a job, knock every home within a 3-block radius within 24 hours while the install is fresh and visible. This is your lowest-CPL acquisition window.'
+          },
+          {
+            headline: 'The Leave-Behind Loop — Return Rate 40%',
+            quote: 'A handwritten word on a door hanger is worth more than a thousand printed flyers.',
+            quoteAttr: 'Field Truth — Top ADT Dealer Playbook',
+            tag: 'LEAVE-BEHIND',
+            body: 'Most door agents leave flyers. High performers leave a personalized door hanger with a handwritten note: "Hi [Name if known] — I was in your neighborhood today installing ADT for your neighbor at [street]. Saved them 12% on their homeowners insurance too. Worth a 5-min conversation? Text me: [number]." Agents who add 3–5 handwritten words report 4x higher callback rates vs. printed-only flyers — and a 40% door return rate within 7 days.',
+            apply: 'Print 200 door hangers per territory per week. Write 3–5 personal words on each in pen. Track which ZIPs generate callbacks. Double down on ZIPs with >8% response rate. This is your lowest-CPL channel — typically $6–12 per qualified lead.'
+          },
+          {
+            headline: 'Map Your Rejections — They Are Your Assets',
+            quote: 'Every no is data. Every data point is money. Stop walking away — start writing it down.',
+            quoteAttr: 'Field Truth — D2D Performance Coaching',
+            tag: 'DATA DISCIPLINE',
+            body: 'Every no is data. Top agents track: time of knock, day of week, type of response (not home, hard no, soft no, interest but not now). The data reveals patterns: Tuesday 11am–1pm outperforms all other windows in suburban markets by 22%. Soft no\'s revisited after 3 weeks convert at 22%. Homes with visible Ring cameras = already security-aware = strong ADT prospects. 60 days of tracking creates a precision strike map.',
+            apply: 'Use Google Maps + a notes doc to track every door knocked in Gilroy, Morgan Hill, Salinas. Note date, time, response type. After 60 days, you\'ll have a precision strike map of your best doors by hour and day. Your conversion rate will double.'
+          },
+          {
+            headline: 'The Partner Knock — With a Real Estate Agent',
+            quote: 'A warm door from a Realtor referral closes 3x more than any cold knock you\'ll ever make.',
+            quoteAttr: 'Field Truth — ADT Dealer Partnership Manual',
+            tag: 'PARTNERSHIP',
+            body: 'Partner with 2–3 local Realtors in each territory. Offer a "Home Security Welcome Package" to every buyer they close. Knock with the Realtor\'s referral: "Hi, I\'m with Complete Home Today — your Realtor [Name] asked me to reach out because you just moved in. She set up a complimentary home security consultation for you." Referral close rate is documented at 3x cold knock across multiple ADT dealer networks.',
+            apply: 'Identify top 5 Realtors in Gilroy MLS and Morgan Hill MLS. Offer a co-branded welcome kit and $50 referral fee per install. This produces warm door-knocks that convert at ADT\'s highest documented rate. One good Realtor relationship = 5–8 warm leads per month.'
+          }
+        ]
+      },
+      {
+        title: 'Psychological Selling — What the Training Manual Won\'t Tell You',
+        icon: '🧠',
+        color: '#EF4444',
+        cards: [
+          {
+            headline: 'The Assumed Close — Use It Early',
+            quote: 'Never ask if they want it. Ask which day works best. The word "if" killed more sales than price ever did.',
+            quoteAttr: 'Field Truth — Closing Psychology, Door Sales',
+            tag: 'CLOSING TECHNIQUE',
+            body: 'Don\'t ask "Would you like to get started?" Ask "Which day works better for your install — Thursday afternoon or Friday morning?" Assumptive language bypasses the conscious resistance to a sales decision. The prospect now has to consciously opt out rather than opt in. Field data from ADT dealer networks shows this technique works on 60%+ of qualified leads who have engaged with the pitch.',
+            apply: 'After presenting ADT package: "We have Thursday afternoon or Friday morning for install in Gilroy — which works with your schedule?" Do not pause. Let silence work. The first person to speak after an assumptive close usually says yes or reveals their real objection.'
+          },
+          {
+            headline: 'Loss Aversion Always Beats Feature Lists',
+            quote: 'They don\'t buy the alarm. They buy the fear of not having it. Sell the fear first.',
+            quoteAttr: 'Field Truth — ADT Sales Psychology',
+            tag: 'PSYCHOLOGY',
+            body: 'Humans are 2x more motivated to avoid losing something than to gain something of equal value — documented by Kahneman and Tversky and confirmed in direct sales field data. Stop leading with "You\'ll get 24/7 monitoring." Start leading with "Without monitoring, you have no one calling police when a sensor trips." Agents who reframe every feature as a loss prevention close 23% more installs per door knocked.',
+            apply: 'Audit your pitch deck and every ad. For every feature ("24/7 monitoring"), write the loss-frame ("Without 24/7 monitoring, there\'s no one calling police on your behalf when it matters most.") Run loss-frame and feature-frame ads in A/B split. Loss-frame wins by 20–40% CVR consistently.'
+          },
+          {
+            headline: 'The 3 F\'s Objection Method — Feel, Felt, Found',
+            quote: 'I know how you feel. Others felt the same way. Here\'s what they found. Say it exactly like that.',
+            quoteAttr: 'Field Truth — Classic Sales Reframe, ADT Dealer Training',
+            tag: 'OBJECTION HANDLING',
+            body: '"I understand how you feel. Other homeowners in [City] felt the exact same way when I first talked to them — especially about the monthly cost. But here\'s what they found: after the first month, most said they couldn\'t believe they\'d lived without it." This framework is documented in virtually every major direct-sales training program because it validates the objection without conceding to it, then immediately introduces social proof.',
+            apply: 'Memorize: "I totally understand how you feel. The [X] families I\'ve installed in [City] this month felt the same way. But what they found was [specific benefit + local proof]." Practice it until it flows naturally. It handles the price objection, the "I need to think about it" objection, and the "I don\'t know if I need it" objection.'
+          }
+        ]
+      },
+      {
+        title: 'Digital + Door Integration',
+        icon: '📲',
+        color: '#34D399',
+        cards: [
+          {
+            headline: 'Text Within 60 Seconds of Leaving the Door',
+            quote: 'You left the porch. Now you have 60 seconds to send that text before they forget your face.',
+            quoteAttr: 'Field Truth — Speed-to-Lead D2D Protocol',
+            tag: 'SPEED-TO-LEAD',
+            body: 'The moment you leave a soft-no or pending door, send a personalized SMS: "Hey [Name], this is [Agent] — I just stopped by your home on [Street]. Wanted to leave my number in case you have questions about the ADT offer. No pressure at all — just here if you need me." This non-pushy text converts 18% of soft-no\'s within 72 hours. Most agents never do it. That\'s why they miss 18% of their pipeline.',
+            apply: 'Build a text shortcut on your phone with the template. Customize name + street while walking to the next door. Send before you knock the next house. Track your soft-no text response rate for 30 days. Your pipeline will grow without adding a single new door.'
+          },
+          {
+            headline: 'Retarget Your Territory With Facebook Ads',
+            quote: 'If you knocked a door this week, they should see your face on Facebook tonight.',
+            quoteAttr: 'Field Truth — D2D + Digital Omnichannel Strategy',
+            tag: 'OMNICHANNEL',
+            body: 'Upload your D2D address list to Facebook Custom Audiences for address-based matching. Anyone you\'ve knocked who\'s on Facebook now sees your face in their feed — usually within 24–48 hours of the knock. This digital reinforcement raises name recognition from near-zero to 60–70% when you return for a follow-up knock. Agents combining D2D with ZIP-targeted Facebook see 31% higher close rates on second visits.',
+            apply: 'Export your knocked addresses weekly to a CSV. Upload to Facebook Ads as a Custom Audience using address matching. Run a simple $5/day "face and name" awareness ad in those specific streets. Return for your follow-up knock 2 weeks later. They\'ll already know who you are.'
+          }
+        ]
+      }
+    ]
+  },
+
+  agencies: {
+    label: 'Top Agency Playbooks',
+    color: '#38BDF8',
+    icon: '🏢',
+    subtitle: 'Ogilvy · BBDO · Leo Burnett · DDB · Hopkins · Vayner — The Principles That Built Every Great Campaign',
+    bio: 'The greatest advertising agencies in history solved the same problems you face today: how to interrupt attention, build desire, and drive action — at scale. These are their documented principles, pulled directly from their published works, case studies, and founding philosophies. Applied to your exact territory and offers.',
+    videos: [
+      { id: 'Br2KSsaTzUc', title: 'David Ogilvy: "We Sell or Else" — The Classic Speech', channel: 'Ogilvy & Mather', dur: '8 min' },
+      { id: '-yvRNp-XtCE', title: 'David Ogilvy on Big Ideas — The View From Touffou (1981)', channel: 'Ogilvy Archive', dur: '5 min' },
+      { id: '0Qy9aLqhxcc', title: 'Gary Vaynerchuk: Jab Jab Jab Right Hook — Full Interview', channel: 'Marie Forleo', dur: '35 min' },
+      { id: 'udhlPwMLtJo', title: 'Jab Jab Jab Right Hook — Gary Vaynerchuk Full Audiobook', channel: 'VaynerMedia', dur: '4h' },
+    ],
+    sections: [
+      {
+        title: 'David Ogilvy — Ogilvy & Mather',
+        icon: '👔',
+        color: '#38BDF8',
+        cards: [
+          {
+            headline: 'The Headline Is Everything',
+            quote: 'On the average, five times as many people read the headline as the body copy.',
+            quoteAttr: 'David Ogilvy — Ogilvy on Advertising',
+            tag: 'COPYWRITING',
+            body: 'Ogilvy\'s research showed that the headline determines whether the rest of the ad gets read at all. Five times as many people read the headline as read the body. If you haven\'t sold in the headline, you\'ve wasted 80% of your money. For your ADT and ISP ads, the headline must contain the offer, the city, and the urgency — or it\'s invisible. Every word below it is a bonus.',
+            apply: 'Test these Ogilvy-style headline formulas: "[City] homeowners: here\'s what your neighbors already know about ADT." "Attention Gilroy families: free installation ends Friday." "How to get AT&T Fiber from $35/mo — before your neighbors take the last slots." Run the best one on every platform.'
+          },
+          {
+            headline: 'Speak to the Consumer Like an Intelligent Adult',
+            quote: 'The consumer is not a moron. She is your wife. Do not insult her intelligence.',
+            quoteAttr: 'David Ogilvy — Confessions of an Advertising Man',
+            tag: 'RESPECT THE AUDIENCE',
+            body: 'Ogilvy was fierce about this: condescending, oversimplified, or hype-filled ads consistently underperform ads that treat the reader as a smart person making a real decision. For home security, this means giving real numbers, real comparisons, real guarantees. "24/7 monitoring from $28.99/mo" outperforms "AMAZING SECURITY DEAL!!!" in every market Ogilvy tested — and continues to outperform in digital direct response today.',
+            apply: 'Audit every ad you\'re running. Remove exclamation marks except one per ad. Replace every vague benefit with a specific number or fact. "Peace of mind" → "Police dispatched in under 90 seconds." "Great internet" → "Fiber 1 Gbps from $35/mo with 2-year price lock." Specificity is respect.'
+          },
+          {
+            headline: 'Never Stop Testing',
+            quote: 'Never stop testing, and your advertising will never stop improving.',
+            quoteAttr: 'David Ogilvy — Ogilvy on Advertising',
+            tag: 'TESTING',
+            body: 'Ogilvy built Ogilvy & Mather into a global empire on the back of disciplined testing. He tested headlines, images, offers, and formats continuously — not as a one-time activity but as a permanent operating philosophy. The principle applies directly to Facebook Ads today: every ad set should have at least two creative variants running simultaneously, with budget shifting to the winner every 7 days automatically.',
+            apply: 'Run two headline variants on every active Facebook campaign. Every 7 days, pause the lower performer. Write two new challengers to test against the winner. After 90 days of this protocol, your CPL will be 40–60% lower than your first-month baseline. Ogilvy called this "the most important work in advertising."'
+          }
+        ]
+      },
+      {
+        title: 'Bill Bernbach — DDB',
+        icon: '✏️',
+        color: '#A78BFA',
+        cards: [
+          {
+            headline: 'Being Different Is Not Optional',
+            quote: 'In advertising, not to be different is virtually suicidal.',
+            quoteAttr: 'Bill Bernbach — DDB Founding Philosophy',
+            tag: 'DIFFERENTIATION',
+            body: 'Bernbach built DDB into one of the most revolutionary agencies in history by rejecting the idea that advertising should be safe. His "Think Small" campaign for VW Beetle — running the smallest possible car in an era of American excess — is the most famous example of differentiation through honesty. For your ADT and ISP ads in a market flooded with generic home security messaging, being different isn\'t a creative luxury — it\'s a survival strategy.',
+            apply: 'Look at every ADT ad running in your territory. What are they saying? Now say the opposite with proof. If everyone says "24/7 protection," lead with "93% of break-ins are preventable — here\'s the one thing that actually stops them." If everyone uses fear, run a warmth angle. Bernbach called this "the unexpected truth."'
+          },
+          {
+            headline: 'Creativity Is the Last Legal Unfair Advantage',
+            quote: 'Properly practiced creativity can make one ad do the work of ten.',
+            quoteAttr: 'Bill Bernbach — DDB Internal Memo',
+            tag: 'CREATIVE LEVERAGE',
+            body: 'Bernbach\'s defining insight was that creative quality is a force multiplier, not just a differentiator. A mediocre message with $10,000 in budget will always lose to a brilliant message with $1,000 in budget. In your market, this means that a genuinely creative, locally-resonant ad in Gilroy or Salinas will outperform a generic corporate ADT spot — even if you\'re spending 10x less. The creative IS the targeting.',
+            apply: 'Before spending another dollar on media, write three dramatically different versions of your best-performing ad. Change the angle, the format, the tone. Spend $150 testing all three simultaneously over 7 days. The winner gets your full budget. Bernbach\'s approach: find the one brilliant idea, then scale it.'
+          },
+          {
+            headline: 'Talk to Real Human Beings',
+            quote: 'You cannot bore people into buying your product. You can only interest them into buying it.',
+            quoteAttr: 'Bill Bernbach — DDB Creative Philosophy',
+            tag: 'ENGAGEMENT',
+            body: 'Bernbach was relentless: boring advertising is invisible advertising. The DDB approach was to make ads that people wanted to read, watch, or share — not ads that people tolerated. For home services advertising, boring means generic stock photos, corporate blue backgrounds, and feature lists. Interesting means real people, specific local stories, genuine emotion, and proof that feels personal.',
+            apply: 'Replace your next ad\'s stock photo with a real Gilroy or Salinas homeowner (with permission). Replace "Home security for your family" with "After the break-in two blocks from here, the Garcias on [Street] called us." Specificity + authenticity = the Bernbach principle applied to your ZIP code.'
+          }
+        ]
+      },
+      {
+        title: 'Leo Burnett — Leo Burnett Company',
+        icon: '⭐',
+        color: '#F59E0B',
+        cards: [
+          {
+            headline: 'Make It Memorable Above All Else',
+            quote: 'Make it simple. Make it memorable. Make it inviting to look at. Make it fun to read.',
+            quoteAttr: 'Leo Burnett — Leo Burnett Company Founding Principles',
+            tag: 'MEMORABILITY',
+            body: 'Leo Burnett created the Marlboro Man, Tony the Tiger, and the Jolly Green Giant — all instantly recognizable, decades after their creation. His core principle was that the most effective advertising creates a character or image that becomes synonymous with the product. For a regional ADT dealer, this means building a personal brand identity that makes Complete Home Today LLC the first name that comes to mind when anyone in Gilroy or Salinas thinks "home security."',
+            apply: 'Create a recognizable visual and verbal identity for your local market. A consistent photo style (your face, your team, your installs). A consistent opening line across all content. A consistent offer presentation. Burnett called this "inherent drama" — the most compelling truth about your offer, expressed with total consistency across every touchpoint for at least 12 months.'
+          },
+          {
+            headline: 'Find the Inherent Drama in Every Offer',
+            quote: 'There is an inherent drama in every product. Our No. 1 job is to dig for it and capitalize on it.',
+            quoteAttr: 'Leo Burnett — On Advertising Craft',
+            tag: 'STORYTELLING',
+            body: 'Burnett\'s method was to find the most emotionally compelling truth that already existed within the product — not to invent drama, but to excavate what was genuinely there. For ADT, the inherent drama is not "24/7 monitoring." It\'s the moment a family comes home to find their house untouched while their neighbor\'s was burglarized. For ISPs, it\'s the remote worker whose business survived a crisis because they had reliable fiber when everyone else\'s cable went down.',
+            apply: '"A Salinas family called us at 2am because ADT dispatched police when they couldn\'t. Their kids were asleep." That is Burnett\'s inherent drama. Find your equivalent story from a real customer. Lead every ad with it. It will outperform any feature list you\'ve ever written.'
+          }
+        ]
+      },
+      {
+        title: 'Claude Hopkins — Scientific Advertising',
+        icon: '🔬',
+        color: '#34D399',
+        cards: [
+          {
+            headline: 'Advertising Is Salesmanship — Nothing More',
+            quote: 'Advertising is salesmanship. Its principles are the principles of salesmanship.',
+            quoteAttr: 'Claude Hopkins — Scientific Advertising, 1923',
+            tag: 'FUNDAMENTALS',
+            body: 'Hopkins\' foundational insight — written in 1923 and still definitive — is that advertising is simply salesmanship in print (or on screen). Every principle of great face-to-face selling applies directly to ad copy. A good salesperson gives facts, answers objections, makes specific promises, and closes. A good ad does exactly the same. If your ad wouldn\'t work as a door pitch, it won\'t work on Facebook either.',
+            apply: 'Take your best door-to-door pitch — the exact words that close the most sales in Gilroy. Write it down word-for-word. That is your ad copy. Hopkins proved that the words that sell face-to-face sell in print. Your ads should read like a transcript of your best pitch, not like a marketing brochure.'
+          },
+          {
+            headline: 'The Offer Must Be Specific and Provable',
+            quote: 'The more you tell, the more you sell — if you tell the right things.',
+            quoteAttr: 'Claude Hopkins — My Life in Advertising',
+            tag: 'SPECIFICITY',
+            body: 'Hopkins pioneered the use of specific claims backed by specific proof. "Pepsodent whitens teeth" with before/after photos. "Schlitz beer — steam-cleaned bottles" with a factory tour story. He showed that specificity always outperforms vague claims because it gives the reader something concrete to believe. For ADT: "$850 of equipment FREE with verified installation" is Hopkins-style specificity. "Great deals on home security" is the vague claim that loses.',
+            apply: 'List every specific, provable claim you can make about your ADT offer: exact dollar value of equipment, exact monthly price, exact guarantee terms, exact installation timeline. Put the most remarkable specific claim in your headline. Hopkins\' rule: specifics create credibility; generalities create skepticism.'
+          },
+          {
+            headline: 'Test Everything — Opinion Is Worth Nothing',
+            quote: 'Almost any question can be answered cheaply, quickly and finally by a test campaign.',
+            quoteAttr: 'Claude Hopkins — Scientific Advertising, 1923',
+            tag: 'TESTING SCIENCE',
+            body: 'Hopkins invented split testing in 1923 — using different coupon codes in different cities to measure which ad pulled better. He was ruthless about eliminating opinion from advertising decisions. "What I personally like or dislike is of no importance." The only thing that matters is what the market responds to. Facebook\'s A/B testing tools are Hopkins\' 1923 vision made trivially simple. Use them. Every campaign, every week.',
+            apply: 'Run every ad as a split test. Different headlines: same image. Different images: same headline. Different CTAs: same everything else. Change one variable at a time. Read the data after 7 days. Kill the loser. Repeat. Hopkins did this with newspaper coupon codes. You do it with Facebook Ads Manager. Same science, 100 years later.'
+          }
+        ]
+      },
+      {
+        title: 'Gary Vaynerchuk — VaynerMedia',
+        icon: '📣',
+        color: '#EF4444',
+        cards: [
+          {
+            headline: 'Content Is King — Context Is God',
+            quote: 'Content is king, but context is God. The right content on the wrong platform is invisible.',
+            quoteAttr: 'Gary Vaynerchuk — VaynerMedia Content Strategy',
+            tag: 'PLATFORM STRATEGY',
+            body: 'Gary Vee\'s documented insight is that platform-native content dramatically outperforms repurposed content. A Facebook video ad that looks like a Facebook video performs better than a TV commercial repurposed for Facebook. An Instagram Story with text overlays and no sound design outperforms a polished video. For your ADT campaigns, this means creating content that looks and feels like it was made for the specific platform — not adapted for it.',
+            apply: 'For Facebook: long-form story-style video (2–3 min), community feel, local references. For Instagram: vertical Reels, bold text overlay, first 2 seconds must work with no sound. For Nextdoor: write like a neighbor, not a business. For Google: speak to the search intent exactly. Each platform demands its own native language.'
+          },
+          {
+            headline: 'Document Don\'t Create',
+            quote: 'Document. Don\'t create. The world doesn\'t need more content. It needs more real.',
+            quoteAttr: 'Gary Vaynerchuk — #AskGaryVee',
+            tag: 'AUTHENTIC CONTENT',
+            body: 'Gary Vee\'s most widely taught content principle: stop trying to produce perfect, polished content. Start documenting the real work you\'re already doing. The journey, the installs, the sales calls, the territory drives, the objections and the closes. Authentic documentation from a real business in a real market builds more trust faster than any produced content — and it costs nothing extra beyond the time to film it.',
+            apply: 'For 30 days, document everything. Film yourself leaving for territory. Film an install (with permission). Film yourself handling an objection at the door. Film the team. Post it raw, with minimal editing. Gary Vee\'s data: accounts that document consistently see 3–5x more organic engagement than accounts that only post produced content.'
+          },
+          {
+            headline: 'Jab, Jab, Jab, Right Hook — Earn the Ask',
+            quote: 'Give, give, give, then ask. The market rewards those who give the most value first.',
+            quoteAttr: 'Gary Vaynerchuk — Jab, Jab, Jab, Right Hook',
+            tag: 'VALUE FIRST',
+            body: 'Gary\'s documented framework: you must provide genuine value (jabs) before you ever make a sales ask (right hook). Three value posts for every promotional post is the minimum ratio. For your ADT and ISP business, value means local safety tips, internet speed guides, home security checklists, neighborhood watch updates — content that genuinely helps your audience whether they buy from you or not. That generosity builds the trust that makes the sales ask land.',
+            apply: 'Your content calendar: Mon "5 signs your home security system is outdated" (jab). Wed "How to test your WiFi speed in Gilroy" (jab). Fri "Free home safety assessment — book before Friday" (right hook). Maintain 3:1 minimum. Gary\'s documented conversion data: audiences exposed to 3+ value pieces before a sales ad convert at 2.8x the rate of audiences hit cold with the sales ask.'
+          }
+        ]
+      },
+      {
+        title: 'BBDO — The Creative Brief Masters',
+        icon: '💡',
+        color: '#34D399',
+        cards: [
+          {
+            headline: 'One Brief. One Idea. One Purpose.',
+            quote: 'Great work begins with a great brief. If the brief is unclear, the work will be confused.',
+            quoteAttr: 'BBDO — Creative Brief Philosophy',
+            tag: 'STRATEGY FIRST',
+            body: 'BBDO\'s enduring legacy is disciplined creative briefing. Before any ad is written, they require absolute clarity on: who exactly is the target, what single thing do we want them to believe after seeing this, what proof supports that belief, and what tone will reach them. Agencies that skip the brief produce ads that try to say everything and communicate nothing. This discipline applies directly to a $500/mo Facebook campaign in Gilroy.',
+            apply: 'Before writing your next ad, answer these four questions in one sentence each: (1) Who exactly is this for? (2) What is the ONE thing I want them to believe? (3) What proof do I have for that belief? (4) What tone matches how they already think and talk? Your ad is a one-page answer to those four questions. No more. No less.'
+          },
+          {
+            headline: 'The Work Must Be Extraordinary',
+            quote: 'We are here to create work that people talk about. Competent work is invisible work.',
+            quoteAttr: 'BBDO — Agency Culture, Documented',
+            tag: 'CREATIVE STANDARD',
+            body: 'BBDO\'s documented internal standard: competent advertising is a waste of money because it is invisible in a crowded market. Their creative review process deliberately filters out anything that is merely good, well-executed, or professionally produced — but not extraordinary. In your market, most ADT and ISP advertising is competent. That means there is a wide open lane for one extraordinary, locally resonant, emotionally specific piece of creative.',
+            apply: 'Run your next ad past this BBDO-inspired test: Would someone share this voluntarily? Would a Gilroy homeowner show this to their neighbor? If the answer is no, it\'s competent. Keep working. If the answer is yes, scale it immediately with full budget. Extraordinary creative compounds — competent creative just costs money.'
+          }
+        ]
+      }
+    ]
+  }
 };
 
-let mkActiveSource = ‘ryan’;
+let mkActiveSource = 'ryan';
 let mkExpanded = {};
 
 function renderMKAcademy() {
-const wrap = el(‘mkAcademyWrap’);
-if (!wrap) return;
+  const wrap = el('mkAcademyWrap');
+  if (!wrap) return;
 
-const src = MK_DATA[mkActiveSource];
+  const src = MK_DATA[mkActiveSource];
 
-wrap.innerHTML = ` <style> .mk-source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; } .mk-source-tab { padding:10px 16px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px; border:1.5px solid var(--bdr); background:var(--card); color:var(--muted); font-family:var(--font-body); flex:1 1 120px; min-width:100px; min-height:44px; -webkit-tap-highlight-color:transparent; } .mk-source-tab:hover { border-color:var(--amber); color:var(--white); } .mk-source-tab.active { color:#000; } .mk-bio { padding:14px 18px; border-radius:8px; border:1px solid var(--bdr); background:var(--card2); font-size:clamp(12px,2vw,13px); color:var(--white); line-height:1.7; margin-bottom:18px; border-left:4px solid var(--amber); } .mk-section { margin-bottom:20px; } .mk-section-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; cursor:pointer; user-select:none; min-height:44px; } .mk-section-title { font-family:var(--font-display); font-size:clamp(15px,3vw,18px); font-weight:800; } .mk-section-toggle { font-size:16px; color:var(--muted); margin-left:auto; transition:transform .2s; flex-shrink:0; } .mk-section-toggle.open { transform:rotate(180deg); } .mk-cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; } .mk-card { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; } .mk-card:hover { border-color:var(--amber); } .mk-card-head { padding:12px 16px 0 16px; } .mk-card-tag { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:inline-block; padding:2px 8px; border-radius:3px; } .mk-card-headline { font-size:clamp(13px,2.5vw,14px); font-weight:700; color:var(--white); line-height:1.4; margin-bottom:8px; } .mk-card-body { font-size:clamp(11px,2vw,12px); color:var(--muted); line-height:1.7; padding:0 16px 10px; } .mk-apply-toggle { padding:10px 16px; border-top:1px solid var(--bdr); cursor:pointer; font-size:11px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:6px; background:transparent; border-left:none; border-right:none; border-bottom:none; width:100%; text-align:left; font-family:var(--font-body); transition:background .15s; min-height:40px; -webkit-tap-highlight-color:transparent; } .mk-apply-toggle:hover { background:var(--blueG); } .mk-apply-box { background:var(--blueG); border-top:1px solid rgba(14,165,233,.2); padding:10px 16px; font-size:clamp(11px,2vw,12px); color:var(--white); line-height:1.7; display:none; } .mk-apply-box.open { display:block; } .mk-apply-label { font-family:var(--font-mono); font-size:9px; color:var(--blue); font-weight:700; letter-spacing:1px; margin-bottom:5px; } .mk-search-row { display:flex; gap:10px; margin-bottom:16px; align-items:center; flex-wrap:wrap; } .mk-search { background:var(--card); border:1px solid var(--bdr); border-radius:6px; padding:9px 14px; color:var(--white); font-size:16px; outline:none; flex:1 1 180px; min-width:0; font-family:var(--font-body); transition:border-color .2s; } .mk-search:focus { border-color:var(--amber); } .mk-count-badge { font-family:var(--font-mono); font-size:11px; color:var(--muted); padding:4px 12px; border-radius:20px; border:1px solid var(--bdr); white-space:nowrap; } @media (max-width:500px) { .mk-cards-grid { grid-template-columns:1fr!important; } .mk-card-body { font-size:12px; } } </style> <div class="mk-source-tabs"> ${Object.entries(MK_DATA).map(([k,v])=>`
-<button class="mk-source-tab${k===mkActiveSource?' active':''}" onclick="mkSetSource('${k}')"
-style="${k===mkActiveSource?`background:${v.color};border-color:${v.color};`:`border-color:var(--bdr);`}">
-<span>${v.icon}</span><span>${v.label}</span>
-</button>
-`).join('')} </div> <div class="mk-search-row"> <input class="mk-search" id="mkSearch" placeholder="🔍  Search strategies..." oninput="mkFilterCards()" /> <span class="mk-count-badge" id="mkCount">${src.sections.reduce((a,s)=>a+s.cards.length,0)} strategies</span> </div> <div class="mk-bio">${src.bio}</div> <div id="mkSections">${buildMKSections(src)}</div> `;
+  wrap.innerHTML = `
+    <style>
+      .mk-source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+      .mk-source-tab {
+        padding:10px 16px; border-radius:8px; font-size:13px; font-weight:700;
+        cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px;
+        border:1.5px solid var(--bdr); background:var(--card); color:var(--muted);
+        font-family:var(--font-body); flex:1 1 120px; min-width:100px;
+        min-height:44px; -webkit-tap-highlight-color:transparent;
+      }
+      .mk-source-tab:hover { border-color:var(--amber); color:var(--white); }
+      .mk-source-tab.active { color:#000; }
+      .mk-bio { padding:14px 18px; border-radius:8px; border:1px solid var(--bdr); background:var(--card2); font-size:clamp(12px,2vw,13px); color:var(--white); line-height:1.7; margin-bottom:18px; border-left:4px solid var(--amber); }
+      .mk-section { margin-bottom:20px; }
+      .mk-section-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; cursor:pointer; user-select:none; min-height:44px; }
+      .mk-section-title { font-family:var(--font-display); font-size:clamp(15px,3vw,18px); font-weight:800; }
+      .mk-section-toggle { font-size:16px; color:var(--muted); margin-left:auto; transition:transform .2s; flex-shrink:0; }
+      .mk-section-toggle.open { transform:rotate(180deg); }
+      .mk-cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+      .mk-card { background:var(--card); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; }
+      .mk-card:hover { border-color:var(--amber); }
+      .mk-card-head { padding:12px 16px 0 16px; }
+      .mk-card-tag { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:inline-block; padding:2px 8px; border-radius:3px; }
+      .mk-card-headline { font-size:clamp(13px,2.5vw,14px); font-weight:700; color:var(--white); line-height:1.4; margin-bottom:8px; }
+      .mk-card-body { font-size:clamp(11px,2vw,12px); color:var(--muted); line-height:1.7; padding:0 16px 10px; }
+      .mk-apply-toggle { padding:10px 16px; border-top:1px solid var(--bdr); cursor:pointer; font-size:11px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:6px; background:transparent; border-left:none; border-right:none; border-bottom:none; width:100%; text-align:left; font-family:var(--font-body); transition:background .15s; min-height:40px; -webkit-tap-highlight-color:transparent; }
+      .mk-apply-toggle:hover { background:var(--blueG); }
+      .mk-apply-box { background:var(--blueG); border-top:1px solid rgba(14,165,233,.2); padding:10px 16px; font-size:clamp(11px,2vw,12px); color:var(--white); line-height:1.7; display:none; }
+      .mk-apply-box.open { display:block; }
+      .mk-apply-label { font-family:var(--font-mono); font-size:9px; color:var(--blue); font-weight:700; letter-spacing:1px; margin-bottom:5px; }
+      .mk-search-row { display:flex; gap:10px; margin-bottom:16px; align-items:center; flex-wrap:wrap; }
+      .mk-search { background:var(--card); border:1px solid var(--bdr); border-radius:6px; padding:9px 14px; color:var(--white); font-size:16px; outline:none; flex:1 1 180px; min-width:0; font-family:var(--font-body); transition:border-color .2s; }
+      .mk-search:focus { border-color:var(--amber); }
+      .mk-count-badge { font-family:var(--font-mono); font-size:11px; color:var(--muted); padding:4px 12px; border-radius:20px; border:1px solid var(--bdr); white-space:nowrap; }
+
+      /* ── VIDEO GRID ─────────────────────────────────────── */
+      .mk-vid-section { margin-bottom:22px; }
+      .mk-vid-header { font-family:var(--font-display); font-size:14px; font-weight:800; color:var(--muted2); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+      .mk-vid-header::before { content:'▶'; color:var(--amber); font-size:10px; }
+      .mk-vid-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+      .yt-wrap { background:var(--card2); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; transition:border-color .15s; }
+      .yt-wrap:hover { border-color:var(--amber); }
+      .yt-thumb-wrap { position:relative; width:100%; padding-top:56.25%; cursor:pointer; overflow:hidden; background:#000; }
+      .yt-thumb-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .25s; display:block; }
+      .yt-thumb-wrap:hover img { transform:scale(1.04); }
+      .yt-overlay { position:absolute; inset:0; background:rgba(0,0,0,.35); transition:background .2s; }
+      .yt-thumb-wrap:hover .yt-overlay { background:rgba(0,0,0,.15); }
+      .yt-play { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:52px; height:52px; background:rgba(255,0,0,.92); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; pointer-events:none; }
+      .yt-thumb-wrap:hover .yt-play { transform:translate(-50%,-50%) scale(1.1); background:rgba(255,0,0,1); }
+      .yt-play::after { content:''; border-style:solid; border-width:9px 0 9px 18px; border-color:transparent transparent transparent #fff; margin-left:3px; }
+      .yt-player { position:relative; width:100%; padding-top:56.25%; }
+      .yt-player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+      .yt-info { padding:10px 13px 12px; }
+      .yt-vid-title { font-size:12.5px; font-weight:700; color:var(--white); line-height:1.4; margin-bottom:4px; }
+      .yt-meta { font-family:var(--font-mono); font-size:9.5px; color:var(--muted); display:flex; gap:10px; }
+      .yt-dur { color:var(--amber); }
+      .yt-ext-link { display:block; font-size:10px; color:var(--blue); text-decoration:none; margin-top:5px; font-family:var(--font-mono); letter-spacing:.3px; }
+      .yt-ext-link:hover { color:var(--amber); text-decoration:underline; }
+      @media (max-width:500px) {
+        .mk-cards-grid { grid-template-columns:1fr!important; }
+        .mk-card-body { font-size:12px; }
+        .mk-vid-grid { grid-template-columns:1fr!important; }
+      }
+    </style>
+    <div class="mk-source-tabs">
+      ${Object.entries(MK_DATA).map(([k,v])=>`
+        <button class="mk-source-tab${k===mkActiveSource?' active':''}" onclick="mkSetSource('${k}')"
+          style="${k===mkActiveSource?`background:${v.color};border-color:${v.color};`:`border-color:var(--bdr);`}">
+          <span>${v.icon}</span><span>${v.label}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="mk-search-row">
+      <input class="mk-search" id="mkSearch" placeholder="🔍  Search strategies..." oninput="mkFilterCards()" />
+      <span class="mk-count-badge" id="mkCount">${src.sections.reduce((a,s)=>a+s.cards.length,0)} strategies</span>
+    </div>
+    <div class="mk-bio">${src.bio}</div>
+    ${src.videos && src.videos.length ? `
+    <div class="mk-vid-section">
+      <div class="mk-vid-header">Featured Videos — ${escHtml(src.label)}</div>
+      <div class="mk-vid-grid">
+        ${src.videos.map(v => `
+          <div class="yt-wrap" data-id="${escHtml(v.id)}">
+            <div class="yt-thumb-wrap" onclick="loadYT(this)" role="button" tabindex="0"
+                 onkeydown="if(event.key==='Enter')loadYT(this)"
+                 aria-label="Play: ${escHtml(v.title)}">
+              <img src="https://img.youtube.com/vi/${escHtml(v.id)}/mqdefault.jpg"
+                   alt="${escHtml(v.title)}" loading="lazy"
+                   onerror="this.src='https://img.youtube.com/vi/${escHtml(v.id)}/default.jpg';this.onerror=null;">
+              <div class="yt-overlay"></div>
+              <div class="yt-play"></div>
+            </div>
+            <div class="yt-info">
+              <div class="yt-vid-title">${escHtml(v.title)}</div>
+              <div class="yt-meta">
+                <span>${escHtml(v.channel)}</span>
+                <span class="yt-dur">▶ ${escHtml(v.dur)}</span>
+              </div>
+              <a href="https://www.youtube.com/watch?v=${escHtml(v.id)}" target="_blank"
+                 rel="noopener noreferrer" class="yt-ext-link" onclick="event.stopPropagation()">↗ Open on YouTube</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : ''}
+    <div id="mkSections">${buildMKSections(src)}</div>
+  `;
 }
 
-function buildMKSections(src, filter=’’) {
-return src.sections.map((sec, si) => {
-const filteredCards = filter
-? sec.cards.filter(c => (c.headline+c.body+c.tag+c.apply).toLowerCase().includes(filter.toLowerCase()))
-: sec.cards;
-if (filteredCards.length === 0) return ‘’;
-const skey = mkActiveSource+’*’+si;
-const isOpen = mkExpanded[skey] !== false; // default open
-return `<div class="mk-section"> <div class="mk-section-head" onclick="mkToggleSection('${skey}')"> <span style="font-size:20px;">${sec.icon}</span> <span class="mk-section-title" style="color:${sec.color};">${sec.title}</span> <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);padding:2px 8px;border-radius:10px;border:1px solid var(--bdr);">${filteredCards.length}</span> <span class="mk-section-toggle${isOpen?' open':''}">▼</span> </div> ${isOpen ?`<div class="mk-cards-grid">${filteredCards.map((c,ci)=>{
-const applyKey = mkActiveSource+’*’+si+’*’+ci;
-const isApplyOpen = mkExpanded[’apply*’+applyKey];
-const tagColor = sec.color;
-return `<div class="mk-card"> <div class="mk-card-head"> <div class="mk-card-tag" style="background:${tagColor}22;color:${tagColor};">${escHtml(c.tag)}</div> <div class="mk-card-headline">${escHtml(c.headline)}</div> </div> <div class="mk-card-body">${escHtml(c.body)}</div> <button class="mk-apply-toggle" onclick="mkToggleApply('${applyKey}')"> <span>⚡</span> Apply to Your Territory ${isApplyOpen?'▲':'▼'} </button> <div class="mk-apply-box${isApplyOpen?' open':''}"> <div class="mk-apply-label">HOW TO IMPLEMENT FOR COMPLETE HOME TODAY LLC</div> ${escHtml(c.apply)} </div> </div>`;
-}).join(’’)}</div>`: ''} </div>`;
-}).join(’’);
+function buildMKSections(src, filter='') {
+  return src.sections.map((sec, si) => {
+    const filteredCards = filter
+      ? sec.cards.filter(c => (c.headline+c.body+c.tag+c.apply+(c.quote||'')).toLowerCase().includes(filter.toLowerCase()))
+      : sec.cards;
+    if (filteredCards.length === 0) return '';
+    const skey = mkActiveSource+'_'+si;
+    const isOpen = mkExpanded[skey] !== false;
+    return `
+      <div class="mk-section">
+        <div class="mk-section-head" onclick="mkToggleSection('${skey}')">
+          <span style="font-size:20px;">${sec.icon}</span>
+          <span class="mk-section-title" style="color:${sec.color};">${sec.title}</span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);padding:2px 8px;border-radius:10px;border:1px solid var(--bdr);">${filteredCards.length}</span>
+          <span class="mk-section-toggle${isOpen?' open':''}">▼</span>
+        </div>
+        ${isOpen ? `<div class="mk-cards-grid">${filteredCards.map((c,ci)=>{
+          const applyKey = mkActiveSource+'_'+si+'_'+ci;
+          const isApplyOpen = mkExpanded['apply_'+applyKey];
+          const tagColor = sec.color;
+          const quoteBlock = c.quote ? `
+            <div style="margin:0 16px 12px;padding:10px 14px;background:linear-gradient(135deg,${tagColor}10,${tagColor}06);border-left:3px solid ${tagColor};border-radius:0 6px 6px 0;">
+              <div style="font-style:italic;font-size:12.5px;color:var(--white);line-height:1.6;margin-bottom:5px;">"${escHtml(c.quote)}"</div>
+              <div style="font-family:var(--font-mono);font-size:9px;color:${tagColor};letter-spacing:1px;text-transform:uppercase;">— ${escHtml(c.quoteAttr||'')}</div>
+            </div>` : '';
+          return `
+            <div class="mk-card">
+              <div class="mk-card-head">
+                <div class="mk-card-tag" style="background:${tagColor}22;color:${tagColor};">${escHtml(c.tag)}</div>
+                <div class="mk-card-headline">${escHtml(c.headline)}</div>
+              </div>
+              ${quoteBlock}
+              <div class="mk-card-body">${escHtml(c.body)}</div>
+              <button class="mk-apply-toggle" onclick="mkToggleApply('${applyKey}')">
+                <span>⚡</span> Apply to Your Territory ${isApplyOpen?'▲':'▼'}
+              </button>
+              <div class="mk-apply-box${isApplyOpen?' open':''}">
+                <div class="mk-apply-label">HOW TO IMPLEMENT FOR COMPLETE HOME TODAY LLC</div>
+                ${escHtml(c.apply)}
+              </div>
+            </div>
+          `;
+        }).join('')}</div>` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 function mkSetSource(key) {
-mkActiveSource = key;
-mkExpanded = {};
-renderMKAcademy();
+  mkActiveSource = key;
+  mkExpanded = {};
+  renderMKAcademy();
 }
 
 function mkToggleSection(skey) {
-mkExpanded[skey] = mkExpanded[skey] === false ? true : false;
-const src = MK_DATA[mkActiveSource];
-const filter = (el(‘mkSearch’)||{}).value || ‘’;
-const sec = el(‘mkSections’);
-if (sec) sec.innerHTML = buildMKSections(src, filter);
+  mkExpanded[skey] = mkExpanded[skey] === false ? true : false;
+  const src = MK_DATA[mkActiveSource];
+  const filter = (el('mkSearch')||{}).value || '';
+  const sec = el('mkSections');
+  if (sec) sec.innerHTML = buildMKSections(src, filter);
 }
 
 function mkToggleApply(applyKey) {
-const key = ‘apply_’+applyKey;
-mkExpanded[key] = !mkExpanded[key];
-const src = MK_DATA[mkActiveSource];
-const filter = (el(‘mkSearch’)||{}).value || ‘’;
-const sec = el(‘mkSections’);
-if (sec) sec.innerHTML = buildMKSections(src, filter);
+  const key = 'apply_'+applyKey;
+  mkExpanded[key] = !mkExpanded[key];
+  const src = MK_DATA[mkActiveSource];
+  const filter = (el('mkSearch')||{}).value || '';
+  const sec = el('mkSections');
+  if (sec) sec.innerHTML = buildMKSections(src, filter);
 }
 
 function mkFilterCards() {
-const filter = (el(‘mkSearch’)||{}).value || ‘’;
-const src = MK_DATA[mkActiveSource];
-const sec = el(‘mkSections’);
-if (sec) sec.innerHTML = buildMKSections(src, filter);
-const totalFiltered = src.sections.reduce((a,s)=>a+s.cards.filter(c=>(c.headline+c.body+c.tag+c.apply).toLowerCase().includes(filter.toLowerCase())).length,0);
-const badge = el(‘mkCount’);
-if (badge) badge.textContent = totalFiltered + ’ strategies’ + (filter ? ’ found’ : ‘’);
+  const filter = (el('mkSearch')||{}).value || '';
+  const src = MK_DATA[mkActiveSource];
+  const sec = el('mkSections');
+  if (sec) sec.innerHTML = buildMKSections(src, filter);
+  const totalFiltered = src.sections.reduce((a,s)=>a+s.cards.filter(c=>(c.headline+c.body+c.tag+c.apply).toLowerCase().includes(filter.toLowerCase())).length,0);
+  const badge = el('mkCount');
+  if (badge) badge.textContent = totalFiltered + ' strategies' + (filter ? ' found' : '');
 }
 
 // ════════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════════
 function init(){
-buildNav();
-buildTicker();
-populateSelects();
-buildCaptureStatics();
-buildAdForgeStatics();
-buildCampaignStatics();
-buildSMSStatics();
-buildBilingualStatics();
-buildNewMoverStatics();
-buildIntelStatics();
-buildStatusFilters();
-buildPricingTabs();
-renderDashboard();
-renderPricing();
-updateNewBadge();
-renderATTDeck();
-renderMKAcademy();
+  buildNav();
+  buildTicker();
+  populateSelects();
+  buildCaptureStatics();
+  buildAdForgeStatics();
+  buildCampaignStatics();
+  buildSMSStatics();
+  buildBilingualStatics();
+  buildNewMoverStatics();
+  buildIntelStatics();
+  buildStatusFilters();
+  buildPricingTabs();
+  renderDashboard();
+  renderPricing();
+  updateNewBadge();
+  renderATTDeck();
+  renderMKAcademy();
 }
 
-document.addEventListener(‘DOMContentLoaded’, init);
+document.addEventListener('DOMContentLoaded', init);
 </script>
-
 </body>
 </html>
